@@ -52,8 +52,8 @@
         "T-02-04",
         "T-02-05"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "01"
     },
     {
@@ -481,7 +481,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-01.md"
       ],
-      "commit": null,
+      "commit": "51fcac8b822be1c91e238091c8bcd1f06519b710",
       "blocker": null
     },
     {
@@ -497,13 +497,15 @@
       ],
       "verification": "DM-01–05,DM-21",
       "deliverable": "Define TypeScript/Zod from DGS-05 v1; strict unknowns, field ranges, finite geometry, UUID/time validation; parity tests against JSON schema and fixtures.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-01-08"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -519,13 +521,15 @@
       ],
       "verification": "DM-06,DM-09–10,DM-14",
       "deliverable": "Load trusted registry, validate global IDs, parent types/cycles/depth, eligibility, duplicate directed tuples and status; reject invalid graph atomically.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-02-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -540,13 +544,15 @@
       ],
       "verification": "DM-07–08,DM-18,CI-01",
       "deliverable": "Pure world/local conversion, bounds and ancestor traversal; test negative/fractional values, expansion and preserved sibling positions.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-02-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -561,13 +567,15 @@
       ],
       "verification": "DM-15,CI-33",
       "deliverable": "Implement typed command results, atomic validation, committed/noop/rejected state, graph-only history API, generation counter and selection reconciliation; wire before UI mutations.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-02-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -582,13 +590,15 @@
       ],
       "verification": "DM-19,DM-20",
       "deliverable": "Define document repository port, session tokens, save-state contracts and version boundary; in-memory test adapter clearly distinguished from real persistence.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-02-04"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md"
+      ],
       "commit": null,
       "blocker": null
     },

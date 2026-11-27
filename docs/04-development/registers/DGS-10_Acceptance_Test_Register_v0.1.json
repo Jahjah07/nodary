@@ -2306,12 +2306,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/portable-parity.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2328,12 +2332,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/portable-parity.test.ts",
+        "tests/unit/graph.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2350,11 +2359,15 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/unit/portable-parity.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2372,11 +2385,17 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/unit/portable-parity.test.ts",
+        "tests/unit/graph.test.ts",
+        "tests/unit/commands.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2392,12 +2411,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/graph.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2414,12 +2437,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/graph.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2436,12 +2463,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/geometry.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2459,12 +2490,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/geometry.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2481,12 +2516,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/portable-parity.test.ts",
+        "tests/unit/graph.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2503,12 +2543,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/graph.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2588,12 +2632,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/graph.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2611,11 +2659,15 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/unit/commands.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2675,11 +2727,16 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/unit/commands.test.ts",
+        "tests/integration/document-session.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2697,11 +2754,15 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/integration/document-session.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2719,11 +2780,16 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/integration/document-session.test.ts",
+        "tests/unit/portable-parity.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -2739,12 +2805,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/portable-parity.test.ts",
+        "tests/unit/graph.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -3383,11 +3454,15 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/unit/geometry.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {
@@ -4073,11 +4148,15 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/unit/commands.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
       "applicabilityDecision": null
     },
     {

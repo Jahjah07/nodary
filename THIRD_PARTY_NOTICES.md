@@ -25,6 +25,8 @@ DGS-03 §4.3 and DGS-09 T-00-02. Versions and source repositories were checked a
 | typescript | 5.9.3 | Apache-2.0 | [TypeScript](https://github.com/microsoft/TypeScript) | `LICENSE.txt`, `ThirdPartyNoticeText.txt` |
 | vitest | 5.1.2 | MIT | [Vitest](https://github.com/vitest-dev/vitest) | `LICENSE.md` |
 
+Phase 02 added Ajv 8.20.0 and ajv-formats 3.0.1 as test-only dependencies for Draft 2020-12 parity and date-time format checks. Both installed packages include MIT terms in `LICENSE`. [Ajv](https://github.com/ajv-validator/ajv) · [ajv-formats](https://github.com/ajv-validator/ajv-formats)
+
 The lockfile review included platform-specific optional dependencies. Runtime-tree exceptions include Sharp/libvips platform binaries with LGPL terms, `caniuse-lite` under CC-BY-4.0, `d3-ease` and `source-map-js` under BSD-3-Clause, and `tslib` under 0BSD. The development-only `union` package omits license metadata in the lockfile and includes MIT terms in `node_modules/union/LICENSE`. Several runtime-tree packages also omit standalone license files, including `@next/env`, the Windows SWC package, `client-only`, and `react-compiler-runtime`. Resolve upstream notice provenance and audit the actual distributed files before release.
 
 Retain each applicable copyright and permission notice with distributed copies. Preserve Dexie’s `NOTICE` if shipped, and use Lucide’s installed `LICENSE` for any bundled or copied icon vectors, including Feather attribution where applicable. SP-01 uses system fonts and installs Lucide for later use. It contains no copied React Flow Pro examples or bundled font files. The bootstrap review covers package metadata and available local notices. Release distribution and platform-specific obligations remain subject to review.

@@ -17,6 +17,7 @@ Original v0.1 documents are copied byte-for-byte. DGS identifiers and filenames 
 ## Companion files
 
 - [DGS-05_Portable_Diagram_Schema_v1.json](../docs/02-architecture/schemas/DGS-05_Portable_Diagram_Schema_v1.json)
+- [DGS-05 portable schema v1 with approved CR-01 amendment](02-architecture/schemas/DGS-05_Portable_Diagram_Schema_v1_CR-01.json)
 - [DGS-05_Example_Architecture_v1.json](../tests/fixtures/schema/DGS-05_Example_Architecture_v1.json)
 - [DGS-06_Component_Registry_v1.json](../docs/03-design/references/DGS-06_Component_Registry_v1.json)
 - [DGS-06_Template_Basic_Flowchart_v1.json](../tests/fixtures/templates/DGS-06_Template_Basic_Flowchart_v1.json)

@@ -75,3 +75,9 @@ All captures are synthetic workspace data from Chrome 158.0.8127.38 on the verif
 | [Representative architecture components](PHASE-04-architecture.png) | 1520 × 1100 |
 | [All seven general components](PHASE-04-general.png) | 1520 × 1100 |
 | [Selected circle resized to 104 × 104](PHASE-04-selected-resized.png) | 1520 × 1100 |
+
+## Owner closure
+
+The owner accepted Phase 04 on 27 November 2026. The closure audit reviewed the implementation at `f4aa40c95997c824f20503715cfb7e12ec929a15`, checked all 18 immutable baseline hashes and confirmed the unchanged CR-01 reference, dependency lock and bundled license. The working registers agreed on 30 mandatory passes and 188 total unrun scenarios. The 13 Phase 04 passes were checked against their DGS-10 assertions and the linked automated evidence. The prior pointer failures remain recorded above. A fresh closure run passed 126/126 Vitest cases and 39/39 production browser cases in 50.4 seconds with three workers. The prior Edge page setup timeouts did not recur.
+
+The initial commit normalized the five Phase 04 PNGs through the documentation text rule. The original working-tree PNGs passed signature and chunk CRC verification. The closure commit exempts evidence PNGs from text normalization and restores those five captures byte-for-byte. Hosted GitHub Actions remains unrun.

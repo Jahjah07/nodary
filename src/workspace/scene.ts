@@ -5,13 +5,18 @@ import type { Immutable } from "../core/immutable";
 import { componentFor } from "../core/registry";
 
 import { hitVisual, labelLayout, visualOf, type Measure } from "../core/visual";
+import { edgeLabel, routeInk, unionBounds, worldAnchor, type Anchor } from "../core/routes";
+import type { Endpoint } from "../core/edge-edits";
 
 type Box<T> = { item: Immutable<T>; rect: Rect; bounds: Rect };
-type SceneEdge = { item: Immutable<Edge>; points: Position[]; arrows: Position[][]; label: Rect | null; bounds: Rect };
+export type SceneEdge = { item: Immutable<Edge>; points: Position[]; line: Position[]; arrows: Position[][]; bounds: Rect;
+  label: ReturnType<typeof edgeLabel>; source: Anchor; target: Anchor; warning?: string };
+export type SceneAnchor = Anchor & { endpoint: Endpoint };
 export type Scene = {
   nodes: Box<Node>[];
   groups: (Box<Boundary> & { title: Rect | null; depth: number })[];
   edges: SceneEdge[];
+  diagnostics: string[];
   bounds: Rect | null;
 };
 
@@ -22,45 +27,25 @@ export function rectBetween(a: Position, b: Position): Rect {
   return { x: Math.min(a.x, b.x), y: Math.min(a.y, b.y), width: Math.abs(a.x - b.x), height: Math.abs(a.y - b.y) };
 }
 
-function union(rects: Rect[]): Rect | null {
-  if (!rects.length) return null;
-  const x = Math.min(...rects.map((box) => box.x));
-  const y = Math.min(...rects.map((box) => box.y));
-  const right = Math.max(...rects.map((box) => box.x + box.width));
-  const bottom = Math.max(...rects.map((box) => box.y + box.height));
-  return { x, y, width: right - x, height: bottom - y };
+export function connectionAnchor(scene: Pick<Scene, "nodes">, endpoint: Endpoint) {
+  const node = scene.nodes.find(({ item }) => item.id === endpoint.nodeId);
+  return node && worldAnchor(node.item, node.rect, endpoint.handleId);
 }
 
-const pointsBounds = (points: Position[]): Rect => union(points.map((point) => ({ ...point, width: 0, height: 0 })))!;
-const direction = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] } as const;
-function anchor(box: Box<Node>, handle: Edge["source"]["handleId"]): Position {
-  const offset = visualOf(box.item).anchors.find(({ id }) => id === handle)!.position;
-  return { x: box.rect.x + offset.x, y: box.rect.y + offset.y };
-}
-function marker(tip: Position, previous: Position, stroke: number): Position[] {
-  const distance = Math.hypot(tip.x - previous.x, tip.y - previous.y);
-  if (!distance) return [];
-  const length = Math.min(distance, Math.max(8, 4 * stroke));
-  const half = Math.max(6, 3 * stroke) / 2 * length / Math.max(8, 4 * stroke);
-  const x = (tip.x - previous.x) / distance;
-  const y = (tip.y - previous.y) / distance;
-  const base = { x: tip.x - x * length, y: tip.y - y * length };
-  return [tip, { x: base.x + y * half, y: base.y - x * half }, { x: base.x - y * half, y: base.y + x * half }];
-}
-function pathMidpoint(points: Position[]): Position {
-  const segments = points.slice(1).map((p, i) => Math.hypot(p.x - points[i].x, p.y - points[i].y));
-  let remaining = segments.reduce((total, length) => total + length, 0) / 2;
-  for (const [i, length] of segments.entries()) {
-    if (length > 0 && remaining <= length) {
-      const t = remaining / length;
-      return { x: points[i].x + t * (points[i + 1].x - points[i].x), y: points[i].y + t * (points[i + 1].y - points[i].y) };
-    }
-    remaining -= length;
-  }
-  return points[0];
+export function connectionAnchors(scene: Scene): SceneAnchor[] {
+  return scene.nodes.flatMap(({ item, rect }) => componentFor(item.type).allowedHandles.map((handleId) => ({
+    ...worldAnchor(item, rect, handleId)!, endpoint: { nodeId: item.id, handleId },
+  })));
 }
 
-// DGS-06 component geometry and the Phase 03 representative connector routes.
+export function projectConnection(item: Immutable<Edge>, source: Anchor, target: Anchor, measure?: Measure): SceneEdge | string {
+  const rendered = routeInk(source, target, item);
+  if (!rendered.ok) return rendered.issues[0].message;
+  const ink = rendered.value;
+  const label = edgeLabel(item, ink.points, measure);
+  return { item, ...ink, label, source, target, bounds: label ? unionBounds([ink.bounds, label.box])! : ink.bounds };
+}
+
 export function buildScene(document: Immutable<DiagramDocument>, measure?: Measure): Scene {
   const hierarchy = indexHierarchy(document);
   if (!hierarchy.ok) throw Error("Scene requires a validated hierarchy.");
@@ -79,31 +64,18 @@ export function buildScene(document: Immutable<DiagramDocument>, measure?: Measu
     return { item, ...geometry, depth: hierarchy.value.get(item.id)!.depth,
       title: item.title ? { ...region, x: x + region.x, y: y + region.y, height: Math.max(region.height, height) } : null };
   }).sort((a, b) => a.depth - b.depth);
-  const edges = document.edges.map((item) => {
-    const start = anchor(lookup.get(item.source.nodeId)!, item.source.handleId);
-    const end = anchor(lookup.get(item.target.nodeId)!, item.target.handleId);
-    const points = [start];
-    if (item.route === "orthogonal" && start.x !== end.x && start.y !== end.y) {
-      if (direction[item.source.handleId][0]) {
-        const x = (start.x + end.x) / 2;
-        points.push({ x, y: start.y }, { x, y: end.y });
-      } else {
-        const y = (start.y + end.y) / 2;
-        points.push({ x: start.x, y }, { x: end.x, y });
-      }
-    }
-    points.push(end);
-    const arrows: Position[][] = [];
-    if (item.arrows !== "none") arrows.push(marker(end, points.at(-2)!, item.style.strokeWidth));
-    if (item.arrows === "both") arrows.push(marker(start, points[1], item.style.strokeWidth));
-    const center = pathMidpoint(points);
-    const width = Math.min(240, Math.max(38, item.label.length * item.style.text.fontSize * .55 + 16));
-    const height = item.style.text.fontSize + 8;
-    const label = item.label ? { x: center.x - width / 2, y: center.y - height / 2, width, height } : null;
-    const bounds = union([addStroke(pointsBounds([...points, ...arrows.flat()]), item.style.strokeWidth / 2), ...(label ? [label] : [])])!;
-    return { item, points, arrows, label, bounds };
-  });
-  return { nodes, groups, edges, bounds: union([...nodes, ...groups, ...edges].map(({ bounds }) => bounds)) };
+  const edges: SceneEdge[] = [];
+  const diagnostics: string[] = [];
+  for (const item of document.edges) {
+    const sourceBox = lookup.get(item.source.nodeId);
+    const targetBox = lookup.get(item.target.nodeId);
+    const source = sourceBox && worldAnchor(sourceBox.item, sourceBox.rect, item.source.handleId);
+    const target = targetBox && worldAnchor(targetBox.item, targetBox.rect, item.target.handleId);
+    const edge = source && target ? projectConnection(item, source, target, measure) : "A saved connection endpoint could not be resolved.";
+    if (typeof edge === "string") diagnostics.push(edge);
+    else edges.push(edge);
+  }
+  return { nodes, groups, edges, diagnostics, bounds: unionBounds([...nodes, ...groups, ...edges].map(({ bounds }) => bounds)) };
 }
 
 const contains = (box: Rect, point: Position) =>
@@ -127,7 +99,7 @@ function roundedContains(box: Rect, point: Position, padding: number) {
 
 // DGS-07 §4. Layers remain stable even when React Flow reorders its internal DOM.
 export function hitTest(scene: Scene, point: Position, zoom: number): string | null {
-  for (const edge of scene.edges.toReversed()) if (edge.label && contains(edge.label, point)) return edge.item.id;
+  for (const edge of scene.edges.toReversed()) if (edge.label && contains(edge.label.box, point)) return edge.item.id;
   for (const group of scene.groups.toReversed()) if (group.title && contains(group.title, point)) return group.item.id;
   for (const node of scene.nodes.toReversed()) {
     if (hitVisual(visualOf(node.item), node.item.size, { x: point.x - node.rect.x, y: point.y - node.rect.y },

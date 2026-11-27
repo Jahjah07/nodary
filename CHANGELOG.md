@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 05 — 27 November 2026
+
+- Closed Phase 04 locally and restored the original screenshot bytes in Git.
+- Added validated pointer and keyboard connection creation, endpoint reconnection, route selection and edge-only deletion.
+- Added shared deterministic routing, arrowheads, stroke and label geometry, with live updates after moving or resizing components. [Phase 05 evidence](docs/04-development/evidence/PHASE-05.md)
+
 ## Phase 04 — 27 November 2026
 
 - Closed Phase 03 at the existing local workspace commit after owner acceptance.

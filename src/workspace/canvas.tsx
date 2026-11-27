@@ -1,17 +1,20 @@
 "use client";
 
 import { Maximize, Minus, Plus, RotateCcw } from "lucide-react";
-import { useEffect, useEffectEvent, useImperativeHandle, useRef, useState, type DragEvent, type KeyboardEvent, type MouseEvent, type PointerEvent, type Ref, type RefObject } from "react";
+import { useEffect, useEffectEvent, useImperativeHandle, useMemo, useRef, useState, type DragEvent, type KeyboardEvent, type MouseEvent, type PointerEvent, type Ref, type RefObject } from "react";
 import type { CommandState } from "../core/commands";
 import { componentDispatcher, insertionPosition, makeComponent, resizeHandles, resizeRect, type ComponentEdit, type ComponentType, type ResizeHandle } from "../core/component-edits";
 import type { DiagramDocument, Position, Viewport } from "../core/contracts";
+import { candidateEdge, type End, type Endpoint } from "../core/edge-edits";
 import { clientToWorld, worldToClient } from "../core/geometry";
 import type { Rect } from "../core/graph";
 import type { Immutable } from "../core/immutable";
 import { componentFor } from "../core/registry";
 import { ComponentGraphic, measureLabel } from "./component-graphic";
+import { targetEdit, type ConnectionStart, type EditEdge } from "./connections";
 import { Projection } from "./flow";
-import { buildScene, clampTranslation, fitScene, hitTest, objectsIn, originView, rectBetween, zoomAt, type Scene } from "./scene";
+import { buildScene, clampTranslation, connectionAnchor, connectionAnchors, fitScene, hitTest, objectsIn,
+  originView, projectConnection, rectBetween, zoomAt, type Scene, type SceneAnchor } from "./scene";
 
 export type Tool = "select" | "pan";
 export type EditComponent = (edit: ComponentEdit, selection: readonly string[], generation: number) => string | null;
@@ -25,11 +28,13 @@ type Gesture = {
   pointer: number; mode: "pan" | "select"; start: Position; view: Viewport;
   hit: string | null; selection: readonly string[]; shift: boolean;
   editor: CommandState; resize?: ResizeHandle;
+  connection?: ConnectionStart;
 };
 
-export function Canvas({ scene, viewport, selection, tool, isSample, editor, pending, controls, drag, onEdit, onView }: {
+export function Canvas({ scene, viewport, selection, tool, isSample, editor, pending, controls, drag, onEdit, onEdge, onView }: {
   scene: Scene; viewport: Viewport | null; selection: readonly string[]; tool: Tool; isSample: boolean;
   editor: CommandState; pending: boolean; controls: Ref<CanvasControls>; drag: RefObject<PaletteDrag | null>; onEdit: EditComponent;
+  onEdge: EditEdge;
   onView(view: Viewport, selection: readonly string[]): void;
 }) {
   const surface = useRef<HTMLDivElement>(null);
@@ -44,12 +49,18 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
   const [notice, setNotice] = useState("");
   const [preview, setPreview] = useState<{ document: Immutable<DiagramDocument>; selection: readonly string[] }>();
   const [ghost, setGhost] = useState<ReturnType<typeof makeComponent>>();
+  const [hover, setHover] = useState<string | null>(null);
+  const [link, setLink] = useState<{ points: Position[]; target?: Endpoint; valid: boolean; message: string }>();
   const active = viewport ?? originView;
   const { gridVisible, snapToGrid, gridSpacing } = editor.document.settings;
   const spacing = gridSpacing * active.zoom * (active.zoom < .4 ? 2 : 1);
   const shown = preview ? buildScene(preview.document, measureLabel) : scene;
   const picked = preview?.selection ?? selection;
   const objects = [...scene.nodes, ...scene.groups];
+  const selectedEdge = picked.length === 1 ? shown.edges.find(({ item }) => item.id === picked[0]) : undefined;
+  const enabled = !isSample && !pending && tool === "select" && !space;
+  const sceneAnchors = useMemo(() => connectionAnchors(scene), [scene]);
+  const anchors = enabled ? sceneAnchors : [];
   const resizer = !isSample && tool === "select" && !space && picked.length === 1 ?
     [...shown.nodes, ...shown.groups].find(({ item }) => item.id === picked[0] && componentFor(item.type).resizable) : undefined;
 
@@ -81,9 +92,46 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     setMarquee(undefined);
     setDraggingPan(false);
     setPreview(undefined);
+    setLink(undefined);
     if (cancel) setNotice("");
     if (cancel && current.mode === "pan") onView(current.view, current.selection);
     if (surface.current?.hasPointerCapture(current.pointer)) surface.current.releasePointerCapture(current.pointer);
+  }
+  function screenPoint(anchor: Pick<SceneAnchor, "point" | "direction">, view: Viewport) {
+    const position = worldToClient(anchor.point, view, originView);
+    return { x: position.x + 17 * anchor.direction.x, y: position.y + 17 * anchor.direction.y };
+  }
+
+  function resolveTarget(position: Position, view: Viewport) {
+    const box = surface.current!;
+    if (position.x < 0 || position.y < 0 || position.x >= box.clientWidth || position.y >= box.clientHeight) return;
+    let closest: Endpoint | undefined;
+    let best = 9.01;
+    for (const anchor of anchors) {
+      const screen = screenPoint(anchor, view);
+      const distance = Math.hypot(position.x - screen.x, position.y - screen.y);
+      if (distance < best) { closest = anchor.endpoint; best = distance; }
+    }
+    return closest;
+  }
+
+  function linkPreview(current: Gesture, end: Position) {
+    const start = current.connection!;
+    const original = start.kind === "reconnect" ? scene.edges.find(({ item }) => item.id === start.id) : undefined;
+    const fixed = start.kind === "connect" ? connectionAnchor(scene, start.source) :
+      original?.[start.side === "source" ? "target" : "source"];
+    const target = resolveTarget(end, current.view);
+    const fallback = fixed ? [fixed.point, clientToWorld(end, current.view, originView)] : [];
+    if (!target) return { points: fallback, valid: false, message: "Drop on a component connection point." };
+    const edit = targetEdit(start, target);
+    const candidate = candidateEdge(current.editor.document, edit);
+    if (!candidate.ok) return { points: fallback, valid: false, target, message: candidate.issues[0].message };
+    const source = connectionAnchor(scene, candidate.value.source);
+    const destination = connectionAnchor(scene, candidate.value.target);
+    const projected = source && destination && projectConnection(candidate.value, source, destination);
+    if (!projected || typeof projected === "string") return { points: fallback, valid: false, target,
+      message: projected || "The connection point is unavailable." };
+    return { points: projected.points, valid: true, target, message: "Release to connect." };
   }
   function insert(type: ComponentType, position: Position) {
     const id = crypto.randomUUID();
@@ -187,11 +235,17 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     const start = local(event);
     const mode = event.button === 1 || tool === "pan" || space ? "pan" : "select";
     const handle = (event.target as HTMLElement).dataset.resize as ResizeHandle | undefined;
+    const data = (event.target as HTMLElement).dataset;
+    const connection: ConnectionStart | undefined = enabled && mode === "select" ?
+      data.reconnect && selectedEdge ? { kind: "reconnect", id: selectedEdge.item.id, side: data.reconnect as End } :
+        data.port && data.nodeId ? { kind: "connect", id: crypto.randomUUID(), source: { nodeId: data.nodeId, handleId: data.port as Endpoint["handleId"] } } :
+          undefined : undefined;
     const resize = mode === "select" && !pending ? handle : undefined;
     setNotice("");
     gesture.current = { pointer: event.pointerId, mode, start, view: active, selection, shift: event.shiftKey,
-      editor, resize, hit: mode === "select" ? (resize && resizer ? resizer.item.id :
+      editor, resize, connection, hit: mode === "select" ? (resize && resizer ? resizer.item.id :
         hitTest(scene, clientToWorld(start, active, originView), active.zoom)) : null };
+    if (connection) setLink(linkPreview(gesture.current, start));
     setDraggingPan(mode === "pan");
     event.currentTarget.setPointerCapture(event.pointerId);
   }
@@ -217,8 +271,25 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
   }
   function move(event: PointerEvent<HTMLDivElement>) {
     const current = gesture.current;
-    if (!current || current.pointer !== event.pointerId) return;
+    if (!current) {
+      if (enabled) {
+        const client = local(event);
+        const hit = hitTest(scene, clientToWorld(client, active, originView), active.zoom);
+        const candidate = anchors.find(({ endpoint }) => endpoint.nodeId === hit) ??
+          anchors.filter((anchor) => {
+            const point = screenPoint(anchor, active);
+            return Math.hypot(point.x - client.x, point.y - client.y) <= 24;
+          }).at(-1);
+        setHover((event.target as HTMLElement).dataset.nodeId ?? candidate?.endpoint.nodeId ?? null);
+      }
+      return;
+    }
+    if (current.pointer !== event.pointerId) return;
     const end = local(event);
+    if (current.connection) {
+      setLink(linkPreview(current, end));
+      return;
+    }
     const dx = end.x - current.start.x;
     const dy = end.y - current.start.y;
     if (current.mode === "pan") {
@@ -245,6 +316,13 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     const dragged = Math.hypot(end.x - current.start.x, end.y - current.start.y) >= 4;
     stop(false);
     if (current.mode === "pan") return;
+    if (current.connection) {
+      if (!dragged) return;
+      const next = linkPreview(current, end);
+      if (!next.valid || !next.target) setNotice(next.message);
+      else setNotice(onEdge(targetEdit(current.connection, next.target), current.editor.generation) ?? "");
+      return;
+    }
     const change = dragged && transform(current, end.x - current.start.x, end.y - current.start.y);
     if (change) {
       setNotice(onEdit(change.edit, change.next, current.editor.generation) ?? "");
@@ -277,7 +355,11 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
       onView(active, objectsIn(scene));
     } else if (event.code === "Space" && !event.ctrlKey && !event.metaKey && !event.altKey) {
       event.preventDefault();
-      setSpace(true);
+      if (!gesture.current) setSpace(true);
+    } else if (!gesture.current && !isSample && !pending && selectedEdge &&
+        (event.key === "Delete" || event.key === "Backspace") && !event.ctrlKey && !event.metaKey && !event.altKey) {
+      event.preventDefault();
+      setNotice(onEdge({ kind: "delete", id: selectedEdge.item.id }, editor.generation) ?? "");
     } else if (!gesture.current && !isSample && !pending && !event.altKey && !event.ctrlKey && !event.metaKey &&
       Object.hasOwn(arrows, event.key)) {
       const ids = objects.filter(({ item }) => selection.includes(item.id)).map(({ item }) => item.id);
@@ -315,9 +397,9 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
   }
 
   return <section className="canvas-area" aria-label={isSample ? "Read-only sample diagram" : "Diagram workspace"}>
-    <div ref={surface} className="canvas-surface" data-tool={tool === "pan" || space || draggingPan ? "pan" : "select"}
+    <div ref={surface} id="diagram-canvas" className="canvas-surface" data-tool={tool === "pan" || space || draggingPan ? "pan" : "select"}
       data-dragging={draggingPan} tabIndex={0} role="region" aria-label="Diagram canvas"
-      onPointerDown={down} onPointerMove={move} onPointerUp={up}
+      onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerLeave={() => setHover(null)}
       onPointerCancel={() => stop(true)} onLostPointerCapture={() => stop(true)} onContextMenu={context} onKeyDown={key}
       onDragOver={(event) => {
         const candidate = placed(event);
@@ -339,6 +421,29 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
       {gridVisible && <div aria-hidden="true" className="canvas-grid" style={{ backgroundSize: `${spacing}px ${spacing}px`,
         backgroundPosition: `${active.x - spacing / 2}px ${active.y - spacing / 2}px` }} />}
       <Projection scene={shown} viewport={active} selection={picked} />
+      {link && <svg className="connection-preview" aria-hidden="true">
+        <polyline points={link.points.map((p) => {
+          const { x, y } = worldToClient(p, active, originView);
+          return `${x},${y}`;
+        }).join(" ")} data-valid={link.valid} />
+      </svg>}
+      {!preview && anchors.filter(({ endpoint }) => link || endpoint.nodeId === hover || picked.includes(endpoint.nodeId)).map((anchor) => {
+        const { endpoint } = anchor;
+        const point = screenPoint(anchor, active);
+        const highlighted = link?.target?.nodeId === endpoint.nodeId && link?.target?.handleId === endpoint.handleId;
+        return <span key={`${endpoint.nodeId}:${endpoint.handleId}`} aria-hidden="true" className="connection-port"
+          data-node-id={endpoint.nodeId} data-port={endpoint.handleId} data-valid={highlighted ? link!.valid : undefined}
+          style={{ left: point.x, top: point.y }} />;
+      })}
+      {enabled && selectedEdge && !link && (["source", "target"] as const).map((side) => {
+        const anchor = selectedEdge[side];
+        const point = screenPoint(anchor, active);
+        const other = screenPoint(selectedEdge[side === "source" ? "target" : "source"], active);
+        const overlap = Math.hypot(other.x - point.x, other.y - point.y) < 18;
+        const offset = overlap ? (side === "source" ? -11 : 11) : 0;
+        return <span key={side} aria-hidden="true" className="connection-port reconnect-port" data-reconnect={side}
+          title={`Reconnect ${side}`} style={{ left: point.x + offset, top: point.y }} />;
+      })}
       {ghost && <div className="drop-preview" style={{ left: active.x + ghost.position.x * active.zoom,
         top: active.y + ghost.position.y * active.zoom, width: ghost.size.width * active.zoom, height: ghost.size.height * active.zoom }}>
         <ComponentGraphic item={ghost} />
@@ -361,7 +466,8 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
       <button className="icon-button" aria-label="Fit diagram" title="Fit diagram" onClick={fit}><Maximize size={16} /></button>
       <button className="icon-button" aria-label="Reset zoom" title="Reset to 100%" onClick={() => scene.bounds ? zoom(1) : onView(originView, selection)}><RotateCcw size={15} /></button>
     </div>
-    {notice && <p className="canvas-notice" role={preview ? undefined : "status"}>{notice}</p>}
+    {(link || notice || shown.diagnostics[0] || selectedEdge?.warning) && <p className="canvas-notice" data-valid={link?.valid}
+      role={preview || link ? undefined : "status"}>{link?.message ?? (notice || shown.diagnostics[0] || selectedEdge?.warning)}</p>}
     {menu && <div className="canvas-menu" role="group" aria-label="Canvas actions" style={{ left: menu.x, top: menu.y }}
       onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setMenu(undefined); }}
       onKeyDown={(event) => { if (event.key === "Escape") { event.stopPropagation(); setMenu(undefined); surface.current?.focus(); } }}>

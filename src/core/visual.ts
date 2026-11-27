@@ -59,22 +59,27 @@ export function visualOf(item: Item) {
 }
 
 const graphemes = new Intl.Segmenter(undefined, { granularity: "grapheme" });
-export function labelLayout(item: Item, measure: Measure = approximate) {
-  const shape = visualOf(item);
-  const text = "title" in item ? item.title : item.label;
-  const { fontSize, align } = item.style.text;
-  const lineHeight = fontSize * 1.25;
+export function wrapLines(text: string, width: number, fontSize: number, measure: Measure) {
   const lines: string[] = [];
   let widthFits = true;
   for (const paragraph of text ? text.replaceAll("\t", "    ").split("\n") : []) {
     let line = "";
     for (const { segment } of graphemes.segment(paragraph)) {
-      if (line && measure(line + segment, fontSize) > shape.region.width) { lines.push(line); line = ""; }
+      if (line && measure(line + segment, fontSize) > width) { lines.push(line); line = ""; }
       line += segment;
-      if (measure(line, fontSize) > shape.region.width) widthFits = false;
+      if (measure(line, fontSize) > width) widthFits = false;
     }
     lines.push(line);
   }
+  return { lines, widthFits };
+}
+
+export function labelLayout(item: Item, measure: Measure = approximate) {
+  const shape = visualOf(item);
+  const text = "title" in item ? item.title : item.label;
+  const { fontSize, align } = item.style.text;
+  const lineHeight = fontSize * 1.25;
+  const { lines, widthFits } = wrapLines(text, shape.region.width, fontSize, measure);
   const height = lines.length * lineHeight;
   const statusFits = !shape.status || (measure(shape.status.label, 11) + 25 <= shape.status.box.width && shape.status.box.height >= 13.75);
   const heightLimit = item.type === "general.boundary" ? item.size.height - 16 - item.style.strokeWidth : shape.region.height;

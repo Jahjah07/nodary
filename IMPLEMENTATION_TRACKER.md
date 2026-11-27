@@ -2,10 +2,10 @@
 
 **Baseline:** 27 November 2026. This is a human-readable rollup. Machine authority: [DGS-09_Implementation_Task_Register_v0.1.json](docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json) and [DGS-10_Acceptance_Test_Register_v0.1.json](docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json). Update status from actual evidence, not manual progress alone.
 
-- Tasks completed: 26/56. Phases passed: 5/13.
-- Mandatory scenarios passed: 30/205. Conditional: 0/13 (applicability pending).
+- Tasks completed: 29/56. Phases passed: 6/13.
+- Mandatory scenarios passed: 41/205. Conditional: 0/13 (applicability pending).
 - Spikes passed: 8/8; release gates passed: 0/10.
-- Phase 04 is ready for owner review. Phase 05 awaits separate authorization.
+- Phase 05 is ready for owner review. Phase 06 awaits separate authorization.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
@@ -13,8 +13,8 @@
 | 01 | Technical prototypes and decision gates | 8 | Closed in `51fcac8` | Passed with owner-approved CR-01 |
 | 02 | Core domain and command foundation | 5 | Closed in `e9f321c` | Owner accepted |
 | 03 | Workspace and canvas | 5 | Closed in `43e22d3` | Owner accepted |
-| 04 | Component library | 4 | Implemented | Passed locally |
-| 05 | Connections and routing | 3 | Not started | Not run |
+| 04 | Component library | 4 | Closed in `7622353` | Owner accepted |
+| 05 | Connections and routing | 3 | Implemented | Passed locally |
 | 06 | Properties and styling | 3 | Not started | Not run |
 | 07 | Grouping and boundaries | 4 | Not started | Not run |
 | 08 | Commands and editing history integration | 3 | Not started | Not run |
@@ -53,9 +53,9 @@
 | T-04-02 | Shared primitive geometry and scene | Implemented | Pass, exact primitives and 104 cardinal anchors | [Phase 04 evidence](docs/04-development/evidence/PHASE-04.md) |
 | T-04-03 | Component library insertion | Implemented | Pass, offline keyboard insertion and verified native click/drag | [Phase 04 evidence](docs/04-development/evidence/PHASE-04.md) |
 | T-04-04 | Move and resize interactions | Implemented | Pass, previews, fixed sides, circle constraints and atomic history | [Phase 04 evidence](docs/04-development/evidence/PHASE-04.md) |
-| T-05-01 | Edge creation and graph constraints | Not started | Not run | — |
-| T-05-02 | Shared route and marker geometry | Not started | Not run | — |
-| T-05-03 | Edge renderer and reconnection | Not started | Not run | — |
+| T-05-01 | Edge creation and graph constraints | Implemented | Pass, pointer and keyboard connect with canonical validation | [Phase 05 evidence](docs/04-development/evidence/PHASE-05.md) |
+| T-05-02 | Shared route and marker geometry | Implemented | Pass, 16 cardinal pairs, degeneracy, markers and labels | [Phase 05 evidence](docs/04-development/evidence/PHASE-05.md) |
+| T-05-03 | Edge renderer and reconnection | Implemented | Pass, both endpoint controls, cancellation and live attachment | [Phase 05 evidence](docs/04-development/evidence/PHASE-05.md) |
 | T-06-01 | Contextual properties and styles | Not started | Not run | — |
 | T-06-02 | Text layout and content fit | Not started | Not run | — |
 | T-06-03 | Architecture status and boundary title controls | Not started | Not run | — |
@@ -85,7 +85,7 @@
 | T-12-03 | Release handover | Not started | Not run | — |
 
 ## Active blockers and review
-Phase 00 closed in `2476348`, Phase 01 in `51fcac8` and Phase 02 in `e9f321c`. Phase 03 passed locally. Hosted GitHub Actions remains unrun. Full component insertion, measured text layout, raw import, durable persistence and release qualification remain scheduled for later phases.
+Phase 04 closed in `7622353`. Phase 05 passed locally and awaits owner review. CR-05 proposes V0.1 as the internal connected editor milestone. Full label fitting, property controls, grouping, durable persistence, import, export and release qualification remain scheduled for later phases. Hosted GitHub Actions remains unrun.
 
 ## Updating this tracker
 Use `not_started`, `in_progress`, `blocked`, `implemented` (or register's approved status vocabulary) and actual verification states separately; never mark completed solely because code exists. For a phase that has only partial verification, record specific tests pending later. Update machine registers first and reconcile this rollup at the phase gate. Keep evidence under `docs/04-development/evidence/` or an approved CI artifact reference, with timestamp, commit/build, command, environment, result and limitations. Do not mark mandatory skipped/unrun as passed. Record an explicit non-applicability decision for deferred optional tests only.

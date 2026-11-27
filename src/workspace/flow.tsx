@@ -3,7 +3,8 @@
 import { ConnectionMode, EdgeLabelRenderer, Handle, Position as Port, ReactFlow, type Edge as FlowEdge, type EdgeProps, type Node as FlowNode, type NodeProps } from "@xyflow/react";
 import type { Boundary, Node, Position, Viewport } from "../core/contracts";
 import type { Immutable } from "../core/immutable";
-import { visualOf } from "../core/visual";
+import { diagramFont, visualOf } from "../core/visual";
+import { dashPattern } from "../core/routes";
 import { ComponentGraphic } from "./component-graphic";
 import type { Scene } from "./scene";
 import "@xyflow/react/dist/style.css";
@@ -22,18 +23,30 @@ function DiagramObject({ data }: NodeProps<SceneNode>) {
 }
 
 const poly = (points: Position[]) => points.map(({ x, y }) => `${x},${y}`).join(" ");
-function Connector({ data }: EdgeProps<SceneConnector>) {
+export function Connector({ data }: Pick<EdgeProps<SceneConnector>, "data">) {
   const { edge, selected } = data!;
-  const { style, label } = edge.item;
-  const color = selected ? "#4F46E5" : style.stroke;
+  const { style } = edge.item;
+  const label = edge.label;
   return <>
-    <polyline points={poly(edge.points)} fill="none" stroke={color} strokeWidth={style.strokeWidth + (selected ? 1 : 0)}
-      strokeDasharray={style.strokeStyle === "dashed" ? "6 4" : undefined} strokeLinejoin="round" data-selected={selected} />
-    {edge.arrows.map((arrow, i) => <polygon key={i} points={poly(arrow)} fill={color} />)}
-    {edge.label && <EdgeLabelRenderer><span className="diagram-edge-label" data-selected={selected} style={{
-      left: edge.label.x, top: edge.label.y, width: edge.label.width, height: edge.label.height,
-      fontSize: style.text.fontSize, color: style.text.color,
-    }}>{label}</span></EdgeLabelRenderer>}
+    {selected && <polyline points={poly(edge.points)} fill="none" stroke="#818CF8" strokeOpacity={.5}
+      strokeWidth={style.strokeWidth + 5} strokeLinejoin="round" />}
+    <polyline className="connection-line" data-edge-id={edge.item.id} data-route={edge.item.route}
+      data-source={edge.item.source.nodeId} data-target={edge.item.target.nodeId}
+      data-source-handle={edge.item.source.handleId} data-target-handle={edge.item.target.handleId}
+      points={poly(edge.line)} fill="none" stroke={style.stroke} strokeWidth={style.strokeWidth}
+      strokeDasharray={dashPattern(style)?.join(" ")} strokeLinejoin="round" strokeLinecap="round" data-selected={selected} />
+    {edge.arrows.map((arrow, i) => <polygon key={i} data-edge-arrow={edge.item.id} points={poly(arrow)} fill={style.stroke} />)}
+    {label && <EdgeLabelRenderer><svg className="diagram-edge-label" data-selected={selected} style={{
+      left: label.box.x, top: label.box.y, width: label.box.width, height: label.box.height,
+    }} viewBox={`0 0 ${label.box.width} ${label.box.height}`}>
+      <rect width={label.box.width} height={label.box.height} fill="white" />
+      <text fill={style.text.color} fontSize={style.text.fontSize} fontFamily={diagramFont}
+        textAnchor={label.align === "left" ? "start" : label.align === "right" ? "end" : "middle"}
+        dominantBaseline="central" xmlSpace="preserve">
+        {label.lines.map((line, i) => <tspan key={i} x={label.align === "left" ? 4 : label.align === "right" ? label.box.width - 4 : label.box.width / 2}
+          y={2 + label.lineHeight * (i + .5)}>{line}</tspan>)}
+      </text>
+    </svg></EdgeLabelRenderer>}
   </>;
 }
 const nodeTypes = { diagram: DiagramObject };

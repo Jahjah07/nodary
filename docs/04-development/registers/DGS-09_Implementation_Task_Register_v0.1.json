@@ -97,8 +97,8 @@
         "T-05-02",
         "T-05-03"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "04"
     },
     {
@@ -733,7 +733,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-04.md#task-results"
       ],
-      "commit": null,
+      "commit": "f4aa40c95997c824f20503715cfb7e12ec929a15",
       "blocker": null
     },
     {
@@ -756,7 +756,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-04.md#task-results"
       ],
-      "commit": null,
+      "commit": "f4aa40c95997c824f20503715cfb7e12ec929a15",
       "blocker": null
     },
     {
@@ -778,7 +778,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-04.md#task-results"
       ],
-      "commit": null,
+      "commit": "f4aa40c95997c824f20503715cfb7e12ec929a15",
       "blocker": null
     },
     {
@@ -800,7 +800,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-04.md#task-results"
       ],
-      "commit": null,
+      "commit": "f4aa40c95997c824f20503715cfb7e12ec929a15",
       "blocker": null
     },
     {
@@ -812,13 +812,15 @@
       ],
       "verification": "DM-09–10,CI-18–19,CL-07",
       "deliverable": "Create directed endpoints through pointer and keyboard controls; support branching and cycles, reject exact duplicates/self-loops/annotations/frames and dangling references.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-04-04"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-05.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -833,13 +835,15 @@
       ],
       "verification": "CI-21–22,CL-18",
       "deliverable": "Implement deterministic straight/orthogonal paths with endpoint normals, candidate ordering, explicit fallback and path-length label position; finite all handle/overlap cases; shared editor/export scene.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-05-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-05.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -853,13 +857,15 @@
       ],
       "verification": "DM-11,CI-18–20,CL-08,UX-07–08",
       "deliverable": "Render selectable edges and preview labels/arrows; reconnect either endpoint with stable ID/style; invalid release restores edge, motion and resize update anchors.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-05-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-05.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1593,13 +1599,13 @@
       "id": "AC-FR-06-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-06-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-06-03",
@@ -1611,7 +1617,7 @@
       "id": "AC-FR-06-04",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-07-01",
@@ -1623,7 +1629,7 @@
       "id": "AC-FR-07-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-07-03",
@@ -2043,7 +2049,7 @@
       "id": "DM-11",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-12",
@@ -2163,7 +2169,7 @@
       "id": "CL-07",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-08",
@@ -2385,31 +2391,31 @@
       "id": "CI-18",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-19",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-20",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-21",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-22",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-23",

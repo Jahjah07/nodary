@@ -7,6 +7,7 @@ import { createStore } from "zustand/vanilla";
 import type { DocumentSummary } from "../application/document-repository";
 import { beginSave, editSession, openSession, settleSave, viewSession, type DocumentSession } from "../application/document-session";
 import type { CommandState, Outcome } from "../core/commands";
+import type { EdgeEdit } from "../core/edge-edits";
 import { componentDispatcher, type ComponentEdit } from "../core/component-edits";
 import { idSchema, type DiagramDocument, type Viewport } from "../core/contracts";
 import { createMemoryDocumentRepository } from "../infrastructure/memory-document-repository";
@@ -130,8 +131,12 @@ export function Workspace({ initial }: { initial: "/" | "/editor/" }) {
     if (session?.editor.document.id === sampleId) return "Create a diagram to edit components.";
     return apply((state) => dispatcher.dispatch(state, { type: "component", payload, expectedGeneration }), selection);
   }
+  function editEdge(payload: EdgeEdit, expectedGeneration: number) {
+    if (session?.editor.document.id === sampleId) return "Create a diagram to edit connections.";
+    return apply((state) => dispatcher.dispatch(state, { type: "edge", payload, expectedGeneration }), payload.kind === "delete" ? [] : [payload.id]);
+  }
   if (!editorRoute) return <Library documents={documents} loading={!ready && !error} error={error} create={create} />;
-  if (session) return <Editor key={session.token} session={session} onView={updateView} onEdit={edit}
+  if (session) return <Editor key={session.token} session={session} onView={updateView} onEdit={edit} onEdge={editEdge}
     onToggle={(key) => apply((state) => dispatcher.dispatch(state, { type: "toggle", payload: key }))} />;
   return <>
     <header className="app-header"><span className="wordmark">Nodary</span><span className="header-divider" /><BackToLibrary /></header>

@@ -43,7 +43,7 @@ test("CI-07/08 resolves label, title, object and border targets and requires ful
   const scene = buildScene(sampleDiagram().document);
   const [outer, inner] = scene.groups;
   const client = scene.nodes[0];
-  const label = scene.edges[0].label!;
+  const label = scene.edges[0].label!.box;
   expect(hitTest(scene, { x: label.x + 2, y: label.y + 2 }, 1)).toBe(scene.edges[0].item.id);
   expect(hitTest(scene, { x: inner.title!.x + 3, y: inner.title!.y + 3 }, 1)).toBe(inner.item.id);
   expect(hitTest(scene, { x: outer.rect.x + 1, y: outer.rect.y + 300 }, 1)).toBe(outer.item.id);
@@ -51,7 +51,7 @@ test("CI-07/08 resolves label, title, object and border targets and requires ful
   const overlapped = { ...scene, nodes: [client, { ...client, item: scene.nodes[1].item }] };
   const middle = { x: client.rect.x + client.rect.width / 2, y: client.rect.y + client.rect.height / 2 };
   expect(hitTest(overlapped, middle, 1)).toBe(scene.nodes[1].item.id);
-  const coveringEdge = { ...scene.edges[0], label: { ...middle, width: 20, height: 15 } };
+  const coveringEdge = { ...scene.edges[0], label: { ...scene.edges[0].label!, box: { ...middle, width: 20, height: 15 } } };
   expect(hitTest({ ...overlapped, edges: [coveringEdge] }, middle, 1)).toBe(coveringEdge.item.id);
   const box = client.bounds;
   expect(objectsIn(scene, { ...box, width: box.width - 1 })).toEqual([]);

@@ -1,4 +1,4 @@
-import { parseStructure, type DiagramDocument, type PortableDiagram, type Position, type Size, type Viewport } from "./contracts";
+import { parseStructure, type DiagramDocument, type Edge, type Node, type PortableDiagram, type Position, type Size, type Viewport } from "./contracts";
 import { indexHierarchy } from "./hierarchy";
 import type { Immutable } from "./immutable";
 import { componentFor } from "./registry";
@@ -29,6 +29,22 @@ export function snapshotFits(envelope: Immutable<PortableDiagram>): boolean {
     if (size > limits.bytes) return false;
   }
   return true;
+}
+
+type Endpoints = Pick<Edge, "source" | "target">;
+export const directedKey = ({ source, target }: Endpoints) => JSON.stringify([source.nodeId, source.handleId, target.nodeId, target.handleId]);
+
+export function endpointIssues(edge: Endpoints, nodes: ReadonlyMap<string, Immutable<Node>>, path: Issue["path"] = []): Issue[] {
+  const issues: Issue[] = [];
+  for (const side of ["source", "target"] as const) {
+    const endpoint = edge[side];
+    const node = nodes.get(endpoint.nodeId);
+    if (!node || !componentFor(node.type).allowedHandles.includes(endpoint.handleId)) {
+      issues.push({ code: "INVALID_ENDPOINT", path: [...path, side], message: "Choose an eligible component and connection point." });
+    }
+  }
+  if (edge.source.nodeId === edge.target.nodeId) issues.push({ code: "SELF_LOOP", path, message: "Choose a different component. A connection cannot loop to itself." });
+  return issues;
 }
 
 // DGS-05 VAL-05–14. Measured scene ink is supplied by later layout integration.
@@ -78,15 +94,8 @@ export function validateGraph<D extends Immutable<DiagramDocument>>(document: D,
   const connections = new Set<string>();
   for (const [i, edge] of document.edges.entries()) {
     const path = ["document", "edges", i];
-    for (const side of ["source", "target"] as const) {
-      const endpoint = edge[side];
-      const node = nodes.get(endpoint.nodeId);
-      if (!node || !componentFor(node.type).allowedHandles.includes(endpoint.handleId)) {
-        add("INVALID_ENDPOINT", [...path, side], "Endpoint requires an eligible node and handle.");
-      }
-    }
-    const key = JSON.stringify([edge.source.nodeId, edge.source.handleId, edge.target.nodeId, edge.target.handleId]);
-    if (edge.source.nodeId === edge.target.nodeId) add("SELF_LOOP", path, "Self-loops are unsupported.");
+    for (const issue of endpointIssues(edge, nodes, path)) add(issue.code, issue.path, issue.message);
+    const key = directedKey(edge);
     if (connections.has(key)) add("DUPLICATE_EDGE", path, "A directed edge already uses these endpoints.");
     connections.add(key);
   }

@@ -150,8 +150,20 @@ kbd { font: 12px/1.4 system-ui, sans-serif; padding: 2px 4px; border-radius: 4px
 .component-resize::before { content: ""; width: 8px; height: 8px; border: 1px solid var(--accent);
   border-radius: 2px; background: var(--panel); }
 .drop-preview { position: absolute; pointer-events: none; opacity: .55; }
-.diagram-edge-label { position: absolute; display: grid; place-items: center; white-space: nowrap; overflow: hidden; border-radius: 4px; background: white; border: 1px solid #e2e8f0; }
+.diagram-edge-label { position: absolute; overflow: visible; }
 .diagram-edge-label[data-selected="true"] { outline: 2px solid var(--accent); }
+.connection-port { position: absolute; z-index: 3; display: grid; place-items: center; width: 18px; height: 18px;
+  transform: translate(-50%, -50%); cursor: crosshair; }
+.connection-port::before { content: ""; width: 8px; height: 8px; border: 1.5px solid var(--accent);
+  background: var(--panel); border-radius: 50%; }
+.connection-port[data-valid="true"]::before { background: #16a34a; border-color: #166534; }
+.connection-port[data-valid="false"]::before { background: #dc2626; border-color: #991b1b; }
+.reconnect-port { z-index: 4; }
+.reconnect-port::before { border-radius: 1px; background: var(--accent); }
+.connection-preview { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; }
+.connection-preview polyline { fill: none; stroke: #dc2626; stroke-width: 2; stroke-dasharray: 6 4; }
+.connection-preview polyline[data-valid="true"] { stroke: #15803d; }
+.connection-actions { display: grid; gap: 8px; margin-top: 12px; }
 .canvas-empty { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; pointer-events: none; }
 .canvas-empty strong { font-size: 18px; }
 .canvas-empty span { color: var(--secondary); background: var(--app); }

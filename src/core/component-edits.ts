@@ -1,4 +1,5 @@
 import { createDispatcher } from "./commands";
+import { applyEdgeEdit, type EdgeEdit } from "./edge-edits";
 import type { Boundary, Node, Position } from "./contracts";
 import { indexHierarchy, moveTransformRoots, resizeObject, snapWorld, validateContainment } from "./geometry";
 import type { Rect } from "./graph";
@@ -50,8 +51,9 @@ export function componentDispatcher(measure?: Measure) {
   const metrics = { visualBounds: (item: Parameters<typeof visualOf>[0]) => visualOf(item).bounds,
     titleHeight: (item: Immutable<Boundary>) => labelLayout(item, measure).height };
   const reject = (message: string) => fail({ code: "INVALID_GEOMETRY", path: ["document"], message });
-  return createDispatcher<{ toggle: SettingsKey; component: ComponentEdit }>({
+  return createDispatcher<{ toggle: SettingsKey; component: ComponentEdit; edge: EdgeEdit }>({
     toggle(draft, key) { draft.settings[key] = !draft.settings[key]; return ok(undefined); },
+    edge: applyEdgeEdit,
     component(draft, edit) {
       if (edit.kind === "insert") {
         const item = makeComponent(edit.type, edit.id, edit.position);

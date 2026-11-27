@@ -3,22 +3,33 @@ import { makeComponent, type ComponentType } from "../core/component-edits";
 import { approximate, diagramFont, iconVectors, labelLayout, visualOf, type Measure } from "../core/visual";
 
 let context: CanvasRenderingContext2D | null | undefined;
-export const measureLabel: Measure = (text, size) => {
-  if (typeof document === "undefined") return approximate(text, size);
-  context ??= document.createElement("canvas").getContext("2d");
-  if (!context) return approximate(text, size);
+function textMetrics(text: string, size: number) {
+  if (typeof document === "undefined") return;
+  if (context === undefined) context = document.createElement("canvas").getContext("2d");
+  if (!context) return;
   context.font = `${size}px ${diagramFont}`;
-  return context.measureText(text).width;
-};
+  context.textBaseline = "alphabetic";
+  context.textAlign = "left";
+  return context.measureText(text);
+}
+export const measureLabel: Measure = Object.assign(
+  (text: string, size: number) => textMetrics(text, size)?.width ?? approximate(text, size),
+  { ink(text: string, size: number) {
+    const result = textMetrics(text, size);
+    if (!result) return;
+    return { left: result.actualBoundingBoxLeft, right: result.actualBoundingBoxRight,
+      ascent: result.actualBoundingBoxAscent, descent: result.actualBoundingBoxDescent };
+  } },
+);
 
-export function ComponentGraphic({ item, selected, tile }: {
-  item: Parameters<typeof visualOf>[0]; selected?: boolean; tile?: boolean;
+export function ComponentGraphic({ item, selected, tile, label }: {
+  item: Parameters<typeof visualOf>[0]; selected?: boolean; tile?: boolean; label?: ReturnType<typeof labelLayout>;
 }) {
   const shape = visualOf(item);
   const { width, height } = item.size;
   const { style } = item;
   const { outline, decoration, icon, status, dash, bounds } = shape;
-  const layout = labelLayout(item, measureLabel);
+  const layout = label ?? labelLayout(item, measureLabel);
   const frame = "title" in item;
   const tileBox = icon ? `${icon.box.x - 3} ${icon.box.y - 3} 30 30` :
     `${bounds.x - 2} ${bounds.y - 2} ${bounds.width + 4} ${bounds.height + 4}`;
@@ -43,10 +54,10 @@ export function ComponentGraphic({ item, selected, tile }: {
     {tile && outline.kind === "none" && <text x={width / 2} y={height / 2} dominantBaseline="central"
       fontFamily={diagramFont} fontSize={height * .65} textAnchor="middle" fill={style.text.color}>T</text>}
     {!tile && layout.lines.length > 0 && <text className={frame ? "frame-title" : "diagram-label"} fill={style.text.color}
-      textAnchor={layout.anchor} fontFamily={diagramFont} fontSize={style.text.fontSize} dominantBaseline="central" xmlSpace="preserve">
-      {layout.lines.map((line, i) => <tspan key={i} x={layout.x} y={layout.y + i * layout.lineHeight}>{line}</tspan>)}
+      fontFamily={diagramFont} fontSize={style.text.fontSize} xmlSpace="preserve">
+      {layout.placements.map((line, i) => <tspan key={i} x={line.x} y={line.y}>{line.text}</tspan>)}
     </text>}
-    {!tile && status && <g transform={`translate(${status.box.x} ${status.box.y})`}>
+    {!tile && status && <g data-status={"status" in item ? item.status : undefined} transform={`translate(${status.box.x} ${status.box.y})`}>
       <rect width={status.box.width} height={status.box.height} rx={4} fill="#FFFFFF" />
       <circle cx={11.5} cy={status.box.height / 2} r={3.5} fill={status.marker} />
       <text x={20} y={status.box.height / 2} dominantBaseline="central" fontFamily={diagramFont} fontSize={11} fill={status.text}>{status.label}</text>

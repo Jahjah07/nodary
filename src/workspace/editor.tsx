@@ -1,12 +1,13 @@
 "use client";
 
 import { CircleHelp, Clock3, Grid2X2, Hand, Magnet, MousePointer2, PanelLeft, PanelRight, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode, type SyntheticEvent } from "react";
 import type { DocumentSession } from "../application/document-session";
 import type { Viewport } from "../core/contracts";
 import { componentFor, componentRegistry } from "../core/registry";
 import type { ComponentType } from "../core/component-edits";
 import { EndpointDialog, type ConnectionStart, type EditEdge } from "./connections";
+import { LabelDialog, PropertyControls, type EditProperty } from "./properties";
 import { Canvas, type CanvasControls, type EditComponent, type PaletteDrag, type Tool } from "./canvas";
 import { ComponentPreview, measureLabel } from "./component-graphic";
 import { BackToLibrary, categoryName } from "./library";
@@ -25,12 +26,13 @@ function subscribeNarrow(change: () => void) {
 
 const categories = [["Flowchart", "flow."], ["Architecture", "arch."], ["General", "general."]] as const;
 
-export function Editor({ session, onView, onToggle, onEdit, onEdge }: {
+export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty }: {
   session: DocumentSession;
   onView(viewport: Viewport | null, selection: readonly string[]): void;
   onToggle(key: "gridVisible" | "snapToGrid"): void;
   onEdit: EditComponent;
   onEdge: EditEdge;
+  onProperty: EditProperty;
 }) {
   const { document, view } = session.editor;
   const scene = useMemo(() => buildScene(document, measureLabel), [document]);
@@ -38,6 +40,8 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge }: {
   const canvas = useRef<CanvasControls>(null);
   const drag = useRef<PaletteDrag | null>(null);
   const [connection, setConnection] = useState<ConnectionStart>();
+  const [labelId, setLabelId] = useState<string>();
+  const labelItem = labelId ? [...document.nodes, ...document.edges, ...document.groups].find(({ id }) => id === labelId) : undefined;
   const endpointTrigger = useRef<HTMLElement>(null);
   const [tool, setTool] = useState<Tool>("select");
   const narrow = useSyncExternalStore(subscribeNarrow, isNarrow, () => false);
@@ -61,7 +65,15 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge }: {
     (panel === "components" ? left : right).current?.focus();
   }
 
-  return <div className="editor-shell">
+  function guardDraft(event: SyntheticEvent<HTMLDivElement>) {
+    const invalid = event.currentTarget.querySelector<HTMLFormElement>('.property-field[data-invalid="true"]');
+    if (invalid && !invalid.contains(event.target as HTMLElement)) {
+      event.preventDefault();
+      event.stopPropagation();
+      invalid.querySelector<HTMLElement>("input, textarea, select")?.focus();
+    }
+  }
+  return <div className="editor-shell" onPointerDownCapture={guardDraft} onClickCapture={guardDraft}>
     <header className="app-header editor-header">
       <span className="wordmark">Nodary</span><span className="header-divider" /><BackToLibrary /><span className="header-divider" />
       <h1 ref={heading} tabIndex={-1} title={document.title}>{document.title}</h1>
@@ -107,9 +119,10 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge }: {
         </div>
       </Sidebar>}
       <Canvas scene={scene} viewport={view.viewport} selection={view.selection} tool={tool} isSample={isSample}
-        editor={session.editor} pending={!!session.pending} controls={canvas} drag={drag} onEdit={onEdit} onEdge={onEdge} onView={onView} />
+        editor={session.editor} pending={!!session.pending} controls={canvas} drag={drag} onEdit={onEdit} onEdge={onEdge} onView={onView}
+        onLabel={setLabelId} />
       {open.properties && <Sidebar panel="properties" close={() => closePanel("properties")}>
-        <Inspector scene={scene} session={session} readOnly={isSample} onEdge={onEdge}
+        <Inspector scene={scene} session={session} readOnly={isSample} onEdge={onEdge} onProperty={onProperty}
           select={(ids) => onView(view.viewport ?? originView, ids)}
           openConnection={(start, trigger) => { endpointTrigger.current = trigger; setConnection(start); }} />
       </Sidebar>}
@@ -121,6 +134,11 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge }: {
         <span className="canvas-shortcut">Hold Space to pan</span><span className="desktop-hint">Desktop editing recommended</span>
       </>}</span>
     </footer>
+    {labelItem && <LabelDialog key={labelItem.id} item={labelItem} generation={session.editor.generation} onEdit={onProperty}
+      close={() => {
+        setLabelId(undefined);
+        window.document.getElementById("diagram-canvas")?.focus({ preventScroll: true });
+      }} />}
     {connection && <EndpointDialog scene={scene} editor={session.editor} start={connection} onEdge={onEdge}
       close={() => {
         setConnection(undefined);
@@ -150,13 +168,15 @@ function Sidebar({ panel, close, children }: { panel: Panel; close(): void; chil
   </aside>;
 }
 
-function Inspector({ scene, session, select, readOnly, openConnection, onEdge }: {
+function Inspector({ scene, session, select, readOnly, openConnection, onEdge, onProperty }: {
   scene: Scene; session: DocumentSession; select(ids: readonly string[]): void; readOnly: boolean;
   openConnection(start: ConnectionStart, trigger: HTMLElement): void; onEdge: EditEdge;
+  onProperty: EditProperty;
 }) {
   const { document, view } = session.editor;
   const [edgeError, setEdgeError] = useState("");
   const all = [...scene.groups, ...scene.nodes, ...scene.edges];
+  const selectedItems = all.filter(({ item }) => view.selection.includes(item.id)).map(({ item }) => item);
   const picked = view.selection.length === 1 ? all.find(({ item }) => item.id === view.selection[0]) : undefined;
   const edge = picked && "source" in picked.item ? picked.item : undefined;
   const canConnect = picked && "type" in picked.item && componentFor(picked.item.type).allowedHandles.length > 0;
@@ -166,7 +186,9 @@ function Inspector({ scene, session, select, readOnly, openConnection, onEdge }:
       select(event.target.value ? [event.target.value] : []); setEdgeError("");
     }}>
       <option value="">Choose an object</option>
-      {all.map(({ item }) => <option key={item.id} value={item.id}>{objectName(item, scene)}</option>)}
+      {all.map(({ item }) => <option key={item.id} value={item.id}>{objectName(item, scene)}
+        {"status" in item && item.status !== "not_specified" ? ` · ${componentRegistry.statuses[item.status].label}` : ""}
+      </option>)}
     </select></label>}
     <section aria-labelledby="inspection-title">
       <h3 id="inspection-title">{picked ? objectName(picked.item, scene) : view.selection.length > 1 ? "Multiple objects" : "Document"}</h3>
@@ -189,16 +211,14 @@ function Inspector({ scene, session, select, readOnly, openConnection, onEdge }:
         onClick={(event) => openConnection({ kind: "connect", id: crypto.randomUUID(),
           source: { nodeId: picked.item.id, handleId: "right" } }, event.currentTarget)}>Connect to…</button>}
       {!readOnly && edge && <div className="connection-actions">
-        <label>Connector route<select value={edge.route} disabled={!!session.pending} onChange={(event) =>
-          editEdge({ kind: "route", id: edge.id, route: event.target.value as typeof edge.route })}>
-          <option value="orthogonal">Orthogonal</option><option value="straight">Straight</option>
-        </select></label>
         {(["source", "target"] as const).map((side) => <button className="button selection-button" key={side} disabled={!!session.pending}
           onClick={(event) => openConnection({ kind: "reconnect", id: edge.id, side }, event.currentTarget)}>Reconnect {side}</button>)}
         <button className="button selection-button" disabled={!!session.pending}
           onClick={() => editEdge({ kind: "delete", id: edge.id })}>Delete connection</button>
       </div>}
       {edgeError && <p role="alert">{edgeError}</p>}
+      {!readOnly && selectedItems.length > 0 && <PropertyControls items={selectedItems} generation={session.editor.generation}
+        busy={!!session.pending} onEdit={onProperty} />}
     </section>
   </div>;
 }

@@ -8,6 +8,7 @@ import type { DocumentSummary } from "../application/document-repository";
 import { beginSave, editSession, openSession, settleSave, viewSession, type DocumentSession } from "../application/document-session";
 import type { CommandState, Outcome } from "../core/commands";
 import type { EdgeEdit } from "../core/edge-edits";
+import type { PropertyEdit } from "../core/properties";
 import { componentDispatcher, type ComponentEdit } from "../core/component-edits";
 import { idSchema, type DiagramDocument, type Viewport } from "../core/contracts";
 import { createMemoryDocumentRepository } from "../infrastructure/memory-document-repository";
@@ -137,6 +138,10 @@ export function Workspace({ initial }: { initial: "/" | "/editor/" }) {
   }
   if (!editorRoute) return <Library documents={documents} loading={!ready && !error} error={error} create={create} />;
   if (session) return <Editor key={session.token} session={session} onView={updateView} onEdit={edit} onEdge={editEdge}
+    onProperty={(payload: PropertyEdit, expectedGeneration) => {
+      if (session.editor.document.id === sampleId) return "Create a diagram to edit properties.";
+      return apply((state) => dispatcher.dispatch(state, { type: "property", payload, expectedGeneration }));
+    }}
     onToggle={(key) => apply((state) => dispatcher.dispatch(state, { type: "toggle", payload: key }))} />;
   return <>
     <header className="app-header"><span className="wordmark">Nodary</span><span className="header-divider" /><BackToLibrary /></header>

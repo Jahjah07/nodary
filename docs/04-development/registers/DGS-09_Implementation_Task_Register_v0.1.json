@@ -111,8 +111,8 @@
         "T-06-02",
         "T-06-03"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "05"
     },
     {
@@ -821,7 +821,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-05.md#task-results"
       ],
-      "commit": null,
+      "commit": "c694948bfded506c1fec422714e49387c72ff361",
       "blocker": null
     },
     {
@@ -844,7 +844,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-05.md#task-results"
       ],
-      "commit": null,
+      "commit": "c694948bfded506c1fec422714e49387c72ff361",
       "blocker": null
     },
     {
@@ -866,7 +866,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-05.md#task-results"
       ],
-      "commit": null,
+      "commit": "c694948bfded506c1fec422714e49387c72ff361",
       "blocker": null
     },
     {
@@ -879,13 +879,15 @@
       ],
       "verification": "CL-10,CI-16–17,UX-06,UX-08",
       "deliverable": "Implement no/single/mixed-selection inspector, allowed style fields, labels, route/arrows/dash and numeric bounds; invalid edits preserve graph; shared properties update atomically.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-05-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-06.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -901,13 +903,15 @@
       ],
       "verification": "CL-11–13,CI-14–16,DM-04",
       "deliverable": "Measured local font metrics, Unicode/multiline wrapping, no clipping or silent shrink; grow content or reject invalid dimensions; fit and ancestor growth integrate with Phase 07. Apply approved XML policy.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-06-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-06.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -922,13 +926,15 @@
       ],
       "verification": "CL-14–16,DM-14,UX-10",
       "deliverable": "Implement four status values for architecture only, marker and text without overriding style; group title and opacity; ensure neutral status backing and readable contrast.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-06-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-06.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1581,7 +1587,7 @@
       "id": "AC-FR-05-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-05-03",
@@ -1593,7 +1599,7 @@
       "id": "AC-FR-05-04",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-06-01",
@@ -1623,7 +1629,7 @@
       "id": "AC-FR-07-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-07-02",
@@ -1683,7 +1689,7 @@
       "id": "AC-FR-09-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-10-01",
@@ -1911,7 +1917,7 @@
       "id": "UX-06",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-07",
@@ -1923,7 +1929,7 @@
       "id": "UX-08",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-09",
@@ -1935,7 +1941,7 @@
       "id": "UX-10",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-11",
@@ -2007,7 +2013,7 @@
       "id": "DM-04",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-05",
@@ -2187,37 +2193,37 @@
       "id": "CL-10",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-11",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-12",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-13",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-14",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-15",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-16",
@@ -2367,25 +2373,25 @@
       "id": "CI-14",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-15",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-16",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-17",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-18",

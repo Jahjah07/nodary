@@ -1,12 +1,12 @@
 import { createDispatcher } from "./commands";
 import { applyEdgeEdit, type EdgeEdit } from "./edge-edits";
+import { applyPropertyEdit, containmentMetrics, type PropertyEdit } from "./properties";
 import type { Boundary, Node, Position } from "./contracts";
 import { indexHierarchy, moveTransformRoots, resizeObject, snapWorld, validateContainment } from "./geometry";
 import type { Rect } from "./graph";
-import type { Immutable } from "./immutable";
 import { componentFor, type Component } from "./registry";
 import { fail, ok } from "./validation";
-import { labelLayout, visualOf, type Measure } from "./visual";
+import { labelLayout, type Measure } from "./visual";
 
 export type ComponentType = Component["type"];
 export type SettingsKey = "gridVisible" | "snapToGrid";
@@ -48,12 +48,12 @@ export function resizeRect(rect: Rect, handle: ResizeHandle, delta: Position, sq
 
 // DGS-06/07. The same validation runs for preview and commit.
 export function componentDispatcher(measure?: Measure) {
-  const metrics = { visualBounds: (item: Parameters<typeof visualOf>[0]) => visualOf(item).bounds,
-    titleHeight: (item: Immutable<Boundary>) => labelLayout(item, measure).height };
+  const metrics = containmentMetrics(measure);
   const reject = (message: string) => fail({ code: "INVALID_GEOMETRY", path: ["document"], message });
-  return createDispatcher<{ toggle: SettingsKey; component: ComponentEdit; edge: EdgeEdit }>({
+  return createDispatcher<{ toggle: SettingsKey; component: ComponentEdit; edge: EdgeEdit; property: PropertyEdit }>({
     toggle(draft, key) { draft.settings[key] = !draft.settings[key]; return ok(undefined); },
     edge: applyEdgeEdit,
+    property: (draft, edit) => applyPropertyEdit(draft, edit, measure),
     component(draft, edit) {
       if (edit.kind === "insert") {
         const item = makeComponent(edit.type, edit.id, edit.position);

@@ -74,7 +74,8 @@ test("connector paint uses canonical dashed stroke, labels and arrows beside a s
   expect(container.querySelectorAll("polygon")).toHaveLength(2);
   const label = container.querySelector(".diagram-edge-label")!;
   expect(label.querySelector("rect")?.getAttribute("fill")).toBe("white");
-  expect(label.querySelector("text")?.getAttribute("text-anchor")).toBe("end");
+  expect(scene.edges[0].label?.align).toBe("right");
+  expect(Number(label.querySelector("tspan")?.getAttribute("x"))).toBeGreaterThan(4);
   expect([...label.querySelectorAll("tspan")].map((line) => line.textContent)).toEqual(["Request", "<Literal>"]);
   expect(container.querySelector("literal")).toBeNull();
   expect(container.querySelectorAll("polyline")).toHaveLength(2);
@@ -108,7 +109,8 @@ test("editor restricts connection tools by selection and sends the scoped route 
   const session = await opened();
   const onEdge = vi.fn(() => null);
   const onView = vi.fn();
-  const props = { onEdge, onView, onToggle: vi.fn(), onEdit: vi.fn() };
+  const onProperty = vi.fn(() => null);
+  const props = { onEdge, onView, onToggle: vi.fn(), onEdit: vi.fn(), onProperty };
   const note = session.editor.document.nodes.at(-1)!;
   const pickedNote = viewSession(session, null, [note.id]);
   if (!pickedNote.ok) throw Error("expected selected annotation");
@@ -119,7 +121,7 @@ test("editor restricts connection tools by selection and sends the scoped route 
   if (!pickedEdge.ok) throw Error("expected selected edge");
   rerender(<Editor session={pickedEdge.value} {...props} />);
   fireEvent.change(screen.getByLabelText("Connector route"), { target: { value: "straight" } });
-  expect(onEdge).toHaveBeenCalledWith({ kind: "route", id: edge.id, route: "straight" }, 0);
+  expect(onProperty).toHaveBeenCalledWith({ field: "route", ids: [edge.id], value: "straight" }, 0);
   fireEvent.click(screen.getByRole("button", { name: "Reconnect target" }));
   expect(screen.getByRole("dialog", { name: "Reconnect target" })).toBeDefined();
   fireEvent.click(screen.getByRole("button", { name: "Cancel" }));

@@ -9,13 +9,13 @@ import { ComponentGraphic } from "./component-graphic";
 import type { Scene } from "./scene";
 import "@xyflow/react/dist/style.css";
 
-type SceneNode = FlowNode<{ item: Immutable<Node | Boundary>; selected: boolean }>;
+type SceneNode = FlowNode<{ item: Immutable<Node | Boundary>; selected: boolean; label: Scene["nodes"][number]["label"] }>;
 type SceneConnector = FlowEdge<{ edge: Scene["edges"][number]; selected: boolean }>;
 const ports = { top: Port.Top, right: Port.Right, bottom: Port.Bottom, left: Port.Left };
 function DiagramObject({ data }: NodeProps<SceneNode>) {
   const { item, selected } = data;
   return <>
-    <ComponentGraphic item={item} selected={selected} />
+    <ComponentGraphic item={item} selected={selected} label={data.label} />
     {visualOf(item).anchors.map(({ id, position }) => <Handle className="projection-port" key={id} id={id}
       type="source" position={ports[id]} isConnectable={false}
       style={{ left: position.x, top: position.y, right: "auto", bottom: "auto", transform: "translate(-50%, -50%)" }} />)}
@@ -41,10 +41,8 @@ export function Connector({ data }: Pick<EdgeProps<SceneConnector>, "data">) {
     }} viewBox={`0 0 ${label.box.width} ${label.box.height}`}>
       <rect width={label.box.width} height={label.box.height} fill="white" />
       <text fill={style.text.color} fontSize={style.text.fontSize} fontFamily={diagramFont}
-        textAnchor={label.align === "left" ? "start" : label.align === "right" ? "end" : "middle"}
-        dominantBaseline="central" xmlSpace="preserve">
-        {label.lines.map((line, i) => <tspan key={i} x={label.align === "left" ? 4 : label.align === "right" ? label.box.width - 4 : label.box.width / 2}
-          y={2 + label.lineHeight * (i + .5)}>{line}</tspan>)}
+        xmlSpace="preserve">
+        {label.placements.map((line, i) => <tspan key={i} x={line.x} y={line.y}>{line.text}</tspan>)}
       </text>
     </svg></EdgeLabelRenderer>}
   </>;
@@ -58,7 +56,7 @@ export function Projection({ scene, viewport, selection }: { scene: Scene; viewp
   const nodes: SceneNode[] = [...scene.groups, ...scene.nodes].map((entry, index) => ({
     id: entry.item.id, parentId: entry.item.parentId ?? undefined, position: entry.item.position,
     type: "diagram", ...entry.item.size, measured: entry.item.size,
-    data: { item: entry.item, selected: active.has(entry.item.id) },
+    data: { item: entry.item, selected: active.has(entry.item.id), label: entry.label },
     zIndex: "title" in entry ? index : 250 + index,
   }));
   const edges: SceneConnector[] = scene.edges.map((edge) => ({

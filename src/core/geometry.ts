@@ -87,7 +87,7 @@ function expandFrame(document: DiagramDocument, frame: Boundary, metrics?: Conta
   if (!contained(frame, children, metrics)) return invalid("Boundary measurements did not converge.");
 }
 
-function expandParents(document: DiagramDocument, parents: Iterable<string>, metrics?: ContainmentMetrics): Result<DiagramDocument> {
+export function expandParents(document: DiagramDocument, parents: Iterable<string>, metrics?: ContainmentMetrics): Result<DiagramDocument> {
   const indexed = indexHierarchy(document);
   if (!indexed.ok) return indexed;
   const groups = new Map(document.groups.map((group) => [group.id, group]));

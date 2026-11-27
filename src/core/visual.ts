@@ -8,7 +8,9 @@ type Item = Immutable<Node | Boundary>;
 export type HandleId = Edge["source"]["handleId"];
 export const diagramFont = "Arial, Liberation Sans, sans-serif";
 export const normals = { top: { x: 0, y: -1 }, right: { x: 1, y: 0 }, bottom: { x: 0, y: 1 }, left: { x: -1, y: 0 } } as const;
-export type Measure = (text: string, size: number) => number;
+type Ink = { left: number; right: number; ascent: number; descent: number };
+export type Measure = ((text: string, size: number) => number) &
+  { ink?(text: string, size: number): Ink | undefined };
 export const approximate: Measure = (text, size) => [...text].length * size * .55;
 export const inset = (box: Rect, s: number): Rect => ({ x: box.x + s, y: box.y + s, width: box.width - 2 * s, height: box.height - 2 * s });
 const rect = (x: number, y: number, width: number, height: number): Rect => ({ x, y, width, height });
@@ -59,35 +61,69 @@ export function visualOf(item: Item) {
 }
 
 const graphemes = new Intl.Segmenter(undefined, { granularity: "grapheme" });
+const words = new Intl.Segmenter(undefined, { granularity: "word" });
+export function measuredInk(text: string, size: number, measure: Measure) {
+  const advance = measure(text, size);
+  const ink = measure.ink?.(text, size) ?? { left: 0, right: advance, ascent: size * .75, descent: size * .2 };
+  const left = Math.max(0, ink.left);
+  return { ...ink, left, width: left + Math.max(advance, ink.right), right: Math.max(advance, ink.right) };
+}
+
 export function wrapLines(text: string, width: number, fontSize: number, measure: Measure) {
   const lines: string[] = [];
   let widthFits = true;
   for (const paragraph of text ? text.replaceAll("\t", "    ").split("\n") : []) {
     let line = "";
-    for (const { segment } of graphemes.segment(paragraph)) {
-      if (line && measure(line + segment, fontSize) > width) { lines.push(line); line = ""; }
-      line += segment;
-      if (measure(line, fontSize) > width) widthFits = false;
+    const fits = (value: string) => measuredInk(value, fontSize, measure).width <= width;
+    for (const { segment: word } of words.segment(paragraph)) {
+      if (fits(line + word)) { line += word; continue; }
+      if (line) { lines.push(line); line = ""; }
+      if (fits(word)) { line = word; continue; }
+      for (const { segment } of graphemes.segment(word)) {
+        if (line && !fits(line + segment)) { lines.push(line); line = ""; }
+        line += segment;
+        if (!fits(line)) widthFits = false;
+      }
     }
     lines.push(line);
   }
   return { lines, widthFits };
 }
 
+export function lineMetrics(lines: readonly string[], fontSize: number, measure: Measure) {
+  const ink = lines.map((line) => measuredInk(line, fontSize, measure));
+  const ascent = Math.max(fontSize * .75, ...ink.map((line) => line.ascent));
+  const descent = Math.max(fontSize * .2, ...ink.map((line) => line.descent));
+  const lineHeight = Math.max(fontSize * 1.25, ascent + descent);
+  return { ink, lineHeight, baseline: ascent + (lineHeight - ascent - descent) / 2 };
+}
+
 export function labelLayout(item: Item, measure: Measure = approximate) {
   const shape = visualOf(item);
   const text = "title" in item ? item.title : item.label;
   const { fontSize, align } = item.style.text;
-  const lineHeight = fontSize * 1.25;
   const { lines, widthFits } = wrapLines(text, shape.region.width, fontSize, measure);
+  const { ink, lineHeight, baseline } = lineMetrics(lines, fontSize, measure);
   const height = lines.length * lineHeight;
-  const statusFits = !shape.status || (measure(shape.status.label, 11) + 25 <= shape.status.box.width && shape.status.box.height >= 13.75);
+  const statusFits = !shape.status || (measuredInk(shape.status.label, 11, measure).width + 25 <= shape.status.box.width && shape.status.box.height >= 13.75);
   const heightLimit = item.type === "general.boundary" ? item.size.height - 16 - item.style.strokeWidth : shape.region.height;
-  return { lines, lineHeight, height, fits: (!text || (widthFits && height <= heightLimit)) && statusFits,
-    x: shape.region.x + (align === "left" ? 0 : align === "right" ? shape.region.width : shape.region.width/2),
-    y: shape.region.y + lineHeight/2 + (shape.topAligned ? 0 : (shape.region.height-height)/2),
-    anchor: align === "left" ? "start" : align === "right" ? "end" : "middle",
-  } as const;
+  const x = shape.region.x + (align === "left" ? 0 : align === "right" ? shape.region.width : shape.region.width/2);
+  const y = shape.region.y + baseline + (shape.topAligned ? 0 : (shape.region.height-height)/2);
+  const placements = lines.map((text, i) => ({
+    text, x: x + ink[i].left - ink[i].width * (align === "left" ? 0 : align === "right" ? 1 : .5),
+    y: y + i * lineHeight, width: ink[i].width, left: ink[i].left, ascent: ink[i].ascent, descent: ink[i].descent,
+  }));
+  return { lines, placements, lineHeight, height, widthFits: (!text || (widthFits && shape.region.width > 0)) && statusFits,
+    fits: (!text || (widthFits && shape.region.width > 0 && height <= heightLimit)) && statusFits };
+}
+
+export function visualBounds(item: Item, layout: ReturnType<typeof labelLayout>): Rect {
+  const box = visualOf(item).bounds;
+  const x = Math.min(box.x, ...layout.placements.map((line) => line.x - line.left));
+  const y = Math.min(box.y, ...layout.placements.map((line) => line.y - line.ascent));
+  const right = Math.max(box.x + box.width, ...layout.placements.map((line) => line.x - line.left + line.width));
+  const bottom = Math.max(box.y + box.height, ...layout.placements.map((line) => line.y + line.descent));
+  return { x, y, width: right - x, height: bottom - y };
 }
 
 export function hitVisual(shape: ReturnType<typeof visualOf>, size: Size, p: Position, tolerance: number): boolean {

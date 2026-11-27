@@ -3,7 +3,7 @@ import type { Rect } from "./graph";
 import { add, subtract } from "./hierarchy";
 import type { Immutable } from "./immutable";
 import { fail, ok, type Result } from "./validation";
-import { approximate, inset, visualOf, wrapLines, type Measure } from "./visual";
+import { approximate, inset, lineMetrics, visualOf, wrapLines, type Measure } from "./visual";
 
 export type Anchor = { point: Position; direction: Position; rect: Rect; stroke: number };
 type Ink = { points: Position[]; line: Position[]; arrows: Position[][]; bounds: Rect; warning?: string };
@@ -129,10 +129,13 @@ export function edgeLabel(edge: Pick<Edge, "label" | "style">, points: readonly 
   if (!edge.label) return null;
   const { fontSize, align } = edge.style.text;
   const { lines } = wrapLines(edge.label, 232, fontSize, measure);
-  const width = Math.max(...lines.map((line) => measure(line, fontSize))) + 8;
-  const lineHeight = fontSize * 1.25;
+  const { ink, baseline, lineHeight } = lineMetrics(lines, fontSize, measure);
+  const width = Math.max(...ink.map((line) => line.width)) + 8;
   const height = lines.length * lineHeight + 4;
   const center = halfPath(points);
   const box = { x: center.x - width / 2, y: center.y - height / 2, width, height };
-  return { box, lines, lineHeight, align };
+  const available = width - 8;
+  const placements = lines.map((text, i) => ({ text, x: 4 + ink[i].left +
+    (available - ink[i].width) * (align === "left" ? 0 : align === "right" ? 1 : .5), y: 2 + baseline + i * lineHeight }));
+  return { box, lines, placements, lineHeight, align };
 }

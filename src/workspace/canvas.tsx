@@ -31,10 +31,11 @@ type Gesture = {
   connection?: ConnectionStart;
 };
 
-export function Canvas({ scene, viewport, selection, tool, isSample, editor, pending, controls, drag, onEdit, onEdge, onView }: {
+export function Canvas({ scene, viewport, selection, tool, isSample, editor, pending, controls, drag, onEdit, onEdge, onView, onLabel }: {
   scene: Scene; viewport: Viewport | null; selection: readonly string[]; tool: Tool; isSample: boolean;
   editor: CommandState; pending: boolean; controls: Ref<CanvasControls>; drag: RefObject<PaletteDrag | null>; onEdit: EditComponent;
   onEdge: EditEdge;
+  onLabel(id: string): void;
   onView(view: Viewport, selection: readonly string[]): void;
 }) {
   const surface = useRef<HTMLDivElement>(null);
@@ -231,6 +232,7 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     event.preventDefault();
     finishNudge(true);
     event.currentTarget.focus({ preventScroll: true });
+    if (event.currentTarget !== document.activeElement) return;
     if (menu) { setMenu(undefined); return; }
     const start = local(event);
     const mode = event.button === 1 || tool === "pan" || space ? "pan" : "select";
@@ -356,6 +358,9 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     } else if (event.code === "Space" && !event.ctrlKey && !event.metaKey && !event.altKey) {
       event.preventDefault();
       if (!gesture.current) setSpace(true);
+    } else if (!gesture.current && !isSample && !pending && event.key === "Enter" && selection.length === 1) {
+      event.preventDefault();
+      onLabel(selection[0]);
     } else if (!gesture.current && !isSample && !pending && selectedEdge &&
         (event.key === "Delete" || event.key === "Backspace") && !event.ctrlKey && !event.metaKey && !event.altKey) {
       event.preventDefault();
@@ -400,6 +405,11 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     <div ref={surface} id="diagram-canvas" className="canvas-surface" data-tool={tool === "pan" || space || draggingPan ? "pan" : "select"}
       data-dragging={draggingPan} tabIndex={0} role="region" aria-label="Diagram canvas"
       onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerLeave={() => setHover(null)}
+      onDoubleClick={(event) => {
+        if (!enabled) return;
+        const id = hitTest(scene, clientToWorld(local(event), active, originView), active.zoom);
+        if (id) onLabel(id);
+      }}
       onPointerCancel={() => stop(true)} onLostPointerCapture={() => stop(true)} onContextMenu={context} onKeyDown={key}
       onDragOver={(event) => {
         const candidate = placed(event);

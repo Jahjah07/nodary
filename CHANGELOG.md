@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 06 — 27 November 2026
+
+- Added contextual property editing and direct label drafts for nodes, edges, and boundaries, with shared-style edits for compatible selections.
+- Added measured text layout, atomic content fitting, boundary title and opacity controls, and manual architecture statuses. [Phase 06 evidence](docs/04-development/evidence/PHASE-06.md)
+
 ## Phase 05 — 27 November 2026
 
 - The owner approved CR-05 and recognized V0.1 as the internal connected-editor milestone. V0.2 mandatory requirements remain in force.

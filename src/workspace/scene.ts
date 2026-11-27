@@ -4,11 +4,11 @@ import type { Rect } from "../core/graph";
 import type { Immutable } from "../core/immutable";
 import { componentFor } from "../core/registry";
 
-import { hitVisual, labelLayout, visualOf, type Measure } from "../core/visual";
+import { hitVisual, labelLayout, visualBounds, visualOf, type Measure } from "../core/visual";
 import { edgeLabel, routeInk, unionBounds, worldAnchor, type Anchor } from "../core/routes";
 import type { Endpoint } from "../core/edge-edits";
 
-type Box<T> = { item: Immutable<T>; rect: Rect; bounds: Rect };
+type Box<T> = { item: Immutable<T>; rect: Rect; bounds: Rect; label: ReturnType<typeof labelLayout> };
 export type SceneEdge = { item: Immutable<Edge>; points: Position[]; line: Position[]; arrows: Position[][]; bounds: Rect;
   label: ReturnType<typeof edgeLabel>; source: Anchor; target: Anchor; warning?: string };
 export type SceneAnchor = Anchor & { endpoint: Endpoint };
@@ -51,8 +51,9 @@ export function buildScene(document: Immutable<DiagramDocument>, measure?: Measu
   if (!hierarchy.ok) throw Error("Scene requires a validated hierarchy.");
   const box = (item: Immutable<Node | Boundary>) => {
     const rect = { ...hierarchy.value.get(item.id)!.world, ...item.size };
-    const local = visualOf(item).bounds;
-    return { rect, bounds: { ...local, x: rect.x + local.x, y: rect.y + local.y } };
+    const label = labelLayout(item, measure);
+    const local = visualBounds(item, label);
+    return { rect, label, bounds: { ...local, x: rect.x + local.x, y: rect.y + local.y } };
   };
   const nodes = document.nodes.map((item) => ({ item, ...box(item) }));
   const lookup = new Map(nodes.map((node) => [node.item.id, node]));
@@ -60,7 +61,7 @@ export function buildScene(document: Immutable<DiagramDocument>, measure?: Measu
     const geometry = box(item);
     const { x, y } = geometry.rect;
     const region = visualOf(item).region;
-    const height = labelLayout(item, measure).height;
+    const height = geometry.label.height;
     return { item, ...geometry, depth: hierarchy.value.get(item.id)!.depth,
       title: item.title ? { ...region, x: x + region.x, y: y + region.y, height: Math.max(region.height, height) } : null };
   }).sort((a, b) => a.depth - b.depth);

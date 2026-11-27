@@ -36,8 +36,8 @@
         "T-01-07",
         "T-01-08"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "blocked",
+      "gate_status": "blocked",
       "depends_on_phase": "00"
     },
     {
@@ -223,7 +223,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-00.md"
       ],
-      "commit": null,
+      "commit": "24763487eb99db8f76babe3aa4f7faabe34beca7",
       "blocker": null
     },
     {
@@ -245,7 +245,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-00.md"
       ],
-      "commit": null,
+      "commit": "24763487eb99db8f76babe3aa4f7faabe34beca7",
       "blocker": null
     },
     {
@@ -266,7 +266,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-00.md"
       ],
-      "commit": null,
+      "commit": "24763487eb99db8f76babe3aa4f7faabe34beca7",
       "blocker": null
     },
     {
@@ -289,7 +289,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-00.md"
       ],
-      "commit": null,
+      "commit": "24763487eb99db8f76babe3aa4f7faabe34beca7",
       "blocker": null
     },
     {
@@ -303,13 +303,15 @@
       ],
       "verification": "SP-02",
       "deliverable": "Prove two nested levels, parent motion once, reparent and ungroup preserve world positions, expansion and undo with cross-boundary edges.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-00-04"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -324,13 +326,15 @@
       ],
       "verification": "SP-03",
       "deliverable": "Prove four cardinal handles, negative coordinates, resize/reconnect, straight and orthogonal geometry and full scene fit; invalid reconnect keeps ID and endpoints.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-01-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -348,13 +352,16 @@
       ],
       "verification": "SP-04",
       "deliverable": "Build minimal controlled SVG/PNG proof with multiline labels, vector icons, markers and nested boundaries; inspect independent viewer, XML safety and font parity.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-01-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md",
+        "docs/04-development/evidence/PHASE-01-SP-04.png"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -370,13 +377,15 @@
       ],
       "verification": "SP-05",
       "deliverable": "Demonstrate transactional CAS in two real browser pages, quota/abort, edit during save and stale deletion; capture outcomes and recovery UI implications.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-01-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -392,13 +401,15 @@
       ],
       "verification": "SP-06",
       "deliverable": "Prove compound duplicate/delete/undo, redo invalidation, failed command immutability and 50 transactions using representative graph.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-01-04"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -414,13 +425,15 @@
       ],
       "verification": "SP-07",
       "deliverable": "Prove focus arbitration, native text undo, keyboard alternative to connect/resize, cancellation and visible focus; document gaps.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-01-05"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -435,13 +448,16 @@
       ],
       "verification": "SP-08",
       "deliverable": "Run 100-node/150-edge synthetic workload in production shell; capture hardware/browser/build, frame and commit/save/export measurements or explicitly unavailable measurements; DGS-10 owns thresholds.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-01-06"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md",
+        "docs/04-development/evidence/PHASE-01-SP-08.json"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -456,15 +472,17 @@
       ],
       "verification": "SP-01–08",
       "deliverable": "Record each spike result, ADR outcome, font strategy, XML-incompatible text policy and license review; no failed mandatory spike silently waived. Re-run affected prototypes after changes.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "blocked",
+      "verification_status": "blocked",
       "dependencies": [
         "T-01-07"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ],
       "commit": null,
-      "blocker": null
+      "blocker": "CR-01 proposed XML-compatible canonical text policy awaits explicit owner approval."
     },
     {
       "id": "T-02-01",
@@ -2700,31 +2718,54 @@
     },
     {
       "id": "SP-02",
-      "status": "not_run"
+      "status": "pass",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-03",
-      "status": "not_run"
+      "status": "pass",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-04",
-      "status": "not_run"
+      "status": "pass",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md",
+        "docs/04-development/evidence/PHASE-01-SP-04.png"
+      ]
     },
     {
       "id": "SP-05",
-      "status": "not_run"
+      "status": "pass",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-06",
-      "status": "not_run"
+      "status": "pass",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-07",
-      "status": "not_run"
+      "status": "pass",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-08",
-      "status": "not_run"
+      "status": "pass",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md",
+        "docs/04-development/evidence/PHASE-01-SP-08.json"
+      ]
     }
   ],
   "optionalBacklog": [

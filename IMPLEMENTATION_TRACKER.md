@@ -2,15 +2,15 @@
 
 **Baseline:** 27 November 2026. This is a human-readable rollup. Machine authority: [DGS-09_Implementation_Task_Register_v0.1.json](docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json) and [DGS-10_Acceptance_Test_Register_v0.1.json](docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json). Update status from actual evidence, not manual progress alone.
 
-- Tasks completed: 4/56; phases passed: 1/13.
+- Tasks completed: 11/56; phases passed: 1/13.
 - Mandatory scenarios passed: 0/205; conditional: 0/13 (applicability not yet finalized).
-- Spikes passed: 1/8; release gates passed: 0/10.
-- Next step awaiting authorization: Phase 01, starting with T-01-01 / SP-02.
+- Spikes passed: 8/8; release gates passed: 0/10.
+- Next decision: CR-01 owner approval to close T-01-08. Phase 02 requires separate authorization.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
-| 00 | Project initialization | 4 | Implemented | Pass on equivalent local evidence |
-| 01 | Technical prototypes and decision gates | 8 | Not started | Not run |
+| 00 | Project initialization | 4 | Implemented in `2476348` | Owner accepted the local pass. Hosted CI unrun. |
+| 01 | Technical prototypes and decision gates | 8 | Seven tasks verified, architecture review recorded | Blocked on CR-01 approval |
 | 02 | Core domain and command foundation | 5 | Not started | Not run |
 | 03 | Workspace and canvas | 5 | Not started | Not run |
 | 04 | Component library | 4 | Not started | Not run |
@@ -31,14 +31,14 @@
 | T-00-02 | Scaffold and dependency lock | Implemented | Pass, strict clean install and static build | [Phase 00 evidence](docs/04-development/evidence/PHASE-00.md) |
 | T-00-03 | CI and test harness | Implemented | Pass locally, hosted workflow pending | [Phase 00 evidence](docs/04-development/evidence/PHASE-00.md) |
 | T-00-04 | Static shell spike | Implemented | SP-01 pass, 9/9 browser tests | [Phase 00 evidence](docs/04-development/evidence/PHASE-00.md) |
-| T-01-01 | Nested boundaries spike | Not started | Not run | — |
-| T-01-02 | Connector spike | Not started | Not run | — |
-| T-01-03 | Vector export spike | Not started | Not run | — |
-| T-01-04 | Persistence spike | Not started | Not run | — |
-| T-01-05 | History spike | Not started | Not run | — |
-| T-01-06 | Keyboard and accessibility spike | Not started | Not run | — |
-| T-01-07 | Performance baseline spike | Not started | Not run | — |
-| T-01-08 | Architecture review and compatibility decisions | Not started | Not run | — |
+| T-01-01 | Nested boundaries spike | Implemented | SP-02 pass in Chrome and Edge | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
+| T-01-02 | Connector spike | Implemented | SP-03 pass in Chrome and Edge | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
+| T-01-03 | Vector export spike | Implemented | SP-04 pass with independent Firefox inspection | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
+| T-01-04 | Persistence spike | Implemented | SP-05 pass with real IndexedDB | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
+| T-01-05 | History spike | Implemented | SP-06 pass, 50 mixed transactions | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
+| T-01-06 | Keyboard and accessibility spike | Implemented | SP-07 pass in Chrome and Edge | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
+| T-01-07 | Performance baseline spike | Implemented | SP-08 pass for baseline collection | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
+| T-01-08 | Architecture review and compatibility decisions | Blocked on CR-01 approval | SP-01 through SP-08 verified | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
 | T-02-01 | Canonical contracts and runtime schema | Not started | Not run | — |
 | T-02-02 | Graph integrity and registry contract | Not started | Not run | — |
 | T-02-03 | Coordinate and containment primitives | Not started | Not run | — |
@@ -85,7 +85,7 @@
 | T-12-03 | Release handover | Not started | Not run | — |
 
 ## Active blockers and review
-Phase 00 is ready for owner review. The hosted workflow has yet to run. CR-02–04 are working interpretations awaiting owner review. Resolve CR-01 before dependent schema work. Renderer suitability, font parity, parser, persistence and performance remain open for Phase 01. No release authorization.
+Phase 00 is closed with owner approval in `2476348`. Hosted GitHub Actions remains unrun in the evidence. The owner approved CR-02–04. CR-01 awaits explicit approval of the proposed canonical XML-compatible text policy. Release qualification for parser, font coverage, product persistence and performance remains pending.
 
 ## Updating this tracker
 Use `not_started`, `in_progress`, `blocked`, `implemented` (or register's approved status vocabulary) and actual verification states separately; never mark completed solely because code exists. For a phase that has only partial verification, record specific tests pending later. Update machine registers first and reconcile this rollup at the phase gate. Keep evidence under `docs/04-development/evidence/` or an approved CI artifact reference, with timestamp, commit/build, command, environment, result and limitations. Do not mark mandatory skipped/unrun as passed. Record an explicit non-applicability decision for deferred optional tests only.

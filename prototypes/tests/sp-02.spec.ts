@@ -1,0 +1,65 @@
+import { expect, test } from "@playwright/test";
+
+test("SP-02 moves nested descendants once and preserves world positions, membership and cross-boundary edges", async ({ page }) => {
+  await page.goto("/?sp=sp-02");
+  const worker = page.locator(".react-flow__node[data-id=worker]");
+  const edge = page.locator(".react-flow__edge").first();
+  await expect(worker).toBeVisible();
+  await expect(edge).toBeVisible();
+  const edgePath = () => edge.locator("path.react-flow__edge-path").getAttribute("d");
+  const graph = async () => JSON.parse((await page.getByTestId("graph").textContent())!);
+  const action = (label: string) => page.getByRole("button", { name: label, exact: true }).click();
+  const baseline = await graph();
+  const workerRect = (await worker.boundingBox())!;
+  const initialPath = await edgePath();
+  await action("Probe client coordinate");
+  await expect(page.getByRole("status")).toHaveText('{"x":100,"y":60}');
+
+  await action("Move outer and selected worker");
+  expect((await graph()).world.worker).toEqual({ x: 320, y: 275 });
+  const movedRect = (await worker.boundingBox())!;
+  expect(movedRect.x - workerRect.x).toBeCloseTo(50);
+  expect(movedRect.y - workerRect.y).toBeCloseTo(25);
+  await expect.poll(edgePath).not.toBe(initialPath);
+  await action("Undo");
+  expect(await graph()).toEqual(baseline);
+
+  await action("Reparent worker");
+  expect((await graph()).items.find((node: { id: string }) => node.id === "worker").parent).toBe("outer");
+  expect((await worker.boundingBox())!.x).toBeCloseTo(workerRect.x);
+  expect((await graph()).world.worker).toEqual(baseline.world.worker);
+  await action("Undo");
+  await action("Ungroup inner");
+  expect((await graph()).items.map((node: { id: string }) => node.id)).not.toContain("inner");
+  expect((await graph()).world.worker).toEqual(baseline.world.worker);
+  expect((await graph()).edges).toEqual(baseline.edges);
+  await action("Undo");
+
+  await action("Expand left and top");
+  const expanded = await graph();
+  expect(expanded.world.worker).toEqual({ x: 140, y: 120 });
+  expect(expanded.world.outer.x).toBeLessThan(baseline.world.outer.x);
+  expect(expanded.world.outer.y).toBeLessThan(baseline.world.outer.y);
+  expect(expanded.world.peer).toEqual(baseline.world.peer);
+  expect(expanded.edges).toEqual(baseline.edges);
+  await action("Undo");
+  await action("Expand right and bottom");
+  const grown = await graph();
+  expect(grown.world.worker).toEqual({ x: 680, y: 630 });
+  expect(grown.items[0].width).toBeGreaterThan(410);
+  expect(grown.items[0].height).toBeGreaterThan(310);
+  expect(grown.world.peer).toEqual(baseline.world.peer);
+  await action("Undo");
+  await action("Shrink inner");
+  await expect(page.getByRole("status")).toContainText("cannot shrink");
+  expect(await graph()).toEqual(baseline);
+  await action("Resize inner to fit");
+  expect((await graph()).items[1]).toMatchObject({ width: 190, height: 120 });
+  expect((await graph()).world.worker).toEqual(baseline.world.worker);
+  await action("Undo");
+  await action("Attempt cyclic reparent");
+  await expect(page.getByRole("status")).toContainText("Invalid boundary target");
+  expect(await graph()).toEqual(baseline);
+  expect(await edgePath()).toBe(initialPath);
+  console.info("SP-02 browser " + (await page.context().browser()!.version()));
+});

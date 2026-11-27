@@ -24,6 +24,8 @@ npm run test:e2e
 ```
 Install Google Chrome and Microsoft Edge to run all browser projects. On a clean Linux CI runner, use `npx playwright install --with-deps chromium chrome msedge`. Run `npm start` after building to serve `out/` on `http://127.0.0.1:4173`. Playwright starts that same server itself, so leave port 4173 free before running E2E. Open `/editor/?id=fixture` to exercise SP-01 directly.
 
+The Phase 01 experiments run from a separate static build on port 4174. Install Firefox with `npx playwright install firefox` for the independent SVG rendering check. Run `npm run build:prototypes` and `npm run test:prototypes`. Pass a spike ID such as `npm run test:prototypes -- sp-02` for a targeted run. [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md)
+
 Production target is static HTTPS hosting. Vendor choice and terms review are deferred to the deployment phase. Browser data is origin-specific and should be backed up independently once persistence is implemented.
 
 ## Project structure

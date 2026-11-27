@@ -5010,84 +5010,100 @@
       "experiment": "Nested groups and coordinate transforms",
       "assertion": "Two boundary levels; move parent exactly once, reparent/ungroup preserving world positions, shrink/expand and undo; cross-boundary edges intact",
       "trace": "FR-03/08/10",
-      "status": "not_run",
+      "status": "pass",
       "taskIds": [
         "T-01-01",
         "T-01-08"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-03",
       "experiment": "Connections and geometry",
       "assertion": "Straight/orthogonal edges, four-way anchors as supported, resize, invalid reconnect cancellation, stable ID, negative coordinates, full scene fit",
       "trace": "FR-02/06/07",
-      "status": "not_run",
+      "status": "pass",
       "taskIds": [
         "T-01-02",
         "T-01-08"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-04",
       "experiment": "Portable SVG/PNG",
       "assertion": "Native vector shapes, icons, multiline labels, nested boundaries, arrowheads/status; inspect SVG XML and independent browser/viewer; no clipping or UI",
       "trace": "FR-05/07/08/09/13, NFR-08",
-      "status": "not_run",
+      "status": "pass",
       "taskIds": [
         "T-01-03",
         "T-01-08"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md",
+        "docs/04-development/evidence/PHASE-01-SP-04.png"
+      ]
     },
     {
       "id": "SP-05",
       "experiment": "Persistence and stale tabs",
       "assertion": "Atomic compare-and-swap with two actual browser pages; quota/failure simulation; edit during save; stale deletion cannot resurrect record",
       "trace": "FR-01/11/12, NFR-03",
-      "status": "not_run",
+      "status": "pass",
       "taskIds": [
         "T-01-04",
         "T-01-08"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-06",
       "experiment": "Command/history integrity",
       "assertion": "Duplicate grouped nodes/internal edges; delete and undo; 50 transactions; new edit clears redo; invalid commands leave no mutation",
       "trace": "FR-03/06/08/10",
-      "status": "not_run",
+      "status": "pass",
       "taskIds": [
         "T-01-05",
         "T-01-08"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-07",
       "experiment": "Keyboard and editing",
       "assertion": "Canvas focus vs input/dialog; visible alternatives; resize/connection accessibility evaluation; no accidental deletion",
       "trace": "FR-03/05/14, NFR-05",
-      "status": "not_run",
+      "status": "pass",
       "taskIds": [
         "T-01-06",
         "T-01-08"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md"
+      ]
     },
     {
       "id": "SP-08",
       "experiment": "Reference graph/performance",
       "assertion": "Production build with 100 nodes/150 edges; record interaction, save/export and memory baselines; define thresholds with DGS-10",
       "trace": "NFR-02/06/08",
-      "status": "not_run",
+      "status": "pass",
       "taskIds": [
         "T-01-07",
         "T-01-08"
       ],
-      "evidence": []
+      "evidence": [
+        "docs/04-development/evidence/PHASE-01.md",
+        "docs/04-development/evidence/PHASE-01-SP-08.json"
+      ]
     }
   ],
   "performanceThresholds": [

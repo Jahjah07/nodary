@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 04 — 27 November 2026
+
+- Closed Phase 03 at the existing local workspace commit after owner acceptance.
+- Added the categorized 29-component palette, shared SVG geometry and 14 local architecture icons. Components can be inserted by button, keyboard or drag.
+- Added validated move, nudge and resize gestures with preview, world-space snap, and one history entry per committed graph edit. [Phase 04 evidence](docs/04-development/evidence/PHASE-04.md)
+
 ## Phase 03 — 27 November 2026
 
 - Closed Phase 02 by reviewing and accepting the existing domain foundation commit.

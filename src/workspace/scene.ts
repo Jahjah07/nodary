@@ -4,6 +4,8 @@ import type { Rect } from "../core/graph";
 import type { Immutable } from "../core/immutable";
 import { componentFor } from "../core/registry";
 
+import { hitVisual, labelLayout, visualOf, type Measure } from "../core/visual";
+
 type Box<T> = { item: Immutable<T>; rect: Rect; bounds: Rect };
 type SceneEdge = { item: Immutable<Edge>; points: Position[]; arrows: Position[][]; label: Rect | null; bounds: Rect };
 export type Scene = {
@@ -31,9 +33,9 @@ function union(rects: Rect[]): Rect | null {
 
 const pointsBounds = (points: Position[]): Rect => union(points.map((point) => ({ ...point, width: 0, height: 0 })))!;
 const direction = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] } as const;
-function anchor(box: Rect, handle: Edge["source"]["handleId"]): Position {
-  const [x, y] = direction[handle];
-  return { x: box.x + (x + 1) * box.width / 2, y: box.y + (y + 1) * box.height / 2 };
+function anchor(box: Box<Node>, handle: Edge["source"]["handleId"]): Position {
+  const offset = visualOf(box.item).anchors.find(({ id }) => id === handle)!.position;
+  return { x: box.rect.x + offset.x, y: box.rect.y + offset.y };
 }
 function marker(tip: Position, previous: Position, stroke: number): Position[] {
   const distance = Math.hypot(tip.x - previous.x, tip.y - previous.y);
@@ -58,21 +60,24 @@ function pathMidpoint(points: Position[]): Position {
   return points[0];
 }
 
-// T-03-02 representative scene geometry. Full primitive and connector rules arrive in Phases 04 and 05.
-export function buildScene(document: Immutable<DiagramDocument>): Scene {
+// DGS-06 component geometry and the Phase 03 representative connector routes.
+export function buildScene(document: Immutable<DiagramDocument>, measure?: Measure): Scene {
   const hierarchy = indexHierarchy(document);
   if (!hierarchy.ok) throw Error("Scene requires a validated hierarchy.");
   const box = (item: Immutable<Node | Boundary>) => {
     const rect = { ...hierarchy.value.get(item.id)!.world, ...item.size };
-    return { rect, bounds: addStroke(rect, item.style.strokeWidth / 2) };
+    const local = visualOf(item).bounds;
+    return { rect, bounds: { ...local, x: rect.x + local.x, y: rect.y + local.y } };
   };
   const nodes = document.nodes.map((item) => ({ item, ...box(item) }));
-  const lookup = new Map(nodes.map((node) => [node.item.id, node.rect]));
+  const lookup = new Map(nodes.map((node) => [node.item.id, node]));
   const groups = document.groups.map((item) => {
     const geometry = box(item);
-    const { x, y, width } = geometry.rect;
+    const { x, y } = geometry.rect;
+    const region = visualOf(item).region;
+    const height = labelLayout(item, measure).height;
     return { item, ...geometry, depth: hierarchy.value.get(item.id)!.depth,
-      title: item.title ? { x: x + 10, y: y + 5, width: Math.min(width - 20, item.title.length * 8 + 24), height: 27 } : null };
+      title: item.title ? { ...region, x: x + region.x, y: y + region.y, height: Math.max(region.height, height) } : null };
   }).sort((a, b) => a.depth - b.depth);
   const edges = document.edges.map((item) => {
     const start = anchor(lookup.get(item.source.nodeId)!, item.source.handleId);
@@ -125,7 +130,8 @@ export function hitTest(scene: Scene, point: Position, zoom: number): string | n
   for (const edge of scene.edges.toReversed()) if (edge.label && contains(edge.label, point)) return edge.item.id;
   for (const group of scene.groups.toReversed()) if (group.title && contains(group.title, point)) return group.item.id;
   for (const node of scene.nodes.toReversed()) {
-    if (roundedContains(node.rect, point, node.item.style.strokeWidth / 2 + 2 / zoom)) return node.item.id;
+    if (hitVisual(visualOf(node.item), node.item.size, { x: point.x - node.rect.x, y: point.y - node.rect.y },
+      node.item.style.strokeWidth / 2 + 2 / zoom)) return node.item.id;
   }
   for (const edge of scene.edges.toReversed()) {
     const tolerance = Math.max(6 / zoom, edge.item.style.strokeWidth / 2 + 4 / zoom);

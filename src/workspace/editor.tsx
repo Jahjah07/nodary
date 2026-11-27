@@ -4,9 +4,10 @@ import { CircleHelp, Clock3, Grid2X2, Hand, Magnet, MousePointer2, PanelLeft, Pa
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import type { DocumentSession } from "../application/document-session";
 import type { Viewport } from "../core/contracts";
-import { componentFor } from "../core/registry";
-import { Canvas, type Tool } from "./canvas";
-import { componentIcons } from "./flow";
+import { componentFor, componentRegistry } from "../core/registry";
+import type { ComponentType } from "../core/component-edits";
+import { Canvas, type CanvasControls, type EditComponent, type PaletteDrag, type Tool } from "./canvas";
+import { ComponentPreview, measureLabel } from "./component-graphic";
 import { BackToLibrary, categoryName } from "./library";
 import { sampleId } from "./sample";
 import { buildScene, objectName, objectsIn, originView, type Scene } from "./scene";
@@ -21,13 +22,19 @@ function subscribeNarrow(change: () => void) {
   return () => media.removeEventListener("change", change);
 }
 
-export function Editor({ session, onView, onToggle }: {
+const categories = [["Flowchart", "flow."], ["Architecture", "arch."], ["General", "general."]] as const;
+
+export function Editor({ session, onView, onToggle, onEdit }: {
   session: DocumentSession;
   onView(viewport: Viewport | null, selection: readonly string[]): void;
   onToggle(key: "gridVisible" | "snapToGrid"): void;
+  onEdit: EditComponent;
 }) {
   const { document, view } = session.editor;
-  const scene = useMemo(() => buildScene(document), [document]);
+  const scene = useMemo(() => buildScene(document, measureLabel), [document]);
+  const isSample = document.id === sampleId;
+  const canvas = useRef<CanvasControls>(null);
+  const drag = useRef<PaletteDrag | null>(null);
   const [tool, setTool] = useState<Tool>("select");
   const narrow = useSyncExternalStore(subscribeNarrow, isNarrow, () => false);
   const [panels, setPanels] = useState({ components: true, properties: true });
@@ -74,22 +81,34 @@ export function Editor({ session, onView, onToggle }: {
     <main className="editor-main">
       {open.components && <Sidebar panel="components" close={() => closePanel("components")}>
         <div className="component-library">
-          <h3>Architecture</h3>
-          <ul>{Object.entries(componentIcons).filter(([type]) => type.startsWith("arch.")).map(([type, Icon]) => <li key={type}>
-            <span className="component-icon"><Icon size={18} /></span>{componentFor(type as keyof typeof componentIcons).displayName}
-          </li>)}</ul>
-          <h3>General</h3>
-          <ul><li><span className="component-icon"><PanelLeft size={18} /></span>Boundary</li></ul>
-          <p>Component previews</p>
+          {categories.map(([name, prefix]) => <section key={prefix} aria-labelledby={`palette-${name}`}>
+            <h3 id={`palette-${name}`}>{name}</h3>
+            <ul>{componentRegistry.components.filter(({ type }) => type.startsWith(prefix)).map(({ type, displayName }) => <li key={type}>
+              <button type="button" title={isSample ? "Create a diagram to insert components" : displayName}
+                aria-label={`Insert ${displayName}`} data-type={type} draggable={!isSample && !session.pending}
+                disabled={isSample || !!session.pending}
+                onClick={() => { if (canvas.current?.insert(type as ComponentType) && narrow) setDrawer(undefined); }}
+                onDragStart={(event) => {
+                  const box = event.currentTarget.getBoundingClientRect();
+                  const fraction = (value: number) => Math.max(0, Math.min(1, value));
+                  drag.current = { type, hotspot: { x: fraction((event.clientX - box.left) / box.width), y: fraction((event.clientY - box.top) / box.height) } };
+                  event.dataTransfer.setData("application/x-nodary-component", type);
+                  event.dataTransfer.effectAllowed = "copy";
+                }}
+                onDragEnd={() => { drag.current = null; canvas.current?.clearDrop(); }}>
+                <ComponentPreview type={type} /><span>{displayName}</span>
+              </button>
+            </li>)}</ul>
+          </section>)}
         </div>
       </Sidebar>}
-      <Canvas scene={scene} viewport={view.viewport} selection={view.selection} tool={tool} isSample={document.id === sampleId}
-        gridVisible={document.settings.gridVisible} onView={onView} />
+      <Canvas scene={scene} viewport={view.viewport} selection={view.selection} tool={tool} isSample={isSample}
+        editor={session.editor} pending={!!session.pending} controls={canvas} drag={drag} onEdit={onEdit} onView={onView} />
       {open.properties && <Sidebar panel="properties" close={() => closePanel("properties")}>
         <Inspector scene={scene} session={session} select={(ids) => onView(view.viewport ?? originView, ids)} />
       </Sidebar>}
     </main>
-    {session.failure && <p role="alert" className="editor-error">The temporary repository could not apply the latest settings.</p>}
+    {session.failure && <p role="alert" className="editor-error">The temporary repository could not apply the latest edit.</p>}
     <footer className="editor-status">
       <span>{document.nodes.length} nodes · {document.edges.length} edges · {document.groups.length} boundaries</span>
       <span aria-live="polite">{view.selection.length ? `${view.selection.length} selected` : <>

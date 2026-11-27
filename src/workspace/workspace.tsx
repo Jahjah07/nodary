@@ -6,19 +6,17 @@ import { useStore } from "zustand";
 import { createStore } from "zustand/vanilla";
 import type { DocumentSummary } from "../application/document-repository";
 import { beginSave, editSession, openSession, settleSave, viewSession, type DocumentSession } from "../application/document-session";
-import { createDispatcher } from "../core/commands";
+import type { CommandState, Outcome } from "../core/commands";
+import { componentDispatcher, type ComponentEdit } from "../core/component-edits";
 import { idSchema, type DiagramDocument, type Viewport } from "../core/contracts";
-import { ok } from "../core/validation";
 import { createMemoryDocumentRepository } from "../infrastructure/memory-document-repository";
 import { Editor } from "./editor";
+import { measureLabel } from "./component-graphic";
 import { BackToLibrary, Library } from "./library";
 import { editorHref, navigate, useWorkspaceLocation } from "./navigation";
 import { blankDiagram, sampleDiagram, sampleId } from "./sample";
 
-type SettingsKey = "gridVisible" | "snapToGrid";
-const dispatcher = createDispatcher<{ toggle: SettingsKey }>({
-  toggle(draft, key) { draft.settings[key] = !draft.settings[key]; return ok(undefined); },
-}, () => new Date().toISOString());
+const dispatcher = componentDispatcher(measureLabel);
 
 type Entry = { route: string; session: DocumentSession | null; issue?: string };
 type EntryState = { entry: Entry | undefined };
@@ -104,23 +102,37 @@ export function Workspace({ initial }: { initial: "/" | "/editor/" }) {
     if (viewport !== session.editor.view.viewport) void repository.saveViewport(session.editor.document.id, viewport);
   }
 
-  async function toggle(key: SettingsKey) {
-    if (!session || session.pending) return;
-    const edited = editSession(session, (state) => dispatcher.dispatch(state, { type: "toggle", payload: key }));
-    if (edited.outcome.status !== "committed") return;
-    const saving = beginSave(edited.session);
+  function apply(applyEdit: (state: CommandState) => Outcome, selection?: readonly string[]) {
+    const current = sessionStore.getState().entry?.session;
+    if (!session || !current || current.token !== session.token || current.pending) return "Wait for the current edit to finish.";
+    const edited = editSession(current, applyEdit);
+    if (edited.outcome.status === "rejected") return edited.outcome.issues[0].message;
+    const selected = selection && viewSession(edited.session, edited.session.editor.view.viewport, selection);
+    const next = selected?.ok ? selected.value : edited.session;
+    if (edited.outcome.status === "noop") {
+      setEntry({ route, session: next });
+      return null;
+    }
+    const saving = beginSave(next);
     const capture = saving.pending!;
     setHasWork(true);
     setEntry({ route, session: saving });
-    const written = await repository.save(capture.id, capture.document, capture.revision);
-    setEntry((current) => current?.session?.token === session.token ? {
-      ...current, session: settleSave(current.session, capture, written),
-    } : current);
-    await refresh();
+    void repository.save(capture.id, capture.document, capture.revision).then((written) => {
+      setEntry((latest) => latest?.session?.token === current.token ? {
+        ...latest, session: settleSave(latest.session, capture, written),
+      } : latest);
+      return refresh();
+    });
+    return null;
   }
 
+  function edit(payload: ComponentEdit, selection: readonly string[], expectedGeneration: number) {
+    if (session?.editor.document.id === sampleId) return "Create a diagram to edit components.";
+    return apply((state) => dispatcher.dispatch(state, { type: "component", payload, expectedGeneration }), selection);
+  }
   if (!editorRoute) return <Library documents={documents} loading={!ready && !error} error={error} create={create} />;
-  if (session) return <Editor key={session.token} session={session} onView={updateView} onToggle={(key) => void toggle(key)} />;
+  if (session) return <Editor key={session.token} session={session} onView={updateView} onEdit={edit}
+    onToggle={(key) => apply((state) => dispatcher.dispatch(state, { type: "toggle", payload: key }))} />;
   return <>
     <header className="app-header"><span className="wordmark">Nodary</span><span className="header-divider" /><BackToLibrary /></header>
     <main className="route-state">

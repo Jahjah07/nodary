@@ -2008,7 +2008,7 @@
         "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "43e22d3a45520f4fed65ceb4c024a96c80e18768",
       "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
       "applicabilityDecision": null
     },
@@ -2027,16 +2027,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "component_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
-        "tests/e2e/workspace.spec.ts"
+        "tests/e2e/workspace.spec.ts",
+        "tests/e2e/components.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
+        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture",
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null,
       "taskLinkNote": "Supplemental mapping proposed in DGS-10; DGS-09 did not explicitly list UX-05 in a task verification field."
     },
@@ -2252,7 +2254,7 @@
         "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "43e22d3a45520f4fed65ceb4c024a96c80e18768",
       "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
       "applicabilityDecision": null
     },
@@ -2766,7 +2768,7 @@
         "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "43e22d3a45520f4fed65ceb4c024a96c80e18768",
       "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
       "applicabilityDecision": null
     },
@@ -2927,12 +2929,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/component-edits.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -2949,12 +2956,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/component-visuals.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -2992,12 +3004,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3013,12 +3029,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/component-visuals.test.ts",
+        "tests/integration/component-graphic.test.tsx",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3034,12 +3056,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/component-visuals.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3098,12 +3125,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/component-edits.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3185,11 +3217,15 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/integration/component-edits.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2",
       "applicabilityDecision": null
     },
     {
@@ -3462,12 +3498,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "license_review",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/component-visuals.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3495,7 +3536,7 @@
         "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "43e22d3a45520f4fed65ceb4c024a96c80e18768",
       "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
       "applicabilityDecision": null
     },
@@ -3522,7 +3563,7 @@
         "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "43e22d3a45520f4fed65ceb4c024a96c80e18768",
       "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
       "applicabilityDecision": null
     },
@@ -3593,12 +3634,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/component-edits.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3647,7 +3693,7 @@
         "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "43e22d3a45520f4fed65ceb4c024a96c80e18768",
       "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
       "applicabilityDecision": null
     },
@@ -3674,7 +3720,7 @@
         "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "43e22d3a45520f4fed65ceb4c024a96c80e18768",
       "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
       "applicabilityDecision": null
     },
@@ -3712,12 +3758,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/component-edits.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3734,12 +3785,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/component-edits.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3755,12 +3811,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/component-edits.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3776,12 +3837,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/component-edits.test.ts",
+        "tests/e2e/components.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; static build Soqjmo9k9k0SH654D7MA7",
       "applicabilityDecision": null
     },
     {
@@ -3799,11 +3865,15 @@
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
       "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "testIds": [
+        "tests/integration/component-edits.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2",
       "applicabilityDecision": null
     },
     {

@@ -153,4 +153,23 @@ export function resizeBoundary(document: Snapshot, id: string, size: Size, metri
   return expandParents(draft, frame.parentId === null ? [] : [frame.parentId], metrics);
 }
 
+// DGS-07 §6. A boundary's resize keeps its children in their original world positions.
+export function resizeObject(document: Snapshot, id: string, rect: Rect, metrics?: ContainmentMetrics): Result<DiagramDocument> {
+  const draft = structuredClone(document) as DiagramDocument;
+  const index = indexHierarchy(draft);
+  if (!index.ok) return index;
+  const entry = index.value.get(id);
+  if (!entry || !validWorldRect(rect)) return fail(invalid("Invalid object or requested dimensions."));
+  const { item, world } = entry;
+  const delta = subtract(rect, world);
+  item.position = add(item.position, delta);
+  item.size = { width: rect.width, height: rect.height };
+  if (item.type === "general.boundary") {
+    const children = childrenOf(draft, id);
+    for (const child of children) child.position = subtract(child.position, delta);
+    if (!contained(item, children, metrics)) return fail(invalid("Requested boundary size would hide content."));
+  }
+  return expandParents(draft, item.parentId ? [item.parentId] : [], metrics);
+}
+
 export { geometryEpsilon, indexHierarchy };

@@ -1,4 +1,4 @@
-# Phase 00 third-party notices
+# Third-party notices
 
 DGS-03 §4.3 and DGS-09 T-00-02. Versions and source repositories were checked against the installed package manifests. Paths in the last column are relative to each package directory under `node_modules/` unless indicated.
 
@@ -30,3 +30,14 @@ Phase 02 added Ajv 8.20.0 and ajv-formats 3.0.1 as test-only dependencies for Dr
 The lockfile review included platform-specific optional dependencies. Runtime-tree exceptions include Sharp/libvips platform binaries with LGPL terms, `caniuse-lite` under CC-BY-4.0, `d3-ease` and `source-map-js` under BSD-3-Clause, and `tslib` under 0BSD. The development-only `union` package omits license metadata in the lockfile and includes MIT terms in `node_modules/union/LICENSE`. Several runtime-tree packages also omit standalone license files, including `@next/env`, the Windows SWC package, `client-only`, and `react-compiler-runtime`. Resolve upstream notice provenance and audit the actual distributed files before release.
 
 Retain each applicable copyright and permission notice with distributed copies. Preserve Dexie’s `NOTICE` if shipped, and use Lucide’s installed `LICENSE` for any bundled or copied icon vectors, including Feather attribution where applicable. SP-01 uses system fonts and installs Lucide for later use. It contains no copied React Flow Pro examples or bundled font files. The bootstrap review covers package metadata and available local notices. Release distribution and platform-specific obligations remain subject to review.
+
+## Phase 04 diagram vectors
+
+The 14 registry keys below were copied from the corresponding `dist/esm/icons/<key>.mjs` entries in the lockfile-pinned `lucide-react` 1.82.0 package. The local array stores geometry and removes React reconciliation keys. The original ISC and Feather MIT notices are byte-identical to the package license and shipped in the static build as `LUCIDE-LICENSE.txt`. [Bundled license](public/LUCIDE-LICENSE.txt)
+
+| Applicable terms in the installed release | Icon keys |
+|---|---|
+| Lucide ISC and listed Feather MIT attribution | `database`, `monitor`, `server` |
+| Lucide ISC | `app-window`, `boxes`, `cable`, `cloud`, `globe`, `hard-drive`, `key-round`, `mail`, `network`, `shield`, `user-round` |
+
+Standalone export notice handling is a Phase 10 dependency. The broader release distribution audit remains open.

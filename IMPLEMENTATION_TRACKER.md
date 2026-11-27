@@ -2,18 +2,18 @@
 
 **Baseline:** 27 November 2026. This is a human-readable rollup. Machine authority: [DGS-09_Implementation_Task_Register_v0.1.json](docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json) and [DGS-10_Acceptance_Test_Register_v0.1.json](docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json). Update status from actual evidence, not manual progress alone.
 
-- Tasks completed: 22/56; phases passed: 4/13.
-- Mandatory scenarios passed: 17/205; conditional: 0/13 (applicability not yet finalized).
+- Tasks completed: 26/56. Phases passed: 5/13.
+- Mandatory scenarios passed: 30/205. Conditional: 0/13 (applicability pending).
 - Spikes passed: 8/8; release gates passed: 0/10.
-- Next phase awaiting authorization: Phase 04.
+- Phase 04 is ready for owner review. Phase 05 awaits separate authorization.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
 | 00 | Project initialization | 4 | Implemented in `2476348` | Owner accepted the local pass. Hosted CI unrun. |
 | 01 | Technical prototypes and decision gates | 8 | Closed in `51fcac8` | Passed with owner-approved CR-01 |
 | 02 | Core domain and command foundation | 5 | Closed in `e9f321c` | Owner accepted |
-| 03 | Workspace and canvas | 5 | Implemented | Passed locally |
-| 04 | Component library | 4 | Not started | Not run |
+| 03 | Workspace and canvas | 5 | Closed in `43e22d3` | Owner accepted |
+| 04 | Component library | 4 | Implemented | Passed locally |
 | 05 | Connections and routing | 3 | Not started | Not run |
 | 06 | Properties and styling | 3 | Not started | Not run |
 | 07 | Grouping and boundaries | 4 | Not started | Not run |
@@ -49,10 +49,10 @@
 | T-03-03 | Viewport navigation and grid | Implemented | Pass, real browser pan/zoom and viewport controls | [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md) |
 | T-03-04 | Selection and hit testing | Implemented | Pass, real browser selection and marquee | [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md) |
 | T-03-05 | Keyboard/focus controller and responsive shell | Implemented | Pass, keyboard scope and responsive drawers | [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md) |
-| T-04-01 | Component registry and local assets | Not started | Not run | — |
-| T-04-02 | Shared primitive geometry and scene | Not started | Not run | — |
-| T-04-03 | Component library insertion | Not started | Not run | — |
-| T-04-04 | Move and resize interactions | Not started | Not run | — |
+| T-04-01 | Component registry and local assets | Implemented | Pass, 29 canonical defaults and 14 licensed local vectors | [Phase 04 evidence](docs/04-development/evidence/PHASE-04.md) |
+| T-04-02 | Shared primitive geometry and scene | Implemented | Pass, exact primitives and 104 cardinal anchors | [Phase 04 evidence](docs/04-development/evidence/PHASE-04.md) |
+| T-04-03 | Component library insertion | Implemented | Pass, offline keyboard insertion and verified native click/drag | [Phase 04 evidence](docs/04-development/evidence/PHASE-04.md) |
+| T-04-04 | Move and resize interactions | Implemented | Pass, previews, fixed sides, circle constraints and atomic history | [Phase 04 evidence](docs/04-development/evidence/PHASE-04.md) |
 | T-05-01 | Edge creation and graph constraints | Not started | Not run | — |
 | T-05-02 | Shared route and marker geometry | Not started | Not run | — |
 | T-05-03 | Edge renderer and reconnection | Not started | Not run | — |

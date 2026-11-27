@@ -49,4 +49,6 @@ These are limited artifact-level checks, not executable product tests. Text meas
 
 ## Approval and next action
 
+The owner approved CR-01 on 27 November 2026. Its approved scope includes all four canonical free-text fields, a field/code point diagnostic, preservation of source bytes and stored records, and atomic rejection of invalid edits. Valid supplementary characters remain valid. XML escaping remains a separate serialization requirement. Apply the amendment in Phase 02 with a separately tracked v1 reference schema and parity evidence. [Decision register](../DECISIONS.md)
+
 Owner may authorize Phase 00 without resolving runtime spikes first. Phase 00 records review and any requested edits. CR-01 and architecture/font/parser/license/performance decisions must be resolved or explicitly block dependent work at Phase 01. The original specification files and registers were not edited. No legal name/domain clearance or commercial hosting review performed. Do not add a new broad planning phase.

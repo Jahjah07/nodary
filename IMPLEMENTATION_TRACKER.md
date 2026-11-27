@@ -2,15 +2,15 @@
 
 **Baseline:** 27 November 2026. This is a human-readable rollup. Machine authority: [DGS-09_Implementation_Task_Register_v0.1.json](docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json) and [DGS-10_Acceptance_Test_Register_v0.1.json](docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json). Update status from actual evidence, not manual progress alone.
 
-- Tasks completed: 11/56; phases passed: 1/13.
+- Tasks completed: 12/56; phases passed: 2/13.
 - Mandatory scenarios passed: 0/205; conditional: 0/13 (applicability not yet finalized).
 - Spikes passed: 8/8; release gates passed: 0/10.
-- Next decision: CR-01 owner approval to close T-01-08. Phase 02 requires separate authorization.
+- Owner authorized Phase 02 after successful Phase 01 closure.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
 | 00 | Project initialization | 4 | Implemented in `2476348` | Owner accepted the local pass. Hosted CI unrun. |
-| 01 | Technical prototypes and decision gates | 8 | Seven tasks verified, architecture review recorded | Blocked on CR-01 approval |
+| 01 | Technical prototypes and decision gates | 8 | Implemented | Passed with owner-approved CR-01 |
 | 02 | Core domain and command foundation | 5 | Not started | Not run |
 | 03 | Workspace and canvas | 5 | Not started | Not run |
 | 04 | Component library | 4 | Not started | Not run |
@@ -38,7 +38,7 @@
 | T-01-05 | History spike | Implemented | SP-06 pass, 50 mixed transactions | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
 | T-01-06 | Keyboard and accessibility spike | Implemented | SP-07 pass in Chrome and Edge | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
 | T-01-07 | Performance baseline spike | Implemented | SP-08 pass for baseline collection | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
-| T-01-08 | Architecture review and compatibility decisions | Blocked on CR-01 approval | SP-01 through SP-08 verified | [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md) |
+| T-01-08 | Architecture review and compatibility decisions | Implemented | Pass, CR-01 approved | [Phase 01 closure](docs/04-development/evidence/PHASE-01.md#owner-closure) |
 | T-02-01 | Canonical contracts and runtime schema | Not started | Not run | — |
 | T-02-02 | Graph integrity and registry contract | Not started | Not run | — |
 | T-02-03 | Coordinate and containment primitives | Not started | Not run | — |
@@ -85,7 +85,7 @@
 | T-12-03 | Release handover | Not started | Not run | — |
 
 ## Active blockers and review
-Phase 00 is closed with owner approval in `2476348`. Hosted GitHub Actions remains unrun in the evidence. The owner approved CR-02–04. CR-01 awaits explicit approval of the proposed canonical XML-compatible text policy. Release qualification for parser, font coverage, product persistence and performance remains pending.
+Phase 00 closed in `2476348`. Phase 01 closed after the owner approved CR-01. Hosted GitHub Actions remains unrun. Release qualification for parser, font coverage, product persistence and performance remains pending.
 
 ## Updating this tracker
 Use `not_started`, `in_progress`, `blocked`, `implemented` (or register's approved status vocabulary) and actual verification states separately; never mark completed solely because code exists. For a phase that has only partial verification, record specific tests pending later. Update machine registers first and reconcile this rollup at the phase gate. Keep evidence under `docs/04-development/evidence/` or an approved CI artifact reference, with timestamp, commit/build, command, environment, result and limitations. Do not mark mandatory skipped/unrun as passed. Record an explicit non-applicability decision for deferred optional tests only.

@@ -13,4 +13,3 @@ if (load) {
   root.render(<h1>Nodary technical prototypes</h1>);
 }
 /// <reference types="vite/client" />
-

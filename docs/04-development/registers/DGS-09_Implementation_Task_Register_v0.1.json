@@ -36,8 +36,8 @@
         "T-01-07",
         "T-01-08"
       ],
-      "status": "blocked",
-      "gate_status": "blocked",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "00"
     },
     {
@@ -312,7 +312,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-01.md"
       ],
-      "commit": null,
+      "commit": "1780c28",
       "blocker": null
     },
     {
@@ -335,7 +335,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-01.md"
       ],
-      "commit": null,
+      "commit": "1780c28",
       "blocker": null
     },
     {
@@ -362,7 +362,7 @@
         "docs/04-development/evidence/PHASE-01.md",
         "docs/04-development/evidence/PHASE-01-SP-04.png"
       ],
-      "commit": null,
+      "commit": "1780c28",
       "blocker": null
     },
     {
@@ -386,7 +386,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-01.md"
       ],
-      "commit": null,
+      "commit": "1780c28",
       "blocker": null
     },
     {
@@ -410,7 +410,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-01.md"
       ],
-      "commit": null,
+      "commit": "1780c28",
       "blocker": null
     },
     {
@@ -434,7 +434,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-01.md"
       ],
-      "commit": null,
+      "commit": "1780c28",
       "blocker": null
     },
     {
@@ -458,7 +458,7 @@
         "docs/04-development/evidence/PHASE-01.md",
         "docs/04-development/evidence/PHASE-01-SP-08.json"
       ],
-      "commit": null,
+      "commit": "1780c28",
       "blocker": null
     },
     {
@@ -472,8 +472,8 @@
       ],
       "verification": "SP-01–08",
       "deliverable": "Record each spike result, ADR outcome, font strategy, XML-incompatible text policy and license review; no failed mandatory spike silently waived. Re-run affected prototypes after changes.",
-      "status": "blocked",
-      "verification_status": "blocked",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-01-07"
       ],
@@ -482,7 +482,7 @@
         "docs/04-development/evidence/PHASE-01.md"
       ],
       "commit": null,
-      "blocker": "CR-01 proposed XML-compatible canonical text policy awaits explicit owner approval."
+      "blocker": null
     },
     {
       "id": "T-02-01",

@@ -95,3 +95,9 @@ Suggested specification revisions for owner review are an explicit XML-compatibl
 The static shell build SHA-256 values were `04687d92105248b10f31e13a47ef2d03c34e2833bc5f641b9c4a9a89f9bb9dbc` for `out/index.html` and `1d3422f147430e546ba6b9857cf2080e8da431bb6debe0069a899a5beeac6680` for `out/editor/index.html`. Browser commands ran locally with normal Windows process permissions and reported the existing http-server deprecation and CLI color warnings. All 218 product scenarios and all release gates remain unrun.
 
 **Phase 01 gate — Blocked on explicit CR-01 approval.** SP-01 regression and SP-02–08 passed. The architecture review and proposal are recorded. Final disposition of T-01-08 and dependent schema work await the owner’s decision.
+
+## Owner closure
+
+On 27 November 2026, the owner approved CR-01 and authorized Phase 02 after successful closure. The original blocker above records the pre-approval result. The closure audit started from the clean prototype commit `1780c28`, verified the 18 immutable baseline artifacts, unchanged dependency lockfile and production source isolation, all eight passing spike records, and both raw benchmark reports. Local lint, typecheck and Vitest passed, with 11/11 tests. SP-08 remains a prototype baseline. Hosted GitHub Actions remains unrun.
+
+**Final Phase 01 gate — Pass.** T-01-08 is complete with the approved text policy recorded. Phase 02 will implement it in a separately tracked v1 schema reference and runtime validation.

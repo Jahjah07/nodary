@@ -2,17 +2,17 @@
 
 **Baseline:** 27 November 2026. This is a human-readable rollup. Machine authority: [DGS-09_Implementation_Task_Register_v0.1.json](docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json) and [DGS-10_Acceptance_Test_Register_v0.1.json](docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json). Update status from actual evidence, not manual progress alone.
 
-- Tasks completed: 17/56; phases passed: 3/13.
-- Mandatory scenarios passed: 10/205; conditional: 0/13 (applicability not yet finalized).
+- Tasks completed: 22/56; phases passed: 4/13.
+- Mandatory scenarios passed: 17/205; conditional: 0/13 (applicability not yet finalized).
 - Spikes passed: 8/8; release gates passed: 0/10.
-- Next phase awaiting authorization: Phase 03.
+- Next phase awaiting authorization: Phase 04.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
 | 00 | Project initialization | 4 | Implemented in `2476348` | Owner accepted the local pass. Hosted CI unrun. |
 | 01 | Technical prototypes and decision gates | 8 | Closed in `51fcac8` | Passed with owner-approved CR-01 |
-| 02 | Core domain and command foundation | 5 | Implemented | Passed locally |
-| 03 | Workspace and canvas | 5 | Not started | Not run |
+| 02 | Core domain and command foundation | 5 | Closed in `e9f321c` | Owner accepted |
+| 03 | Workspace and canvas | 5 | Implemented | Passed locally |
 | 04 | Component library | 4 | Not started | Not run |
 | 05 | Connections and routing | 3 | Not started | Not run |
 | 06 | Properties and styling | 3 | Not started | Not run |
@@ -44,11 +44,11 @@
 | T-02-03 | Coordinate and containment primitives | Implemented | Pass, transform and atomic containment assertions | [Phase 02 evidence](docs/04-development/evidence/PHASE-02.md) |
 | T-02-04 | Command dispatcher and history foundation | Implemented | Pass, atomic lifecycle and 50-step undo/redo | [Phase 02 evidence](docs/04-development/evidence/PHASE-02.md) |
 | T-02-05 | Session and repository interfaces | Implemented | Pass, temporary repository integration | [Phase 02 evidence](docs/04-development/evidence/PHASE-02.md) |
-| T-03-01 | Workspace routes and shell | Not started | Not run | — |
-| T-03-02 | React Flow projection adapter | Not started | Not run | — |
-| T-03-03 | Viewport navigation and grid | Not started | Not run | — |
-| T-03-04 | Selection and hit testing | Not started | Not run | — |
-| T-03-05 | Keyboard/focus controller and responsive shell | Not started | Not run | — |
+| T-03-01 | Workspace routes and shell | Implemented | Pass, temporary workspace and static navigation | [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md) |
+| T-03-02 | React Flow projection adapter | Implemented | Pass, canonical IDs and parent-local projection | [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md) |
+| T-03-03 | Viewport navigation and grid | Implemented | Pass, real browser pan/zoom and viewport controls | [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md) |
+| T-03-04 | Selection and hit testing | Implemented | Pass, real browser selection and marquee | [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md) |
+| T-03-05 | Keyboard/focus controller and responsive shell | Implemented | Pass, keyboard scope and responsive drawers | [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md) |
 | T-04-01 | Component registry and local assets | Not started | Not run | — |
 | T-04-02 | Shared primitive geometry and scene | Not started | Not run | — |
 | T-04-03 | Component library insertion | Not started | Not run | — |
@@ -85,7 +85,7 @@
 | T-12-03 | Release handover | Not started | Not run | — |
 
 ## Active blockers and review
-Phase 00 closed in `2476348` and Phase 01 closed in `51fcac8`. Phase 02 passed locally. Hosted GitHub Actions remains unrun. Measured text layout, raw import preflight, durable persistence and release qualification remain scheduled for later phases.
+Phase 00 closed in `2476348`, Phase 01 in `51fcac8` and Phase 02 in `e9f321c`. Phase 03 passed locally. Hosted GitHub Actions remains unrun. Full component insertion, measured text layout, raw import, durable persistence and release qualification remain scheduled for later phases.
 
 ## Updating this tracker
 Use `not_started`, `in_progress`, `blocked`, `implemented` (or register's approved status vocabulary) and actual verification states separately; never mark completed solely because code exists. For a phase that has only partial verification, record specific tests pending later. Update machine registers first and reconcile this rollup at the phase gate. Keep evidence under `docs/04-development/evidence/` or an approved CI artifact reference, with timestamp, commit/build, command, environment, result and limitations. Do not mark mandatory skipped/unrun as passed. Record an explicit non-applicability decision for deferred optional tests only.

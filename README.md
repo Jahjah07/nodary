@@ -1,16 +1,16 @@
 # Nodary
 
-A local-first visual workspace for flowcharts, IT/software architecture and structured diagrams. The current application includes the Phase 00 static library and read-only SP-01 sample.
+A local-first visual workspace for flowcharts, IT/software architecture and structured diagrams. The Phase 03 workspace opens a representative architecture diagram and creates blank diagrams for the current tab. Reloading or closing the tab clears temporary documents and edits.
 
 ## Start here
 1. Open the `nodary` repository in your IDE/Codex workspace.
 2. Read [AGENTS.md](AGENTS.md), [specification index](docs/INDEX.md), [consistency review](docs/CONSISTENCY_REVIEW.md) and [decisions](DECISIONS.md).
 3. See [MASTER_INITIALIZATION.md](prompts/MASTER_INITIALIZATION.md) and [Phase 00 evidence](docs/04-development/evidence/PHASE-00.md) for the initialization scope and results.
-4. After Phase 00, review evidence and authorize [Phase 01](prompts/phases/PHASE-01.md). Continue in numerical order using the matching phase prompt. Use smaller task prompts where needed, especially for prototypes.
+4. Review the [implementation tracker](IMPLEMENTATION_TRACKER.md) before authorizing the next phase.
 
 ## Stack and setup
 
-Use Node.js 22 LTS (22.12 or later in the 22.x line) and npm 11.21.1. [package.json](package.json) lists the exact direct versions, [package-lock.json](package-lock.json) pins the full tree, and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) records package licenses. React Flow is a candidate pending Phase 01 spikes.
+Use Node.js 22 LTS (22.12 or later in the 22.x line) and npm 11.21.1. [package.json](package.json) lists the exact direct versions, [package-lock.json](package-lock.json) pins the full tree, and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) records package licenses.
 ```sh
 npm ci
 npm run dev
@@ -32,6 +32,7 @@ Production target is static HTTPS hosting. Vendor choice and terms review are de
 ```text
 nodary/
 ├── src/app/               # Static library and editor routes
+├── src/workspace/         # Temporary workspace, canvas and controlled projection
 ├── src/prototypes/sp-01/  # Read-only synthetic sample and renderer mount
 ├── docs/                  # 11 DGS specs, schema, registry, registers, review
 ├── tests/fixtures/        # 4 portable JSON example/template/benchmark files

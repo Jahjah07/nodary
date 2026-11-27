@@ -68,8 +68,8 @@
         "T-03-04",
         "T-03-05"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "02"
     },
     {
@@ -506,7 +506,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-02.md"
       ],
-      "commit": null,
+      "commit": "e9f321cf98b1dd174f54d4c69c000dce4fd48b57",
       "blocker": null
     },
     {
@@ -530,7 +530,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-02.md"
       ],
-      "commit": null,
+      "commit": "e9f321cf98b1dd174f54d4c69c000dce4fd48b57",
       "blocker": null
     },
     {
@@ -553,7 +553,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-02.md"
       ],
-      "commit": null,
+      "commit": "e9f321cf98b1dd174f54d4c69c000dce4fd48b57",
       "blocker": null
     },
     {
@@ -576,7 +576,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-02.md"
       ],
-      "commit": null,
+      "commit": "e9f321cf98b1dd174f54d4c69c000dce4fd48b57",
       "blocker": null
     },
     {
@@ -599,7 +599,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-02.md"
       ],
-      "commit": null,
+      "commit": "e9f321cf98b1dd174f54d4c69c000dce4fd48b57",
       "blocker": null
     },
     {
@@ -613,13 +613,15 @@
       ],
       "verification": "UX-01–04",
       "deliverable": "Implement / and query-based editor route, list workspace, create/open and missing-ID states against temporary adapter; header, toolbar, collapsible panels, status bar and neutral design tokens.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-02-05"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-03.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -633,13 +635,15 @@
       ],
       "verification": "CI-01–04",
       "deliverable": "Project canonical nodes/groups/edges, parent-first ordering, stable IDs; renderer measurements/preview transient; no direct committed graph mutation.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-03-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-03.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -653,13 +657,15 @@
       ],
       "verification": "CI-02–04,CI-06,DM-18",
       "deliverable": "Pan, pointer zoom 25–200%, fit via scene bounds interface, reset and 20-unit grid/snap independent; complete fit verified again after scene integration.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-03-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-03.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -673,13 +679,15 @@
       ],
       "verification": "CI-07–09,CI-29",
       "deliverable": "Single/shift/marquee/full selection, empty canvas clear, overlap priority, noncapturing boundary interior and pointer cancellation; no history on selection.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-03-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-03.md"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -694,13 +702,15 @@
       ],
       "verification": "UX-15,UX-17,CI-32",
       "deliverable": "Implement shortcut arbitration and visible alternatives; native input/dialog behavior, focus restoration, desktop panel breakpoints and responsive overflow; final keyboard audit Phase 11.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-03-04"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-03.md"
+      ],
       "commit": null,
       "blocker": null
     },

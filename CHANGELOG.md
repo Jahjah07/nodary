@@ -1,5 +1,11 @@
 # Changelog
 
+## Phase 03 — 27 November 2026
+
+- Closed Phase 02 by reviewing and accepting the existing domain foundation commit.
+- Added the Nodary library, temporary blank diagrams, a responsive editor, and a controlled canonical projection.
+- Added viewport navigation, independent grid and snap settings, selection, and scoped keyboard controls. Same-tab navigation retains the active temporary workspace. [Phase 03 evidence](docs/04-development/evidence/PHASE-03.md)
+
 ## Phase 02 — 27 November 2026
 
 - Closed Phase 01 after owner approval of CR-01.

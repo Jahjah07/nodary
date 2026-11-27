@@ -1,0 +1,600 @@
+{
+  "document": {
+    "schemaVersion": 1,
+    "id": "8689f8ea-ad46-4073-83ec-ad195f6aa758",
+    "title": "Example IT architecture",
+    "category": "architecture",
+    "createdAt": "2026-11-27T00:00:00.000Z",
+    "updatedAt": "2026-11-27T00:00:00.000Z",
+    "nodes": [
+      {
+        "id": "06c89ff5-c333-4ef8-be8b-ac68d6230462",
+        "type": "arch.user",
+        "parentId": null,
+        "position": {
+          "x": 390,
+          "y": 0
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Users",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "not_specified"
+      },
+      {
+        "id": "b709a6c0-57ff-4e2f-a3d0-9d5cae04f0bf",
+        "type": "arch.website",
+        "parentId": "8e4bbd50-223b-4a49-94b4-a8cb4cfd5c12",
+        "position": {
+          "x": 40,
+          "y": 60
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Public website",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "completed"
+      },
+      {
+        "id": "2e5f617d-4500-4e8d-8ed2-1d120f12b251",
+        "type": "arch.application",
+        "parentId": "8e4bbd50-223b-4a49-94b4-a8cb4cfd5c12",
+        "position": {
+          "x": 270,
+          "y": 60
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Web application",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "completed"
+      },
+      {
+        "id": "4cee0324-09ba-453e-a202-4a4ba1a9fa90",
+        "type": "arch.api",
+        "parentId": "8e4bbd50-223b-4a49-94b4-a8cb4cfd5c12",
+        "position": {
+          "x": 500,
+          "y": 60
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Backend API",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "in_progress"
+      },
+      {
+        "id": "c1fa7461-79dd-4d8c-be50-d7bffc3565ab",
+        "type": "arch.database",
+        "parentId": "8e4bbd50-223b-4a49-94b4-a8cb4cfd5c12",
+        "position": {
+          "x": 720,
+          "y": 60
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Database",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "not_specified"
+      },
+      {
+        "id": "ccb8416d-1234-45b3-ac2c-712dfdeabed8",
+        "type": "arch.identity",
+        "parentId": "c85cabf3-e6e5-4a78-9c1a-f5a392f11eb8",
+        "position": {
+          "x": 40,
+          "y": 60
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Identity service",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "completed"
+      },
+      {
+        "id": "98b8f1aa-7630-484a-ab7e-6bce75b90094",
+        "type": "arch.email",
+        "parentId": "c85cabf3-e6e5-4a78-9c1a-f5a392f11eb8",
+        "position": {
+          "x": 270,
+          "y": 60
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Email service",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "completed"
+      },
+      {
+        "id": "0b2d58f6-c02b-4e2e-a859-6e4daa807111",
+        "type": "arch.storage",
+        "parentId": "c85cabf3-e6e5-4a78-9c1a-f5a392f11eb8",
+        "position": {
+          "x": 500,
+          "y": 60
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Document storage",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "completed"
+      },
+      {
+        "id": "681340c9-51b3-45da-85a7-8e5e42cd03ec",
+        "type": "arch.security",
+        "parentId": "c85cabf3-e6e5-4a78-9c1a-f5a392f11eb8",
+        "position": {
+          "x": 720,
+          "y": 60
+        },
+        "size": {
+          "width": 180,
+          "height": 80
+        },
+        "label": "Endpoint security",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "in_progress"
+      },
+      {
+        "id": "340dffc7-71f4-4e1b-a091-7e4ca4a0a011",
+        "type": "arch.integration",
+        "parentId": "c85cabf3-e6e5-4a78-9c1a-f5a392f11eb8",
+        "position": {
+          "x": 500,
+          "y": 150
+        },
+        "size": {
+          "width": 180,
+          "height": 72
+        },
+        "label": "Partner integration",
+        "style": {
+          "fill": "#FFFFFF",
+          "stroke": "#64748B",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "pending"
+      }
+    ],
+    "edges": [
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "bc5dfde0-7482-4481-8444-4b790a087f68",
+        "source": {
+          "nodeId": "06c89ff5-c333-4ef8-be8b-ac68d6230462",
+          "handleId": "left"
+        },
+        "target": {
+          "nodeId": "b709a6c0-57ff-4e2f-a3d0-9d5cae04f0bf",
+          "handleId": "top"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "98f1e5c7-08e2-419a-907b-3ddd60729e87",
+        "source": {
+          "nodeId": "b709a6c0-57ff-4e2f-a3d0-9d5cae04f0bf",
+          "handleId": "right"
+        },
+        "target": {
+          "nodeId": "2e5f617d-4500-4e8d-8ed2-1d120f12b251",
+          "handleId": "left"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "06801719-e010-4ac4-8778-2cc1c6f928f6",
+        "source": {
+          "nodeId": "2e5f617d-4500-4e8d-8ed2-1d120f12b251",
+          "handleId": "right"
+        },
+        "target": {
+          "nodeId": "4cee0324-09ba-453e-a202-4a4ba1a9fa90",
+          "handleId": "left"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "89c7b790-34dd-423f-add9-fc91821f27d2",
+        "source": {
+          "nodeId": "4cee0324-09ba-453e-a202-4a4ba1a9fa90",
+          "handleId": "right"
+        },
+        "target": {
+          "nodeId": "c1fa7461-79dd-4d8c-be50-d7bffc3565ab",
+          "handleId": "left"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "aa59a945-e64e-4a45-b5e2-306673fa2e57",
+        "source": {
+          "nodeId": "06c89ff5-c333-4ef8-be8b-ac68d6230462",
+          "handleId": "bottom"
+        },
+        "target": {
+          "nodeId": "ccb8416d-1234-45b3-ac2c-712dfdeabed8",
+          "handleId": "left"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "b131d8ea-3e2c-416e-aba5-91a32f7d349b",
+        "source": {
+          "nodeId": "ccb8416d-1234-45b3-ac2c-712dfdeabed8",
+          "handleId": "right"
+        },
+        "target": {
+          "nodeId": "98b8f1aa-7630-484a-ab7e-6bce75b90094",
+          "handleId": "left"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "94a37e52-97cb-4c94-9c94-16b6ea05f522",
+        "source": {
+          "nodeId": "98b8f1aa-7630-484a-ab7e-6bce75b90094",
+          "handleId": "right"
+        },
+        "target": {
+          "nodeId": "0b2d58f6-c02b-4e2e-a859-6e4daa807111",
+          "handleId": "left"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "5828d573-fe37-4302-ab2b-734768e287ac",
+        "source": {
+          "nodeId": "0b2d58f6-c02b-4e2e-a859-6e4daa807111",
+          "handleId": "right"
+        },
+        "target": {
+          "nodeId": "681340c9-51b3-45da-85a7-8e5e42cd03ec",
+          "handleId": "left"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "b6ed8d2a-a2f6-4586-ae21-e728bc3f2954",
+        "source": {
+          "nodeId": "4cee0324-09ba-453e-a202-4a4ba1a9fa90",
+          "handleId": "bottom"
+        },
+        "target": {
+          "nodeId": "0b2d58f6-c02b-4e2e-a859-6e4daa807111",
+          "handleId": "top"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "f9028371-b7e6-446c-8ff2-111f1d5c4bd6",
+        "source": {
+          "nodeId": "0b2d58f6-c02b-4e2e-a859-6e4daa807111",
+          "handleId": "bottom"
+        },
+        "target": {
+          "nodeId": "340dffc7-71f4-4e1b-a091-7e4ca4a0a011",
+          "handleId": "top"
+        }
+      }
+    ],
+    "groups": [
+      {
+        "id": "d922327f-6902-45b8-ba46-c8c8c50b9423",
+        "type": "general.boundary",
+        "parentId": null,
+        "position": {
+          "x": 0,
+          "y": 120
+        },
+        "size": {
+          "width": 960,
+          "height": 580
+        },
+        "title": "Example organization systems",
+        "style": {
+          "fill": "#E0E7FF",
+          "stroke": "#6366F1",
+          "strokeWidth": 1,
+          "strokeStyle": "dashed",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "left"
+          },
+          "fillOpacity": 0.3
+        }
+      },
+      {
+        "id": "8e4bbd50-223b-4a49-94b4-a8cb4cfd5c12",
+        "type": "general.boundary",
+        "parentId": "d922327f-6902-45b8-ba46-c8c8c50b9423",
+        "position": {
+          "x": 20,
+          "y": 60
+        },
+        "size": {
+          "width": 920,
+          "height": 220
+        },
+        "title": "Public application",
+        "style": {
+          "fill": "#E0E7FF",
+          "stroke": "#6366F1",
+          "strokeWidth": 1,
+          "strokeStyle": "dashed",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "left"
+          },
+          "fillOpacity": 0.3
+        }
+      },
+      {
+        "id": "c85cabf3-e6e5-4a78-9c1a-f5a392f11eb8",
+        "type": "general.boundary",
+        "parentId": "d922327f-6902-45b8-ba46-c8c8c50b9423",
+        "position": {
+          "x": 20,
+          "y": 300
+        },
+        "size": {
+          "width": 920,
+          "height": 240
+        },
+        "title": "Corporate services",
+        "style": {
+          "fill": "#E0E7FF",
+          "stroke": "#6366F1",
+          "strokeWidth": 1,
+          "strokeStyle": "dashed",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "left"
+          },
+          "fillOpacity": 0.3
+        }
+      }
+    ],
+    "settings": {
+      "gridVisible": true,
+      "snapToGrid": true,
+      "gridSpacing": 20
+    }
+  },
+  "viewport": null
+}

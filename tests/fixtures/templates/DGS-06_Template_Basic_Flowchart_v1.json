@@ -1,0 +1,321 @@
+{
+  "document": {
+    "schemaVersion": 1,
+    "id": "62a8437d-59a5-4f17-8ba9-9301735ee0f3",
+    "title": "Basic process flowchart",
+    "category": "flowchart",
+    "createdAt": "2026-11-27T00:00:00.000Z",
+    "updatedAt": "2026-11-27T00:00:00.000Z",
+    "nodes": [
+      {
+        "id": "0d727d8c-e43e-44b2-b76c-29da8c1a4647",
+        "type": "flow.terminator",
+        "parentId": null,
+        "position": {
+          "x": 280,
+          "y": 0
+        },
+        "size": {
+          "width": 140,
+          "height": 56
+        },
+        "label": "Start",
+        "style": {
+          "fill": "#DCFCE7",
+          "stroke": "#15803D",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "not_specified"
+      },
+      {
+        "id": "a2f1839c-baa0-4a7c-84c7-bf40e7d5cf08",
+        "type": "flow.process",
+        "parentId": null,
+        "position": {
+          "x": 270,
+          "y": 100
+        },
+        "size": {
+          "width": 160,
+          "height": 64
+        },
+        "label": "Review request",
+        "style": {
+          "fill": "#DBEAFE",
+          "stroke": "#2563EB",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "not_specified"
+      },
+      {
+        "id": "165739cc-913f-4569-904e-66e81f38558f",
+        "type": "flow.decision",
+        "parentId": null,
+        "position": {
+          "x": 270,
+          "y": 220
+        },
+        "size": {
+          "width": 160,
+          "height": 112
+        },
+        "label": "Approved?",
+        "style": {
+          "fill": "#FEF3C7",
+          "stroke": "#B45309",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "not_specified"
+      },
+      {
+        "id": "1d749863-d26d-4358-9f14-5b404b202007",
+        "type": "flow.process",
+        "parentId": null,
+        "position": {
+          "x": 80,
+          "y": 400
+        },
+        "size": {
+          "width": 160,
+          "height": 64
+        },
+        "label": "Notify approval",
+        "style": {
+          "fill": "#DBEAFE",
+          "stroke": "#2563EB",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "not_specified"
+      },
+      {
+        "id": "8efa49e5-4212-4db0-9755-9452a83fc9af",
+        "type": "flow.process",
+        "parentId": null,
+        "position": {
+          "x": 460,
+          "y": 400
+        },
+        "size": {
+          "width": 160,
+          "height": 64
+        },
+        "label": "Request changes",
+        "style": {
+          "fill": "#DBEAFE",
+          "stroke": "#2563EB",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "not_specified"
+      },
+      {
+        "id": "48754349-a1b1-4578-b6dd-59fdbfb0ee67",
+        "type": "flow.terminator",
+        "parentId": null,
+        "position": {
+          "x": 280,
+          "y": 560
+        },
+        "size": {
+          "width": 140,
+          "height": 56
+        },
+        "label": "End",
+        "style": {
+          "fill": "#DCFCE7",
+          "stroke": "#15803D",
+          "strokeWidth": 1,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 14,
+            "align": "center"
+          }
+        },
+        "status": "not_specified"
+      }
+    ],
+    "edges": [
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "60e6c1f2-94f2-418d-85d0-722f0d1baecd",
+        "source": {
+          "nodeId": "0d727d8c-e43e-44b2-b76c-29da8c1a4647",
+          "handleId": "bottom"
+        },
+        "target": {
+          "nodeId": "a2f1839c-baa0-4a7c-84c7-bf40e7d5cf08",
+          "handleId": "top"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "8c2ab384-5186-4c44-b0fc-e80761a1f420",
+        "source": {
+          "nodeId": "a2f1839c-baa0-4a7c-84c7-bf40e7d5cf08",
+          "handleId": "bottom"
+        },
+        "target": {
+          "nodeId": "165739cc-913f-4569-904e-66e81f38558f",
+          "handleId": "top"
+        }
+      },
+      {
+        "label": "Yes",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "491d9924-0ce8-4b08-b00e-41ee425b82f3",
+        "source": {
+          "nodeId": "165739cc-913f-4569-904e-66e81f38558f",
+          "handleId": "left"
+        },
+        "target": {
+          "nodeId": "1d749863-d26d-4358-9f14-5b404b202007",
+          "handleId": "top"
+        }
+      },
+      {
+        "label": "No",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "097143f4-1485-418d-b4eb-c359e0bd4edd",
+        "source": {
+          "nodeId": "165739cc-913f-4569-904e-66e81f38558f",
+          "handleId": "right"
+        },
+        "target": {
+          "nodeId": "8efa49e5-4212-4db0-9755-9452a83fc9af",
+          "handleId": "top"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "9738e862-bf21-4e0c-b9c0-6214f08f9402",
+        "source": {
+          "nodeId": "1d749863-d26d-4358-9f14-5b404b202007",
+          "handleId": "bottom"
+        },
+        "target": {
+          "nodeId": "48754349-a1b1-4578-b6dd-59fdbfb0ee67",
+          "handleId": "left"
+        }
+      },
+      {
+        "label": "",
+        "route": "orthogonal",
+        "arrows": "forward",
+        "style": {
+          "stroke": "#64748B",
+          "strokeWidth": 2,
+          "strokeStyle": "solid",
+          "text": {
+            "color": "#0F172A",
+            "fontSize": 12,
+            "align": "center"
+          }
+        },
+        "id": "a9b56af7-1166-4ab1-8dd6-3e6e2b61421d",
+        "source": {
+          "nodeId": "8efa49e5-4212-4db0-9755-9452a83fc9af",
+          "handleId": "bottom"
+        },
+        "target": {
+          "nodeId": "48754349-a1b1-4578-b6dd-59fdbfb0ee67",
+          "handleId": "right"
+        }
+      }
+    ],
+    "groups": [],
+    "settings": {
+      "gridVisible": true,
+      "snapToGrid": true,
+      "gridSpacing": 20
+    }
+  },
+  "viewport": null
+}

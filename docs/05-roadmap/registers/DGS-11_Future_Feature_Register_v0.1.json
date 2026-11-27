@@ -1,0 +1,491 @@
+{
+  "registerVersion": 1,
+  "document": "DGS-11",
+  "version": "0.1",
+  "status": "draft",
+  "baselineRelease": "V0.2",
+  "note": "Future backlog only; no modification to DGS-09 tasks or DGS-10 scenarios. No feature scheduled or implemented.",
+  "releaseBands": [
+    {
+      "id": "V0.3",
+      "title": "Professional editing",
+      "entryConditions": "V0.2 release evidence and profiling; independent feature approval."
+    },
+    {
+      "id": "V0.4",
+      "title": "Intelligent diagramming and interoperability",
+      "entryConditions": "Stable canonical graph and version dispatcher; V0.3 baseline or explicitly compatible subset."
+    },
+    {
+      "id": "V0.5",
+      "title": "Connected workspace",
+      "entryConditions": "Approved identity/data residency/security design, operational owner and cost budget."
+    },
+    {
+      "id": "V0.6",
+      "title": "Collaborative platform",
+      "entryConditions": "Stable authorized repository and sync; invariant-safe concurrency prototype."
+    },
+    {
+      "id": "V1.0",
+      "title": "Commercial platform",
+      "entryConditions": "Proven adoption, legal/operational readiness and separately approved billing."
+    },
+    {
+      "id": "Beyond V1.0",
+      "title": "Exploratory expansion",
+      "entryConditions": "Evidence of demand and dedicated feasibility review."
+    }
+  ],
+  "features": [
+    {
+      "id": "FF-01",
+      "earliestRelease": "V0.3",
+      "title": "Mini-map",
+      "priority": "Should",
+      "source": "FR-16",
+      "dependsOn": [],
+      "scope": "Viewport and graph overview with click-to-navigate; no content mutation.",
+      "candidateAcceptance": "Viewport navigation preserves graph and history; AC-FR-16-01 passes.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-02",
+      "earliestRelease": "V0.3",
+      "title": "Alignment and distribution",
+      "priority": "Should",
+      "source": "FR-16",
+      "dependsOn": [],
+      "scope": "Align eligible siblings by edge/center; distribute at least three objects; reversible world-coordinate operation.",
+      "candidateAcceptance": "Mixed-parent constraints, graph validity and undo; AC-FR-16-02 passes.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-03",
+      "earliestRelease": "V0.3",
+      "title": "Additional named style presets",
+      "priority": "Should",
+      "source": "FR-16",
+      "dependsOn": [],
+      "scope": "Apply compatible explicit properties only; preserve semantics and status.",
+      "candidateAcceptance": "One atomic transaction, unaffected fields retained; AC-FR-16-03 passes.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-04",
+      "earliestRelease": "V0.3",
+      "title": "Automatic arrangement",
+      "priority": "Should",
+      "source": "FR-17",
+      "dependsOn": [],
+      "scope": "Explicit layout preview; evaluate ELK or alternatives; support only verified graph/group types.",
+      "candidateAcceptance": "No graph metadata loss, valid nesting, reversible layout; all FR-17 cases pass; license review.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-05",
+      "earliestRelease": "V0.3",
+      "title": "Additional starter templates",
+      "priority": "Should",
+      "source": "FR-18",
+      "dependsOn": [],
+      "scope": "Software architecture, automation workflow, org chart and mind map starter templates.",
+      "candidateAcceptance": "Independent valid instances, save/reopen/export; all FR-18 cases pass.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-06",
+      "earliestRelease": "V0.3",
+      "title": "Advanced connector editing",
+      "priority": "Future",
+      "source": "DGS-02 FR-07",
+      "dependsOn": [],
+      "scope": "Optional waypoints, endpoint-aware obstacle routing, label positioning; no mandatory auto-reroute on every edit.",
+      "candidateAcceptance": "Versioned geometry; path determinism and bounded failure; editor/export parity.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-07",
+      "earliestRelease": "V0.3",
+      "title": "Extended metadata, search and reusable styles",
+      "priority": "Could",
+      "source": "FR-19",
+      "dependsOn": [
+        "FF-03"
+      ],
+      "scope": "Owner/provider/environment/notes; library search; user style presets; explicit portable metadata extension.",
+      "candidateAcceptance": "Schema and migration approval, inert text, field preservation and applicable FR-19 cases.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-08",
+      "earliestRelease": "V0.3",
+      "title": "Professional notation and icon packs",
+      "priority": "Future",
+      "source": "DGS-02 FR-04",
+      "dependsOn": [],
+      "scope": "Optional swimlanes, architecture packs and UML/BPMN-inspired shapes; no formal notation compliance claim.",
+      "candidateAcceptance": "Approved stable IDs, upstream licenses, render/anchor/export tests and no remote asset dependency.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-09",
+      "earliestRelease": "V0.3",
+      "title": "Presentation output and themes",
+      "priority": "Future",
+      "source": "DGS-04; DGS-08",
+      "dependsOn": [],
+      "scope": "Optional transparent output, design themes and presentation view; evaluate dark UI separately from diagram style.",
+      "candidateAcceptance": "No hidden content or contrast regression; portable appearance and independent viewer tests.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-10",
+      "earliestRelease": "V0.4",
+      "title": "Mermaid import and export",
+      "priority": "Future",
+      "source": "DGS-08",
+      "dependsOn": [],
+      "scope": "Support explicitly documented subset, mapping nodes/edges/styles; loss report for unsupported syntax.",
+      "candidateAcceptance": "Untrusted syntax inert; supported roundtrip semantic equivalence; explicit unsupported-feature handling.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-11",
+      "earliestRelease": "V0.4",
+      "title": "PDF export",
+      "priority": "Future",
+      "source": "DGS-08",
+      "dependsOn": [],
+      "scope": "Single-page fit or paginated output with explicit paper sizes, margins and readable scaling.",
+      "candidateAcceptance": "Viewer validation, vector fidelity where supported, no crop, page/font license review.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-12",
+      "earliestRelease": "V0.4",
+      "title": "AI text-to-diagram",
+      "priority": "Future",
+      "source": "DGS-03; DGS-05",
+      "dependsOn": [],
+      "scope": "Natural-language request produces untrusted structured draft graph, review before commit.",
+      "candidateAcceptance": "Invalid/refused/truncated output safe; model never writes directly; user-reviewed draft and cost limits.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-13",
+      "earliestRelease": "V0.4",
+      "title": "AI document-to-diagram",
+      "priority": "Future",
+      "source": "DGS-01",
+      "dependsOn": [
+        "FF-12"
+      ],
+      "scope": "Selected text or locally extracted supported document content, evidence links and unresolved assumptions.",
+      "candidateAcceptance": "Explicit upload/consent, no hidden transfers, extraction fidelity and prompt-injection regression tests.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-14",
+      "earliestRelease": "V0.4",
+      "title": "AI code-to-architecture",
+      "priority": "Future",
+      "source": "DGS-01",
+      "dependsOn": [
+        "FF-12"
+      ],
+      "scope": "Read selected source or repository snapshot, infer components and dependencies; no code execution.",
+      "candidateAcceptance": "Separate observed vs inferred links, scope/secret filtering, provenance and review before applying.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-15",
+      "earliestRelease": "V0.4",
+      "title": "AI-assisted editing",
+      "priority": "Future",
+      "source": "DGS-05",
+      "dependsOn": [
+        "FF-12"
+      ],
+      "scope": "Propose command batches or graph diffs for selected content; preview impact and ask user approval.",
+      "candidateAcceptance": "Validate against current base generation; stale proposal blocked; atomic undo and no unapproved mutation.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-16",
+      "earliestRelease": "V0.4",
+      "title": "Draw.io interoperability",
+      "priority": "Future",
+      "source": "DGS-08",
+      "dependsOn": [],
+      "scope": "Feasibility review of limited mxGraph mappings; explicit unsupported feature reports.",
+      "candidateAcceptance": "Bounded XML parser without external entities, no scripts/remote assets, supported roundtrip tests.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-17",
+      "earliestRelease": "V0.5",
+      "title": "Account identity and authorization",
+      "priority": "Future",
+      "source": "DGS-03",
+      "dependsOn": [],
+      "scope": "Optional sign-in; server-side authorization; secure account lifecycle and session handling.",
+      "candidateAcceptance": "Ownership enforced per request; session/CSRF tests as applicable; local mode remains usable.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-18",
+      "earliestRelease": "V0.5",
+      "title": "Cloud document repository",
+      "priority": "Future",
+      "source": "DGS-03",
+      "dependsOn": [
+        "FF-17"
+      ],
+      "scope": "Server-side validated snapshots, revision checks, owner access and export/delete controls.",
+      "candidateAcceptance": "Cross-account isolation, atomic revision writes, backup restore and operational monitoring.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-19",
+      "earliestRelease": "V0.5",
+      "title": "Offline-aware synchronization",
+      "priority": "Future",
+      "source": "DGS-03",
+      "dependsOn": [
+        "FF-18"
+      ],
+      "scope": "Explicit opt-in upload, durable outbox, retries, conflicts and deletion semantics; no automatic merge initially.",
+      "candidateAcceptance": "Offline/reconnect/race tests, no resurrection or lost work, account/origin isolation.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-20",
+      "earliestRelease": "V0.5",
+      "title": "Document version history and recovery",
+      "priority": "Future",
+      "source": "DGS-08",
+      "dependsOn": [
+        "FF-18"
+      ],
+      "scope": "Immutable revisions or checkpoints; restore creates new revision; retention policy and export.",
+      "candidateAcceptance": "Restore drill, retention/deletion behavior, permissions and revision integrity.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-21",
+      "earliestRelease": "V0.5",
+      "title": "Offline installation and mobile viewing",
+      "priority": "Future",
+      "source": "DGS-03; DGS-04",
+      "dependsOn": [],
+      "scope": "Separate evaluation of service-worker shell, update handling and read-only responsive viewing.",
+      "candidateAcceptance": "Offline cold-load proof if advertised; update compatibility and no misleading mobile editing promise.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-22",
+      "earliestRelease": "V0.6",
+      "title": "Team workspaces and permissions",
+      "priority": "Future",
+      "source": "DGS-01",
+      "dependsOn": [
+        "FF-17",
+        "FF-18"
+      ],
+      "scope": "Membership/invitations, owner/editor/viewer roles and controlled sharing.",
+      "candidateAcceptance": "Authorization matrix, revocation, invite expiry and cross-tenant negative tests.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-23",
+      "earliestRelease": "V0.6",
+      "title": "Real-time collaborative editing",
+      "priority": "Future",
+      "source": "DGS-03",
+      "dependsOn": [
+        "FF-19",
+        "FF-22"
+      ],
+      "scope": "Evaluate CRDT vs server-authoritative operations; invariant-preserving concurrent transactions.",
+      "candidateAcceptance": "Convergence under network faults plus no invalid graph, per-user undo, reconnect/revocation tests.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-24",
+      "earliestRelease": "V0.6",
+      "title": "Comments, review and presence",
+      "priority": "Future",
+      "source": "DGS-01",
+      "dependsOn": [
+        "FF-22"
+      ],
+      "scope": "Document or node-linked comments, resolved threads and ephemeral presence.",
+      "candidateAcceptance": "Permission checks, anchor deletion behavior, bounded presence and accessible review.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-25",
+      "earliestRelease": "V1.0",
+      "title": "Subscriptions and entitlements",
+      "priority": "Future",
+      "source": "DGS-01",
+      "dependsOn": [
+        "FF-22"
+      ],
+      "scope": "Provider-based billing, server-side entitlements, idempotent webhook processing and cancellation.",
+      "candidateAcceptance": "Sandbox billing lifecycle and permission tests; export/recovery after plan change; owner approval.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-26",
+      "earliestRelease": "V1.0",
+      "title": "Organization governance and audit",
+      "priority": "Future",
+      "source": "DGS-01",
+      "dependsOn": [
+        "FF-22"
+      ],
+      "scope": "Workspace administration, content-safe audit records, retention and account deletion; SSO evaluation.",
+      "candidateAcceptance": "Isolation, revocation and audit integrity; jurisdiction/privacy review before launch.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-27",
+      "earliestRelease": "V1.0",
+      "title": "Production operations and scaling",
+      "priority": "Future",
+      "source": "DGS-03",
+      "dependsOn": [
+        "FF-18",
+        "FF-19"
+      ],
+      "scope": "Defined SLOs, load tests, backups, restore drills, alerting and incident response.",
+      "candidateAcceptance": "Measured load capacity and approved RPO/RTO; tested rollback, restore, privacy and cost guardrails.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    },
+    {
+      "id": "FF-28",
+      "earliestRelease": "Beyond V1.0",
+      "title": "Advanced whiteboard and mobile editing",
+      "priority": "Future",
+      "source": "DGS-01; DGS-04",
+      "dependsOn": [],
+      "scope": "Freehand, image embedding, rotation, touch/stylus, richer canvas objects; evaluate renderer fit before commitment.",
+      "candidateAcceptance": "Separate product scope, interaction/security tests, migrations and export compatibility.",
+      "status": "deferred",
+      "verificationStatus": "not_run",
+      "approval": null,
+      "scheduledTaskIds": [],
+      "evidence": []
+    }
+  ]
+}

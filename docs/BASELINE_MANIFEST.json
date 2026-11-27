@@ -1,0 +1,125 @@
+{
+  "description": "Immutable source baseline at pack assembly; registers may subsequently be updated only as tracked working copies after baseline commit.",
+  "files": [
+    {
+      "originalFilename": "DGS-01_Product_Requirements_Document_v0.1.md",
+      "path": "docs/01-product/DGS-01_Product_Requirements_Document_v0.1.md",
+      "sha256": "fa621b337ee644004ec59f3eae96bac2f82b36a2aff1df5bfa73f0757b43d4d3",
+      "bytes": 13548
+    },
+    {
+      "originalFilename": "DGS-02_MVP_Scope_and_Functional_Requirements_v0.1.md",
+      "path": "docs/01-product/DGS-02_MVP_Scope_and_Functional_Requirements_v0.1.md",
+      "sha256": "d8bb041804acf0960551e535bc50e9dcd96f15141aac58d99ac953ddf70b8df9",
+      "bytes": 43494
+    },
+    {
+      "originalFilename": "DGS-03_System_Architecture_and_Technology_Stack_v0.1.md",
+      "path": "docs/02-architecture/DGS-03_System_Architecture_and_Technology_Stack_v0.1.md",
+      "sha256": "364f5c53919c9e844e7634b5edc36b0b0d0f9263da7bdc425946b6dd58ab15a7",
+      "bytes": 48072
+    },
+    {
+      "originalFilename": "DGS-04_UI_UX_Design_and_Workspace_Specification_v0.1.md",
+      "path": "docs/03-design/DGS-04_UI_UX_Design_and_Workspace_Specification_v0.1.md",
+      "sha256": "3a36616aea5ca99c16fde8422398798ba9cd9217cd8967b9668c1dd4a704fd8a",
+      "bytes": 53594
+    },
+    {
+      "originalFilename": "DGS-05_Diagram_Data_Model_and_Schema_v0.1.md",
+      "path": "docs/02-architecture/DGS-05_Diagram_Data_Model_and_Schema_v0.1.md",
+      "sha256": "165e208cd1901589d517073927f692cbbb4b7e92e1eb643204408d3f80c6dc0e",
+      "bytes": 42707
+    },
+    {
+      "originalFilename": "DGS-06_Shape_and_Component_Library_Specification_v0.1.md",
+      "path": "docs/03-design/DGS-06_Shape_and_Component_Library_Specification_v0.1.md",
+      "sha256": "5fe55d38c5db077a9b8ec1091dde0eacd91f7a6fc5b040323747e85d42efdcb4",
+      "bytes": 42579
+    },
+    {
+      "originalFilename": "DGS-07_Canvas_and_Interaction_Specification_v0.1.md",
+      "path": "docs/03-design/DGS-07_Canvas_and_Interaction_Specification_v0.1.md",
+      "sha256": "81a8c63bf78a500c34bd3f3316c3816d7dac546d82f9cba0efbf238e4ac6a760",
+      "bytes": 48295
+    },
+    {
+      "originalFilename": "DGS-08_Document_Persistence_and_Export_Specification_v0.1.md",
+      "path": "docs/04-development/DGS-08_Document_Persistence_and_Export_Specification_v0.1.md",
+      "sha256": "1f76c5d6e1413a797d36d2fc2d4b17632becb0fa18b3136e43d0da2041ff59d3",
+      "bytes": 45947
+    },
+    {
+      "originalFilename": "DGS-09_Development_Roadmap_and_Implementation_Tasks_v0.1.md",
+      "path": "docs/04-development/DGS-09_Development_Roadmap_and_Implementation_Tasks_v0.1.md",
+      "sha256": "0a9e3164ba49aae33d3de04ba21e5d4b6ae703c65cc8d32e34013e4e1c700cd7",
+      "bytes": 47274
+    },
+    {
+      "originalFilename": "DGS-10_Testing_and_Release_Acceptance_Criteria_v0.1.md",
+      "path": "docs/04-development/DGS-10_Testing_and_Release_Acceptance_Criteria_v0.1.md",
+      "sha256": "6b0744d39b62943b508c8bc0507125c0d148aef9e75e947d9d28cec7aae1b120",
+      "bytes": 37910
+    },
+    {
+      "originalFilename": "DGS-11_Future_Features_and_Scalability_Plan_v0.1.md",
+      "path": "docs/05-roadmap/DGS-11_Future_Features_and_Scalability_Plan_v0.1.md",
+      "sha256": "f850f148083525c29a46668d4e8054382035c6cc4541604a8d3be30ece4c62fb",
+      "bytes": 48589
+    },
+    {
+      "originalFilename": "DGS-05_Portable_Diagram_Schema_v1.json",
+      "path": "docs/02-architecture/schemas/DGS-05_Portable_Diagram_Schema_v1.json",
+      "sha256": "1bfece19259c3a53a8b76d53ff953cecda9764439b4004e488c06afc38242590",
+      "bytes": 11437
+    },
+    {
+      "originalFilename": "DGS-05_Example_Architecture_v1.json",
+      "path": "tests/fixtures/schema/DGS-05_Example_Architecture_v1.json",
+      "sha256": "7ff3fefbef74d13b20f79cee5d370ffdbdee75d9cd663ce46135b1ffbf0a9fb1",
+      "bytes": 14668
+    },
+    {
+      "originalFilename": "DGS-06_Component_Registry_v1.json",
+      "path": "docs/03-design/references/DGS-06_Component_Registry_v1.json",
+      "sha256": "e60322d81114def1e5e2c80ca268eb2da909e276442a70de9c737cf1990847db",
+      "bytes": 29921
+    },
+    {
+      "originalFilename": "DGS-06_Template_Basic_Flowchart_v1.json",
+      "path": "tests/fixtures/templates/DGS-06_Template_Basic_Flowchart_v1.json",
+      "sha256": "b6af2fc24ccf00236f06e758f8be1efa27df8d19ac5499830069c3b905911fb3",
+      "bytes": 7967
+    },
+    {
+      "originalFilename": "DGS-06_Template_IT_Architecture_v1.json",
+      "path": "tests/fixtures/templates/DGS-06_Template_IT_Architecture_v1.json",
+      "sha256": "db1915e0c0287e89e1ec52e5568625d912aac818ca077168fbe8f00470016e10",
+      "bytes": 15216
+    },
+    {
+      "originalFilename": "DGS-09_Implementation_Task_Register_v0.1.json",
+      "path": "docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json",
+      "sha256": "837d035fb5786bcb247576f412c0a40c2838589d23472899debc67bbe87e32da",
+      "bytes": 69858
+    },
+    {
+      "originalFilename": "DGS-10_Acceptance_Test_Register_v0.1.json",
+      "path": "docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json",
+      "sha256": "1c41a963a1b31a9bf34075d05530baf0748f698c67db7782ee688ed39e19e708",
+      "bytes": 160520
+    },
+    {
+      "originalFilename": "DGS-10_Reference_Benchmark_100N_150E_v1.json",
+      "path": "tests/fixtures/benchmark/DGS-10_Reference_Benchmark_100N_150E_v1.json",
+      "sha256": "391b9b6aea6d1e497cbbaeb29f40a5e74eaa3535e6a0f4cc5fe2e00682db2ab9",
+      "bytes": 161764
+    },
+    {
+      "originalFilename": "DGS-11_Future_Feature_Register_v0.1.json",
+      "path": "docs/05-roadmap/registers/DGS-11_Future_Feature_Register_v0.1.json",
+      "sha256": "9c3ed5e4d87b2e587456f6145ee28b2ab8e8976f1e761e3e02dbd359dc2f3fd8",
+      "bytes": 17710
+    }
+  ]
+}

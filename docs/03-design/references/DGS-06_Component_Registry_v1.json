@@ -1,0 +1,1365 @@
+{
+  "registryVersion": 1,
+  "diagramSchemaVersion": 1,
+  "description": "Trusted build-time registry reference; not a portable diagram or runtime implementation.",
+  "components": [
+    {
+      "type": "flow.terminator",
+      "entity": "node",
+      "displayName": "Start / End",
+      "defaultLabel": "Start",
+      "defaultSize": {
+        "width": 140,
+        "height": 56
+      },
+      "minSize": {
+        "width": 96,
+        "height": 40
+      },
+      "defaultStyle": {
+        "fill": "#DCFCE7",
+        "stroke": "#15803D",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "capsule",
+      "iconKey": null,
+      "textRegionKey": "capsule",
+      "aspectRatio": null
+    },
+    {
+      "type": "flow.process",
+      "entity": "node",
+      "displayName": "Process",
+      "defaultLabel": "Process",
+      "defaultSize": {
+        "width": 160,
+        "height": 64
+      },
+      "minSize": {
+        "width": 96,
+        "height": 44
+      },
+      "defaultStyle": {
+        "fill": "#DBEAFE",
+        "stroke": "#2563EB",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "rect",
+      "iconKey": null,
+      "textRegionKey": "rect",
+      "aspectRatio": null
+    },
+    {
+      "type": "flow.decision",
+      "entity": "node",
+      "displayName": "Decision",
+      "defaultLabel": "Decision?",
+      "defaultSize": {
+        "width": 160,
+        "height": 112
+      },
+      "minSize": {
+        "width": 112,
+        "height": 80
+      },
+      "defaultStyle": {
+        "fill": "#FEF3C7",
+        "stroke": "#B45309",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "diamond",
+      "iconKey": null,
+      "textRegionKey": "diamond",
+      "aspectRatio": null
+    },
+    {
+      "type": "flow.input_output",
+      "entity": "node",
+      "displayName": "Input / Output",
+      "defaultLabel": "Input / Output",
+      "defaultSize": {
+        "width": 180,
+        "height": 72
+      },
+      "minSize": {
+        "width": 120,
+        "height": 52
+      },
+      "defaultStyle": {
+        "fill": "#E0E7FF",
+        "stroke": "#4F46E5",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "parallelogram",
+      "iconKey": null,
+      "textRegionKey": "parallelogram",
+      "aspectRatio": null
+    },
+    {
+      "type": "flow.document",
+      "entity": "node",
+      "displayName": "Document",
+      "defaultLabel": "Document",
+      "defaultSize": {
+        "width": 160,
+        "height": 80
+      },
+      "minSize": {
+        "width": 112,
+        "height": 60
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "document",
+      "iconKey": null,
+      "textRegionKey": "document",
+      "aspectRatio": null
+    },
+    {
+      "type": "flow.data_store",
+      "entity": "node",
+      "displayName": "Data store",
+      "defaultLabel": "Data store",
+      "defaultSize": {
+        "width": 160,
+        "height": 88
+      },
+      "minSize": {
+        "width": 112,
+        "height": 64
+      },
+      "defaultStyle": {
+        "fill": "#DCFCE7",
+        "stroke": "#15803D",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "cylinder",
+      "iconKey": null,
+      "textRegionKey": "cylinder",
+      "aspectRatio": null
+    },
+    {
+      "type": "flow.subprocess",
+      "entity": "node",
+      "displayName": "Subprocess",
+      "defaultLabel": "Subprocess",
+      "defaultSize": {
+        "width": 180,
+        "height": 64
+      },
+      "minSize": {
+        "width": 120,
+        "height": 44
+      },
+      "defaultStyle": {
+        "fill": "#DBEAFE",
+        "stroke": "#2563EB",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "subprocess",
+      "iconKey": null,
+      "textRegionKey": "subprocess",
+      "aspectRatio": null
+    },
+    {
+      "type": "flow.on_page_connector",
+      "entity": "node",
+      "displayName": "On-page connector",
+      "defaultLabel": "A",
+      "defaultSize": {
+        "width": 56,
+        "height": 56
+      },
+      "minSize": {
+        "width": 40,
+        "height": 40
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 12,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "ellipse",
+      "iconKey": null,
+      "textRegionKey": "ellipse",
+      "aspectRatio": 1
+    },
+    {
+      "type": "arch.user",
+      "entity": "node",
+      "displayName": "User",
+      "defaultLabel": "User",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "user-round",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.device",
+      "entity": "node",
+      "displayName": "Device",
+      "defaultLabel": "Device",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "monitor",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.website",
+      "entity": "node",
+      "displayName": "Website",
+      "defaultLabel": "Website",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "globe",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.application",
+      "entity": "node",
+      "displayName": "Application",
+      "defaultLabel": "Application",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "app-window",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.server",
+      "entity": "node",
+      "displayName": "Server",
+      "defaultLabel": "Server",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "server",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.database",
+      "entity": "node",
+      "displayName": "Database",
+      "defaultLabel": "Database",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "database",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.cloud",
+      "entity": "node",
+      "displayName": "Cloud",
+      "defaultLabel": "Cloud",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "cloud",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.network",
+      "entity": "node",
+      "displayName": "Network",
+      "defaultLabel": "Network",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "network",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.security",
+      "entity": "node",
+      "displayName": "Security",
+      "defaultLabel": "Security",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "shield",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.identity",
+      "entity": "node",
+      "displayName": "Identity / Access",
+      "defaultLabel": "Identity / Access",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "key-round",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.email",
+      "entity": "node",
+      "displayName": "Email",
+      "defaultLabel": "Email",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "mail",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.storage",
+      "entity": "node",
+      "displayName": "Storage",
+      "defaultLabel": "Storage",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "hard-drive",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.api",
+      "entity": "node",
+      "displayName": "API",
+      "defaultLabel": "API",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "cable",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "arch.integration",
+      "entity": "node",
+      "displayName": "Integration",
+      "defaultLabel": "Integration",
+      "defaultSize": {
+        "width": 180,
+        "height": 80
+      },
+      "minSize": {
+        "width": 152,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": true,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "arch_card",
+      "iconKey": "boxes",
+      "textRegionKey": "arch_card",
+      "aspectRatio": null
+    },
+    {
+      "type": "general.rectangle",
+      "entity": "node",
+      "displayName": "Rectangle",
+      "defaultLabel": "Rectangle",
+      "defaultSize": {
+        "width": 160,
+        "height": 64
+      },
+      "minSize": {
+        "width": 64,
+        "height": 40
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "rect",
+      "iconKey": null,
+      "textRegionKey": "rect",
+      "aspectRatio": null
+    },
+    {
+      "type": "general.rounded_rectangle",
+      "entity": "node",
+      "displayName": "Rounded rectangle",
+      "defaultLabel": "Rounded rectangle",
+      "defaultSize": {
+        "width": 160,
+        "height": 64
+      },
+      "minSize": {
+        "width": 64,
+        "height": 40
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "rounded_rect",
+      "iconKey": null,
+      "textRegionKey": "rect",
+      "aspectRatio": null
+    },
+    {
+      "type": "general.ellipse",
+      "entity": "node",
+      "displayName": "Ellipse",
+      "defaultLabel": "Ellipse",
+      "defaultSize": {
+        "width": 160,
+        "height": 88
+      },
+      "minSize": {
+        "width": 80,
+        "height": 56
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "ellipse",
+      "iconKey": null,
+      "textRegionKey": "ellipse",
+      "aspectRatio": null
+    },
+    {
+      "type": "general.diamond",
+      "entity": "node",
+      "displayName": "Diamond",
+      "defaultLabel": "Diamond",
+      "defaultSize": {
+        "width": 160,
+        "height": 112
+      },
+      "minSize": {
+        "width": 100,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "center"
+        }
+      },
+      "allowedHandles": [
+        "top",
+        "right",
+        "bottom",
+        "left"
+      ],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "diamond",
+      "iconKey": null,
+      "textRegionKey": "diamond",
+      "aspectRatio": null
+    },
+    {
+      "type": "general.text",
+      "entity": "node",
+      "displayName": "Text",
+      "defaultLabel": "Text",
+      "defaultSize": {
+        "width": 180,
+        "height": 48
+      },
+      "minSize": {
+        "width": 64,
+        "height": 32
+      },
+      "defaultStyle": {
+        "fill": "#FFFFFF",
+        "stroke": "#64748B",
+        "strokeWidth": 0,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "left"
+        }
+      },
+      "allowedHandles": [],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "text",
+      "iconKey": null,
+      "textRegionKey": "text",
+      "aspectRatio": null
+    },
+    {
+      "type": "general.note",
+      "entity": "node",
+      "displayName": "Note",
+      "defaultLabel": "Note",
+      "defaultSize": {
+        "width": 180,
+        "height": 120
+      },
+      "minSize": {
+        "width": 100,
+        "height": 72
+      },
+      "defaultStyle": {
+        "fill": "#FEF3C7",
+        "stroke": "#D97706",
+        "strokeWidth": 1,
+        "strokeStyle": "solid",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "left"
+        }
+      },
+      "allowedHandles": [],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align"
+      ],
+      "primitiveKey": "note",
+      "iconKey": null,
+      "textRegionKey": "note",
+      "aspectRatio": null
+    },
+    {
+      "type": "general.boundary",
+      "entity": "group",
+      "displayName": "Boundary",
+      "defaultTitle": "System boundary",
+      "defaultSize": {
+        "width": 320,
+        "height": 220
+      },
+      "minSize": {
+        "width": 160,
+        "height": 100
+      },
+      "defaultStyle": {
+        "fill": "#E0E7FF",
+        "stroke": "#6366F1",
+        "strokeWidth": 1,
+        "strokeStyle": "dashed",
+        "text": {
+          "color": "#0F172A",
+          "fontSize": 14,
+          "align": "left"
+        },
+        "fillOpacity": 0.3
+      },
+      "allowedHandles": [],
+      "supportsStatus": false,
+      "resizable": true,
+      "editableStyleFields": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text.color",
+        "text.fontSize",
+        "text.align",
+        "fillOpacity"
+      ],
+      "primitiveKey": "boundary",
+      "iconKey": null,
+      "textRegionKey": "boundary",
+      "aspectRatio": null
+    }
+  ],
+  "edgeDefaults": {
+    "label": "",
+    "route": "orthogonal",
+    "arrows": "forward",
+    "style": {
+      "stroke": "#64748B",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "text": {
+        "color": "#0F172A",
+        "fontSize": 12,
+        "align": "center"
+      }
+    }
+  },
+  "statuses": {
+    "not_specified": {
+      "label": "Not specified",
+      "marker": "#64748B",
+      "text": "#475569",
+      "visible": false
+    },
+    "completed": {
+      "label": "Completed",
+      "marker": "#15803D",
+      "text": "#166534",
+      "visible": true
+    },
+    "in_progress": {
+      "label": "In progress",
+      "marker": "#D97706",
+      "text": "#92400E",
+      "visible": true
+    },
+    "pending": {
+      "label": "Pending",
+      "marker": "#DC2626",
+      "text": "#991B1B",
+      "visible": true
+    }
+  }
+}

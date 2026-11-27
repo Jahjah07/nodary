@@ -1,0 +1,543 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DGS-05 portable diagram v1 — structural schema",
+  "description": "Structural contract only; graph, registry, containment and resource invariants are specified in DGS-05. No remote schema references.",
+  "type": "object",
+  "properties": {
+    "document": {
+      "$ref": "#/$defs/document"
+    },
+    "viewport": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/viewport"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "document",
+    "viewport"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+    },
+    "parent": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/id"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+    },
+    "color": {
+      "type": "string",
+      "pattern": "^#[0-9A-F]{6}$"
+    },
+    "position": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": -1000000,
+          "maximum": 1000000
+        },
+        "y": {
+          "type": "number",
+          "minimum": -1000000,
+          "maximum": 1000000
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ],
+      "additionalProperties": false
+    },
+    "size": {
+      "type": "object",
+      "properties": {
+        "width": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 100000
+        },
+        "height": {
+          "type": "number",
+          "minimum": 1,
+          "maximum": 100000
+        }
+      },
+      "required": [
+        "width",
+        "height"
+      ],
+      "additionalProperties": false
+    },
+    "lineStyle": {
+      "enum": [
+        "solid",
+        "dashed"
+      ]
+    },
+    "textStyle": {
+      "type": "object",
+      "properties": {
+        "color": {
+          "$ref": "#/$defs/color"
+        },
+        "fontSize": {
+          "type": "number",
+          "minimum": 8,
+          "maximum": 72
+        },
+        "align": {
+          "enum": [
+            "left",
+            "center",
+            "right"
+          ]
+        }
+      },
+      "required": [
+        "color",
+        "fontSize",
+        "align"
+      ],
+      "additionalProperties": false
+    },
+    "nodeStyle": {
+      "type": "object",
+      "properties": {
+        "fill": {
+          "$ref": "#/$defs/color"
+        },
+        "stroke": {
+          "$ref": "#/$defs/color"
+        },
+        "strokeWidth": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "strokeStyle": {
+          "$ref": "#/$defs/lineStyle"
+        },
+        "text": {
+          "$ref": "#/$defs/textStyle"
+        }
+      },
+      "required": [
+        "fill",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "groupStyle": {
+      "type": "object",
+      "properties": {
+        "fill": {
+          "$ref": "#/$defs/color"
+        },
+        "fillOpacity": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "stroke": {
+          "$ref": "#/$defs/color"
+        },
+        "strokeWidth": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "strokeStyle": {
+          "$ref": "#/$defs/lineStyle"
+        },
+        "text": {
+          "$ref": "#/$defs/textStyle"
+        }
+      },
+      "required": [
+        "fill",
+        "fillOpacity",
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "status": {
+      "enum": [
+        "not_specified",
+        "completed",
+        "in_progress",
+        "pending"
+      ]
+    },
+    "node": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "enum": [
+            "flow.terminator",
+            "flow.process",
+            "flow.decision",
+            "flow.input_output",
+            "flow.document",
+            "flow.data_store",
+            "flow.subprocess",
+            "flow.on_page_connector",
+            "arch.user",
+            "arch.device",
+            "arch.website",
+            "arch.application",
+            "arch.server",
+            "arch.database",
+            "arch.cloud",
+            "arch.network",
+            "arch.security",
+            "arch.identity",
+            "arch.email",
+            "arch.storage",
+            "arch.api",
+            "arch.integration",
+            "general.rectangle",
+            "general.rounded_rectangle",
+            "general.ellipse",
+            "general.diamond",
+            "general.text",
+            "general.note"
+          ]
+        },
+        "parentId": {
+          "$ref": "#/$defs/parent"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "size": {
+          "$ref": "#/$defs/size"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 1000
+        },
+        "style": {
+          "$ref": "#/$defs/nodeStyle"
+        },
+        "status": {
+          "$ref": "#/$defs/status"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "parentId",
+        "position",
+        "size",
+        "label",
+        "style",
+        "status"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "enum": [
+                  "flow.terminator",
+                  "flow.process",
+                  "flow.decision",
+                  "flow.input_output",
+                  "flow.document",
+                  "flow.data_store",
+                  "flow.subprocess",
+                  "flow.on_page_connector",
+                  "general.rectangle",
+                  "general.rounded_rectangle",
+                  "general.ellipse",
+                  "general.diamond",
+                  "general.text",
+                  "general.note"
+                ]
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "status": {
+                "const": "not_specified"
+              }
+            }
+          }
+        }
+      ]
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "type": {
+          "const": "general.boundary"
+        },
+        "parentId": {
+          "$ref": "#/$defs/parent"
+        },
+        "position": {
+          "$ref": "#/$defs/position"
+        },
+        "size": {
+          "$ref": "#/$defs/size"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 200
+        },
+        "style": {
+          "$ref": "#/$defs/groupStyle"
+        }
+      },
+      "required": [
+        "id",
+        "type",
+        "parentId",
+        "position",
+        "size",
+        "title",
+        "style"
+      ],
+      "additionalProperties": false
+    },
+    "endpoint": {
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "$ref": "#/$defs/id"
+        },
+        "handleId": {
+          "enum": [
+            "top",
+            "right",
+            "bottom",
+            "left"
+          ]
+        }
+      },
+      "required": [
+        "nodeId",
+        "handleId"
+      ],
+      "additionalProperties": false
+    },
+    "edgeStyle": {
+      "type": "object",
+      "properties": {
+        "stroke": {
+          "$ref": "#/$defs/color"
+        },
+        "strokeWidth": {
+          "type": "number",
+          "minimum": 0.5,
+          "maximum": 8
+        },
+        "strokeStyle": {
+          "$ref": "#/$defs/lineStyle"
+        },
+        "text": {
+          "$ref": "#/$defs/textStyle"
+        }
+      },
+      "required": [
+        "stroke",
+        "strokeWidth",
+        "strokeStyle",
+        "text"
+      ],
+      "additionalProperties": false
+    },
+    "edge": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "source": {
+          "$ref": "#/$defs/endpoint"
+        },
+        "target": {
+          "$ref": "#/$defs/endpoint"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 200
+        },
+        "route": {
+          "enum": [
+            "straight",
+            "orthogonal"
+          ]
+        },
+        "arrows": {
+          "enum": [
+            "none",
+            "forward",
+            "both"
+          ]
+        },
+        "style": {
+          "$ref": "#/$defs/edgeStyle"
+        }
+      },
+      "required": [
+        "id",
+        "source",
+        "target",
+        "label",
+        "route",
+        "arrows",
+        "style"
+      ],
+      "additionalProperties": false
+    },
+    "settings": {
+      "type": "object",
+      "properties": {
+        "gridVisible": {
+          "type": "boolean"
+        },
+        "snapToGrid": {
+          "type": "boolean"
+        },
+        "gridSpacing": {
+          "const": 20
+        }
+      },
+      "required": [
+        "gridVisible",
+        "snapToGrid",
+        "gridSpacing"
+      ],
+      "additionalProperties": false
+    },
+    "viewport": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number",
+          "minimum": -4000000,
+          "maximum": 4000000
+        },
+        "y": {
+          "type": "number",
+          "minimum": -4000000,
+          "maximum": 4000000
+        },
+        "zoom": {
+          "type": "number",
+          "minimum": 0.25,
+          "maximum": 2
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "zoom"
+      ],
+      "additionalProperties": false
+    },
+    "document": {
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "const": 1
+        },
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 120
+        },
+        "category": {
+          "enum": [
+            "general",
+            "flowchart",
+            "architecture"
+          ]
+        },
+        "createdAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "updatedAt": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "nodes": {
+          "type": "array",
+          "maxItems": 1000,
+          "items": {
+            "$ref": "#/$defs/node"
+          }
+        },
+        "groups": {
+          "type": "array",
+          "maxItems": 100,
+          "items": {
+            "$ref": "#/$defs/group"
+          }
+        },
+        "edges": {
+          "type": "array",
+          "maxItems": 2000,
+          "items": {
+            "$ref": "#/$defs/edge"
+          }
+        },
+        "settings": {
+          "$ref": "#/$defs/settings"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "id",
+        "title",
+        "category",
+        "createdAt",
+        "updatedAt",
+        "nodes",
+        "groups",
+        "edges",
+        "settings"
+      ],
+      "additionalProperties": false
+    }
+  }
+}

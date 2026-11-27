@@ -1,0 +1,2752 @@
+{
+  "registerVersion": 1,
+  "document": "DGS-09",
+  "version": "0.1",
+  "targetRelease": "V0.2",
+  "status": "draft",
+  "note": "Sequential default for one developer. Verification references are trace links, not a declaration of completed tests. Full source scenarios remain authoritative. Phase-specific portions may be verified early; full integration gates are in Phases 08–11.",
+  "phases": [
+    {
+      "id": "00",
+      "title": "Project initialization",
+      "estimate_focused_days": "1–2",
+      "gate": "Clean install, static production build and CI baseline; SP-01 passed before further spikes.",
+      "tasks": [
+        "T-00-01",
+        "T-00-02",
+        "T-00-03",
+        "T-00-04"
+      ],
+      "status": "implemented",
+      "gate_status": "pass",
+      "depends_on_phase": null
+    },
+    {
+      "id": "01",
+      "title": "Technical prototypes and decision gates",
+      "estimate_focused_days": "1–2",
+      "gate": "SP-02–08 evidence recorded; mandatory architecture blockers resolved or formally stop dependent work.",
+      "tasks": [
+        "T-01-01",
+        "T-01-02",
+        "T-01-03",
+        "T-01-04",
+        "T-01-05",
+        "T-01-06",
+        "T-01-07",
+        "T-01-08"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "00"
+    },
+    {
+      "id": "02",
+      "title": "Core domain and command foundation",
+      "estimate_focused_days": "2–3",
+      "gate": "Schema parity, pure graph validation and atomic command/history foundation pass; no renderer dependency in core.",
+      "tasks": [
+        "T-02-01",
+        "T-02-02",
+        "T-02-03",
+        "T-02-04",
+        "T-02-05"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "01"
+    },
+    {
+      "id": "03",
+      "title": "Workspace and canvas",
+      "estimate_focused_days": "2–3",
+      "gate": "Working local in-memory editor shell with viewport, selection, focus and navigation; persistence explicitly not yet complete.",
+      "tasks": [
+        "T-03-01",
+        "T-03-02",
+        "T-03-03",
+        "T-03-04",
+        "T-03-05"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "02"
+    },
+    {
+      "id": "04",
+      "title": "Component library",
+      "estimate_focused_days": "1–2",
+      "gate": "All 29 registered types insert and render, geometry/anchors and resize validated, local assets present.",
+      "tasks": [
+        "T-04-01",
+        "T-04-02",
+        "T-04-03",
+        "T-04-04"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "03"
+    },
+    {
+      "id": "05",
+      "title": "Connections and routing",
+      "estimate_focused_days": "1–2",
+      "gate": "Branching, cycles, reconnect and route geometry work; invalid edges never mutate state.",
+      "tasks": [
+        "T-05-01",
+        "T-05-02",
+        "T-05-03"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "04"
+    },
+    {
+      "id": "06",
+      "title": "Properties and styling",
+      "estimate_focused_days": "1–2",
+      "gate": "Validated node/edge/group property controls, status and text-fitting behavior work.",
+      "tasks": [
+        "T-06-01",
+        "T-06-02",
+        "T-06-03"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "05"
+    },
+    {
+      "id": "07",
+      "title": "Grouping and boundaries",
+      "estimate_focused_days": "2–3",
+      "gate": "Nested group geometry, expansion, explicit membership and safe deletion/duplication pass.",
+      "tasks": [
+        "T-07-01",
+        "T-07-02",
+        "T-07-03",
+        "T-07-04"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "06"
+    },
+    {
+      "id": "08",
+      "title": "Commands and editing history integration",
+      "estimate_focused_days": "1",
+      "gate": "All editing paths use command dispatcher; 50 transactions, cancellation and undo/redo pass.",
+      "tasks": [
+        "T-08-01",
+        "T-08-02",
+        "T-08-03"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "07"
+    },
+    {
+      "id": "09",
+      "title": "Persistence and recovery",
+      "estimate_focused_days": "2–3",
+      "gate": "Real browser saves, reload, revision conflict, stale deletion and backup-on-failure verified.",
+      "tasks": [
+        "T-09-01",
+        "T-09-02",
+        "T-09-03",
+        "T-09-04",
+        "T-09-05"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "08"
+    },
+    {
+      "id": "10",
+      "title": "Import, export and templates",
+      "estimate_focused_days": "1–2",
+      "gate": "Both templates, JSON semantic round trip, genuine SVG and PNG with full bounds verified.",
+      "tasks": [
+        "T-10-01",
+        "T-10-02",
+        "T-10-03",
+        "T-10-04",
+        "T-10-05"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "09"
+    },
+    {
+      "id": "11",
+      "title": "Testing and stabilization",
+      "estimate_focused_days": "3–4",
+      "gate": "All mandatory DGS-10 release gates pass with evidence, no blocking defects or unresolved decisions.",
+      "tasks": [
+        "T-11-01",
+        "T-11-02",
+        "T-11-03",
+        "T-11-04"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "10"
+    },
+    {
+      "id": "12",
+      "title": "Deployment and release",
+      "estimate_focused_days": "1",
+      "gate": "Production static artifact deployed only after approval; smoke checks, origin/backup warning and rollback documented.",
+      "tasks": [
+        "T-12-01",
+        "T-12-02",
+        "T-12-03"
+      ],
+      "status": "not_started",
+      "gate_status": "not_run",
+      "depends_on_phase": "11"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "T-00-01",
+      "phase": "00",
+      "title": "Repository and specification baseline",
+      "requirements": [
+        "NFR-07"
+      ],
+      "verification": "—",
+      "deliverable": "Copy unchanged DGS-01–11 and companion fixtures into agreed locations; record checksums, initialize Git, AGENTS.md, README, tracker and decisions; baseline paths verified and no private diagrams committed.",
+      "status": "implemented",
+      "verification_status": "pass",
+      "dependencies": [],
+      "priority": "must",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-00.md"
+      ],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-00-02",
+      "phase": "00",
+      "title": "Scaffold and dependency lock",
+      "requirements": [
+        "NFR-06",
+        "NFR-07"
+      ],
+      "verification": "—",
+      "deliverable": "Initialize Next.js App Router static export, TypeScript, Tailwind, React Flow, Zustand, Zod, Dexie and test tooling; record exact stable versions, Node LTS compatibility, lockfile, license/notice review and reproducible install.",
+      "status": "implemented",
+      "verification_status": "pass",
+      "dependencies": [
+        "T-00-01"
+      ],
+      "priority": "must",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-00.md"
+      ],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-00-03",
+      "phase": "00",
+      "title": "CI and test harness",
+      "requirements": [
+        "NFR-07"
+      ],
+      "verification": "—",
+      "deliverable": "Add lint, typecheck, unit/integration, production build and Playwright scripts; clean runner executes all baseline checks; no secrets or paid services required.",
+      "status": "implemented",
+      "verification_status": "pass",
+      "dependencies": [
+        "T-00-02"
+      ],
+      "priority": "must",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-00.md"
+      ],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-00-04",
+      "phase": "00",
+      "title": "Static shell spike",
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "NFR-06"
+      ],
+      "verification": "SP-01",
+      "deliverable": "Serve static output, reload /editor/?id=fixture, verify browser-only initialization and no server route dependency; record build and browser evidence.",
+      "status": "implemented",
+      "verification_status": "pass",
+      "dependencies": [
+        "T-00-03"
+      ],
+      "priority": "must",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-00.md"
+      ],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-01-01",
+      "phase": "01",
+      "title": "Nested boundaries spike",
+      "requirements": [
+        "FR-03",
+        "FR-08",
+        "FR-10"
+      ],
+      "verification": "SP-02",
+      "deliverable": "Prove two nested levels, parent motion once, reparent and ungroup preserve world positions, expansion and undo with cross-boundary edges.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-00-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-01-02",
+      "phase": "01",
+      "title": "Connector spike",
+      "requirements": [
+        "FR-02",
+        "FR-06",
+        "FR-07"
+      ],
+      "verification": "SP-03",
+      "deliverable": "Prove four cardinal handles, negative coordinates, resize/reconnect, straight and orthogonal geometry and full scene fit; invalid reconnect keeps ID and endpoints.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-01-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-01-03",
+      "phase": "01",
+      "title": "Vector export spike",
+      "requirements": [
+        "FR-05",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-13",
+        "NFR-08"
+      ],
+      "verification": "SP-04",
+      "deliverable": "Build minimal controlled SVG/PNG proof with multiline labels, vector icons, markers and nested boundaries; inspect independent viewer, XML safety and font parity.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-01-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-01-04",
+      "phase": "01",
+      "title": "Persistence spike",
+      "requirements": [
+        "FR-01",
+        "FR-11",
+        "FR-12",
+        "NFR-03"
+      ],
+      "verification": "SP-05",
+      "deliverable": "Demonstrate transactional CAS in two real browser pages, quota/abort, edit during save and stale deletion; capture outcomes and recovery UI implications.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-01-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-01-05",
+      "phase": "01",
+      "title": "History spike",
+      "requirements": [
+        "FR-03",
+        "FR-06",
+        "FR-08",
+        "FR-10"
+      ],
+      "verification": "SP-06",
+      "deliverable": "Prove compound duplicate/delete/undo, redo invalidation, failed command immutability and 50 transactions using representative graph.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-01-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-01-06",
+      "phase": "01",
+      "title": "Keyboard and accessibility spike",
+      "requirements": [
+        "FR-03",
+        "FR-05",
+        "FR-14",
+        "NFR-05"
+      ],
+      "verification": "SP-07",
+      "deliverable": "Prove focus arbitration, native text undo, keyboard alternative to connect/resize, cancellation and visible focus; document gaps.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-01-05"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-01-07",
+      "phase": "01",
+      "title": "Performance baseline spike",
+      "requirements": [
+        "NFR-02",
+        "NFR-06",
+        "NFR-08"
+      ],
+      "verification": "SP-08",
+      "deliverable": "Run 100-node/150-edge synthetic workload in production shell; capture hardware/browser/build, frame and commit/save/export measurements or explicitly unavailable measurements; DGS-10 owns thresholds.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-01-06"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-01-08",
+      "phase": "01",
+      "title": "Architecture review and compatibility decisions",
+      "requirements": [
+        "NFR-04",
+        "NFR-07",
+        "NFR-08"
+      ],
+      "verification": "SP-01–08",
+      "deliverable": "Record each spike result, ADR outcome, font strategy, XML-incompatible text policy and license review; no failed mandatory spike silently waived. Re-run affected prototypes after changes.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-01-07"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-02-01",
+      "phase": "02",
+      "title": "Canonical contracts and runtime schema",
+      "requirements": [
+        "FR-01",
+        "FR-04",
+        "FR-05",
+        "FR-12",
+        "NFR-07"
+      ],
+      "verification": "DM-01–05,DM-21",
+      "deliverable": "Define TypeScript/Zod from DGS-05 v1; strict unknowns, field ranges, finite geometry, UUID/time validation; parity tests against JSON schema and fixtures.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-01-08"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-02-02",
+      "phase": "02",
+      "title": "Graph integrity and registry contract",
+      "requirements": [
+        "FR-04",
+        "FR-06",
+        "FR-08",
+        "FR-09"
+      ],
+      "verification": "DM-06,DM-09–10,DM-14",
+      "deliverable": "Load trusted registry, validate global IDs, parent types/cycles/depth, eligibility, duplicate directed tuples and status; reject invalid graph atomically.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-02-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-02-03",
+      "phase": "02",
+      "title": "Coordinate and containment primitives",
+      "requirements": [
+        "FR-02",
+        "FR-03",
+        "FR-08"
+      ],
+      "verification": "DM-07–08,DM-18,CI-01",
+      "deliverable": "Pure world/local conversion, bounds and ancestor traversal; test negative/fractional values, expansion and preserved sibling positions.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-02-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-02-04",
+      "phase": "02",
+      "title": "Command dispatcher and history foundation",
+      "requirements": [
+        "FR-03",
+        "FR-10",
+        "NFR-07"
+      ],
+      "verification": "DM-15,CI-33",
+      "deliverable": "Implement typed command results, atomic validation, committed/noop/rejected state, graph-only history API, generation counter and selection reconciliation; wire before UI mutations.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-02-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-02-05",
+      "phase": "02",
+      "title": "Session and repository interfaces",
+      "requirements": [
+        "FR-01",
+        "FR-11",
+        "FR-12"
+      ],
+      "verification": "DM-19,DM-20",
+      "deliverable": "Define document repository port, session tokens, save-state contracts and version boundary; in-memory test adapter clearly distinguished from real persistence.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-02-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-03-01",
+      "phase": "03",
+      "title": "Workspace routes and shell",
+      "requirements": [
+        "FR-01",
+        "FR-02",
+        "NFR-01"
+      ],
+      "verification": "UX-01–04",
+      "deliverable": "Implement / and query-based editor route, list workspace, create/open and missing-ID states against temporary adapter; header, toolbar, collapsible panels, status bar and neutral design tokens.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-02-05"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-03-02",
+      "phase": "03",
+      "title": "React Flow projection adapter",
+      "requirements": [
+        "FR-02",
+        "FR-03"
+      ],
+      "verification": "CI-01–04",
+      "deliverable": "Project canonical nodes/groups/edges, parent-first ordering, stable IDs; renderer measurements/preview transient; no direct committed graph mutation.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-03-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-03-03",
+      "phase": "03",
+      "title": "Viewport navigation and grid",
+      "requirements": [
+        "FR-02",
+        "FR-14"
+      ],
+      "verification": "CI-02–04,CI-06,DM-18",
+      "deliverable": "Pan, pointer zoom 25–200%, fit via scene bounds interface, reset and 20-unit grid/snap independent; complete fit verified again after scene integration.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-03-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-03-04",
+      "phase": "03",
+      "title": "Selection and hit testing",
+      "requirements": [
+        "FR-03",
+        "FR-14"
+      ],
+      "verification": "CI-07–09,CI-29",
+      "deliverable": "Single/shift/marquee/full selection, empty canvas clear, overlap priority, noncapturing boundary interior and pointer cancellation; no history on selection.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-03-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-03-05",
+      "phase": "03",
+      "title": "Keyboard/focus controller and responsive shell",
+      "requirements": [
+        "FR-14",
+        "NFR-05",
+        "NFR-06"
+      ],
+      "verification": "UX-15,UX-17,CI-32",
+      "deliverable": "Implement shortcut arbitration and visible alternatives; native input/dialog behavior, focus restoration, desktop panel breakpoints and responsive overflow; final keyboard audit Phase 11.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-03-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-04-01",
+      "phase": "04",
+      "title": "Component registry and local assets",
+      "requirements": [
+        "FR-04",
+        "NFR-04"
+      ],
+      "verification": "CL-01–04,CL-26,DM-02",
+      "deliverable": "Import all 29 definitions with typed adapter and local pinned vector icons; validate defaults and inventory, licensing and no remote asset fetch.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-03-05"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-04-02",
+      "phase": "04",
+      "title": "Shared primitive geometry and scene",
+      "requirements": [
+        "FR-04",
+        "FR-05",
+        "FR-13"
+      ],
+      "verification": "CL-05–06,CL-19",
+      "deliverable": "Implement DGS-06 exact primitives, text regions, visual bounds and cardinal anchors; test all 104 eligible anchors and finite shape geometry; export consumes same scene later.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-04-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-04-03",
+      "phase": "04",
+      "title": "Component library insertion",
+      "requirements": [
+        "FR-03",
+        "FR-04"
+      ],
+      "verification": "CI-05,CL-01–02",
+      "deliverable": "Implement categories and previews, drag/click/keyboard insert to root, correct transformed placement and one transaction; invalid drop no change.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-04-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-04-04",
+      "phase": "04",
+      "title": "Move and resize interactions",
+      "requirements": [
+        "FR-03",
+        "FR-14"
+      ],
+      "verification": "CI-10–14,CL-09,CL-13",
+      "deliverable": "Implement preview and commit, reference snapping, opposite-side resize, circular aspect lock and floor checks; provisional text measurement replaced with full fitter Phase 06.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-04-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-05-01",
+      "phase": "05",
+      "title": "Edge creation and graph constraints",
+      "requirements": [
+        "FR-06"
+      ],
+      "verification": "DM-09–10,CI-18–19,CL-07",
+      "deliverable": "Create directed endpoints through pointer and keyboard controls; support branching and cycles, reject exact duplicates/self-loops/annotations/frames and dangling references.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-04-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-05-02",
+      "phase": "05",
+      "title": "Shared route and marker geometry",
+      "requirements": [
+        "FR-06",
+        "FR-07",
+        "FR-13"
+      ],
+      "verification": "CI-21–22,CL-18",
+      "deliverable": "Implement deterministic straight/orthogonal paths with endpoint normals, candidate ordering, explicit fallback and path-length label position; finite all handle/overlap cases; shared editor/export scene.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-05-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-05-03",
+      "phase": "05",
+      "title": "Edge renderer and reconnection",
+      "requirements": [
+        "FR-06",
+        "FR-07"
+      ],
+      "verification": "DM-11,CI-18–20,CL-08,UX-07–08",
+      "deliverable": "Render selectable edges and preview labels/arrows; reconnect either endpoint with stable ID/style; invalid release restores edge, motion and resize update anchors.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-05-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-06-01",
+      "phase": "06",
+      "title": "Contextual properties and styles",
+      "requirements": [
+        "FR-05",
+        "FR-07"
+      ],
+      "verification": "CL-10,CI-16–17,UX-06,UX-08",
+      "deliverable": "Implement no/single/mixed-selection inspector, allowed style fields, labels, route/arrows/dash and numeric bounds; invalid edits preserve graph; shared properties update atomically.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-05-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-06-02",
+      "phase": "06",
+      "title": "Text layout and content fit",
+      "requirements": [
+        "FR-03",
+        "FR-05",
+        "FR-08",
+        "FR-13"
+      ],
+      "verification": "CL-11–13,CI-14–16,DM-04",
+      "deliverable": "Measured local font metrics, Unicode/multiline wrapping, no clipping or silent shrink; grow content or reject invalid dimensions; fit and ancestor growth integrate with Phase 07. Apply approved XML policy.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-06-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-06-03",
+      "phase": "06",
+      "title": "Architecture status and boundary title controls",
+      "requirements": [
+        "FR-05",
+        "FR-08",
+        "FR-09"
+      ],
+      "verification": "CL-14–16,DM-14,UX-10",
+      "deliverable": "Implement four status values for architecture only, marker and text without overriding style; group title and opacity; ensure neutral status backing and readable contrast.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-06-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-07-01",
+      "phase": "07",
+      "title": "Boundary scene and nesting",
+      "requirements": [
+        "FR-08"
+      ],
+      "verification": "CL-16,CI-23–25",
+      "deliverable": "Render frames behind descendants, title/border hit regions, dynamic padding; nested children parent-relative, cross-boundary edges intact.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-06-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-07-02",
+      "phase": "07",
+      "title": "Group and explicit reparent operations",
+      "requirements": [
+        "FR-08"
+      ],
+      "verification": "DM-06–08,CI-23,CI-26",
+      "deliverable": "Create same-parent selection group, add/remove membership with world-coordinate preservation and cycle/depth checks; visual overlap never changes membership.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-07-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-07-03",
+      "phase": "07",
+      "title": "Recursive expansion and resizing",
+      "requirements": [
+        "FR-03",
+        "FR-05",
+        "FR-08"
+      ],
+      "verification": "CI-24–25,CL-12,DM-08",
+      "deliverable": "Expand ancestor frames in all directions, rebase child locals to preserve unrelated world positions; boundary resize does not scale children, invalid shrink rejects.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-07-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-07-04",
+      "phase": "07",
+      "title": "Delete, ungroup and duplicate graph operations",
+      "requirements": [
+        "FR-03",
+        "FR-06",
+        "FR-08",
+        "FR-10"
+      ],
+      "verification": "DM-12–13,CI-27–28,CL-17,UX-09",
+      "deliverable": "Normalize selected roots, remove incident edges only for deleted nodes, preserve unselected descendants, remap copied internal edges and IDs; undo fully restores transaction.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-07-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-08-01",
+      "phase": "08",
+      "title": "Full transaction integration",
+      "requirements": [
+        "FR-03",
+        "FR-05",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-09",
+        "FR-10"
+      ],
+      "verification": "DM-15,CI-29–30,UX-11",
+      "deliverable": "Integrate all graph mutations with existing dispatcher/history; metadata/view excluded, one gesture/label/style commit, cancelled/noop no entry; undo/redo preserve current metadata/revision.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-07-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-08-02",
+      "phase": "08",
+      "title": "Keyboard actions and history capacity",
+      "requirements": [
+        "FR-10",
+        "FR-14",
+        "NFR-05"
+      ],
+      "verification": "CI-11,CI-30,CI-32,DM-24",
+      "deliverable": "Finish nudge coalescing, undo/redo availability, duplicate/delete/group shortcuts and keyboard alternatives; test at least 50 graph transactions and redo branching.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-08-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-08-03",
+      "phase": "08",
+      "title": "End-to-end editor regression",
+      "requirements": [
+        "FR-02",
+        "FR-03",
+        "FR-06",
+        "FR-07",
+        "FR-08",
+        "FR-10"
+      ],
+      "verification": "CI-03,CI-08,CI-33,CL-08",
+      "deliverable": "Verify full scene fit, complex multi-selection, stale preview and resource limits; use both reference diagram categories; fix any bypasses of dispatcher.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-08-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-09-01",
+      "phase": "09",
+      "title": "Dexie repository and lifecycle",
+      "requirements": [
+        "FR-01",
+        "FR-11"
+      ],
+      "verification": "PE-01–06,PE-20–22",
+      "deliverable": "Implement documents/viewports/preferences stores, create/open/rename/duplicate/delete and atomic row/view operations; strict loaded content validation, no reset on error; template path completed Phase 10.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-08-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-09-02",
+      "phase": "09",
+      "title": "Autosave coordinator",
+      "requirements": [
+        "FR-11",
+        "FR-10"
+      ],
+      "verification": "PE-07–12,PE-19,CI-31",
+      "deliverable": "750 ms debounce, 1s max-wait when available, one in-flight immutable snapshot, generation-aware acknowledgement, retry latest, undo saved as new revision.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-09-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-09-03",
+      "phase": "09",
+      "title": "Cross-tab conflict and recovery",
+      "requirements": [
+        "FR-01",
+        "FR-11",
+        "NFR-03"
+      ],
+      "verification": "PE-13–18,DM-19,UX-12",
+      "deliverable": "CAS transaction, stale deletion protection, copy/reload/backup, session isolation and pending navigation; test two actual tabs even with notifications disabled.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-09-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-09-04",
+      "phase": "09",
+      "title": "Viewport, upgrades and failure handling",
+      "requirements": [
+        "FR-02",
+        "FR-11"
+      ],
+      "verification": "PE-20–22,PE-39",
+      "deliverable": "Independent 500ms viewport debounce without graph revision, safe corrupt-view fallback, blocked upgrade/versionchange, no destructive rollback; test transaction abort and unavailable storage.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-09-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-09-05",
+      "phase": "09",
+      "title": "Editable backup recovery integration",
+      "requirements": [
+        "FR-11",
+        "FR-12"
+      ],
+      "verification": "PE-11,PE-27,UX-13",
+      "deliverable": "Expose safe JSON export of current valid in-memory snapshot even when DB unavailable, reusing Phase 02 validation; no stale substitution; final import/export UI Phase 10.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-09-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-10-01",
+      "phase": "10",
+      "title": "Bounded JSON import and portable export",
+      "requirements": [
+        "FR-12",
+        "NFR-04"
+      ],
+      "verification": "PE-23–28,DM-16–17,DM-20",
+      "deliverable": "Implement strict UTF-8/duplicate-key/depth/size checks, v1 validation, ID remap, atomic add-only import and immutable export snapshot; reject unsupported versions and unsafe keys.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-09-05"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-10-02",
+      "phase": "10",
+      "title": "Starter templates and independence",
+      "requirements": [
+        "FR-15",
+        "FR-01"
+      ],
+      "verification": "CL-22–24,DM-23,UX-02,UX-16",
+      "deliverable": "Bundle exact DGS-06 flowchart and architecture fixtures, remap all IDs, validate, persist and open; independently editable, immutable sources; template instances JSON round-trip.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-10-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-10-03",
+      "phase": "10",
+      "title": "Standalone SVG serializer",
+      "requirements": [
+        "FR-13",
+        "NFR-08"
+      ],
+      "verification": "PE-29–33,CL-18–21,DM-22",
+      "deliverable": "Generate native safe XML vector output from scene with full bounds, 32-unit white padding, icons, text and statuses; no UI, remote assets or raster wrapper; handle XML errors explicitly.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-10-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-10-04",
+      "phase": "10",
+      "title": "PNG renderer and preflight",
+      "requirements": [
+        "FR-13",
+        "NFR-08"
+      ],
+      "verification": "PE-34–36",
+      "deliverable": "Rasterize same scene at 2x (explicit 1x), 8192 edge and 16 Mi pixel budgets; decode/encode/null/timeout cleanup and correct dimensions; no hidden scale reduction.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-10-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-10-05",
+      "phase": "10",
+      "title": "File dialogs, handoff and regression",
+      "requirements": [
+        "FR-12",
+        "FR-13",
+        "FR-15"
+      ],
+      "verification": "PE-37–38,UX-13–14,CI-34,CL-03",
+      "deliverable": "Wire import/export dialog, filename sanitization, stable captured snapshot after draft resolution, browser download handoff; independently inspect PNG/SVG and reimport JSON in target browsers.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-10-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-11-01",
+      "phase": "11",
+      "title": "Consolidated mandatory traceability suite",
+      "requirements": [
+        "FR-01–15",
+        "NFR-07"
+      ],
+      "verification": "AC-01–08,AC-FR-01–15",
+      "deliverable": "Execute every mandatory parent, feature and specialist scenario per DGS-10; evidence with test ID, commit and environment; no unexecuted mandatory checks treated as passes.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-10-05"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-11-02",
+      "phase": "11",
+      "title": "Security, accessibility and compatibility audit",
+      "requirements": [
+        "NFR-01",
+        "NFR-04",
+        "NFR-05",
+        "NFR-06"
+      ],
+      "verification": "UX-17,CL-25–26,CI-32,PE-24,PE-30",
+      "deliverable": "Test malformed imports, markup, remote network requests, keyboard-only editing, contrast/focus, licenses and actual Chrome/Edge desktop; use synthetic data only.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-11-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-11-03",
+      "phase": "11",
+      "title": "Performance and visual fidelity",
+      "requirements": [
+        "NFR-02",
+        "NFR-03",
+        "NFR-08"
+      ],
+      "verification": "CI-35,PE-40,CL-21,DM-24",
+      "deliverable": "Measure reference graph on approved hardware/browser, save/export timings and memory; independently inspect vector and PNG; compare approved DGS-10 thresholds, fix regressions.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-11-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-11-04",
+      "phase": "11",
+      "title": "Usability, defect triage and release candidate",
+      "requirements": [
+        "NFR-01",
+        "NFR-07"
+      ],
+      "verification": "AC-01–08",
+      "deliverable": "Run pilot tasks and gate review; classify defects, fix and rerun impacted tests; record explicit optional deferrals, approve candidate only with all mandatory gates satisfied.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-11-03"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-12-01",
+      "phase": "12",
+      "title": "Production build and deployment approval",
+      "requirements": [
+        "NFR-04",
+        "NFR-06",
+        "NFR-07"
+      ],
+      "verification": "AC-01–08",
+      "deliverable": "Create reproducible tagged static build, verify no private data, licenses and origin warnings; hosting choice and production deployment require owner approval.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-11-04"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-12-02",
+      "phase": "12",
+      "title": "Production smoke and rollback",
+      "requirements": [
+        "FR-01",
+        "FR-11",
+        "FR-12",
+        "FR-13",
+        "NFR-03"
+      ],
+      "verification": "AC-05–07,PE-39",
+      "deliverable": "On intended HTTPS origin verify new diagram, save/reload, JSON backup, PNG/SVG, no unintended uploads; test compatible rollback plan and document origin isolation/migration constraints.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-12-01"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    },
+    {
+      "id": "T-12-03",
+      "phase": "12",
+      "title": "Release handover",
+      "requirements": [
+        "NFR-07"
+      ],
+      "verification": "AC-01–08",
+      "deliverable": "Record tag, build hash, known issues, test evidence, backup guide and deferred scope; update README/tracker/changelog; release only after owner sign-off.",
+      "status": "not_started",
+      "verification_status": "not_run",
+      "dependencies": [
+        "T-12-02"
+      ],
+      "priority": "must",
+      "evidence": [],
+      "commit": null,
+      "blocker": null
+    }
+  ],
+  "acceptanceInventory": [
+    {
+      "id": "AC-01",
+      "source": "DGS-01",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-02",
+      "source": "DGS-01",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-03",
+      "source": "DGS-01",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-04",
+      "source": "DGS-01",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-05",
+      "source": "DGS-01",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-06",
+      "source": "DGS-01",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-07",
+      "source": "DGS-01",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-08",
+      "source": "DGS-01",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-01-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-01-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-01-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-01-04",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-01-05",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-02-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-02-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-02-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-03-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-03-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-03-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-03-04",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-04-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-04-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-04-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-05-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-05-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-05-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-05-04",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-06-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-06-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-06-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-06-04",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-07-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-07-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-07-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-08-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-08-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-08-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-08-04",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-08-05",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-09-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-09-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-09-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-10-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-10-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-10-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-10-04",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-11-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-11-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-11-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-11-04",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-12-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-12-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-12-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-13-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-13-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-13-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-13-04",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-14-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-14-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-14-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-15-01",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-15-02",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-15-03",
+      "source": "DGS-02",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-16-01",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-16-02",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-16-03",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-17-01",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-17-02",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-17-03",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-18-01",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-18-02",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-19-01",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-19-02",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "AC-FR-19-03",
+      "source": "DGS-02",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-01",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-02",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-03",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-04",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-05",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-06",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-07",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-08",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-09",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-10",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-11",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-12",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-13",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-14",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-15",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-16",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-17",
+      "source": "DGS-04",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "UX-18",
+      "source": "DGS-04",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-01",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-02",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-03",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-04",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-05",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-06",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-07",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-08",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-09",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-10",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-11",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-12",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-13",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-14",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-15",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-16",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-17",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-18",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-19",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-20",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-21",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-22",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-23",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "DM-24",
+      "source": "DGS-05",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-01",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-02",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-03",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-04",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-05",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-06",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-07",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-08",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-09",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-10",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-11",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-12",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-13",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-14",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-15",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-16",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-17",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-18",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-19",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-20",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-21",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-22",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-23",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-24",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-25",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CL-26",
+      "source": "DGS-06",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-01",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-02",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-03",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-04",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-05",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-06",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-07",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-08",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-09",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-10",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-11",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-12",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-13",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-14",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-15",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-16",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-17",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-18",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-19",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-20",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-21",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-22",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-23",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-24",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-25",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-26",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-27",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-28",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-29",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-30",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-31",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-32",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-33",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-34",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-35",
+      "source": "DGS-07",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "CI-36",
+      "source": "DGS-07",
+      "applicability": "conditional",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-01",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-02",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-03",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-04",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-05",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-06",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-07",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-08",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-09",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-10",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-11",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-12",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-13",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-14",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-15",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-16",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-17",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-18",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-19",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-20",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-21",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-22",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-23",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-24",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-25",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-26",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-27",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-28",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-29",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-30",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-31",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-32",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-33",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-34",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-35",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-36",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-37",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-38",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-39",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    },
+    {
+      "id": "PE-40",
+      "source": "DGS-08",
+      "applicability": "mandatory",
+      "status": "not_run"
+    }
+  ],
+  "technicalSpikes": [
+    {
+      "id": "SP-01",
+      "status": "pass",
+      "evidence": [
+        "docs/04-development/evidence/PHASE-00.md#t-00-04-and-sp-01--static-library-and-query-route"
+      ]
+    },
+    {
+      "id": "SP-02",
+      "status": "not_run"
+    },
+    {
+      "id": "SP-03",
+      "status": "not_run"
+    },
+    {
+      "id": "SP-04",
+      "status": "not_run"
+    },
+    {
+      "id": "SP-05",
+      "status": "not_run"
+    },
+    {
+      "id": "SP-06",
+      "status": "not_run"
+    },
+    {
+      "id": "SP-07",
+      "status": "not_run"
+    },
+    {
+      "id": "SP-08",
+      "status": "not_run"
+    }
+  ],
+  "optionalBacklog": [
+    {
+      "requirement": "FR-16",
+      "priority": "should",
+      "status": "deferred_pending_review"
+    },
+    {
+      "requirement": "FR-17",
+      "priority": "should",
+      "status": "deferred_pending_review"
+    },
+    {
+      "requirement": "FR-18",
+      "priority": "should",
+      "status": "deferred_pending_review"
+    },
+    {
+      "requirement": "FR-19",
+      "priority": "could",
+      "status": "deferred_pending_review"
+    }
+  ]
+}

@@ -21,7 +21,7 @@
 | CR-02 | UX-05 supplemental task mapping | Approved by owner, 27 November 2026 | Use DGS-10 `relatedTaskIds` for T-03-04, T-04-03 and T-04-04. T-11-01 owns final verification. |
 | CR-03 | RG-09 cannot waive mandatory pilot gate | Approved by owner, 27 November 2026 | Keep the 4/5 within 10 minutes unassisted target. T-11-04 verifies it. |
 | CR-04 | Phase 11 predeployment vs Phase 12 closure | Approved by owner, 27 November 2026 | Follow the DGS-10 §14 split. Close deployment, smoke and rollback evidence in Phase 12 after explicit deployment approval. |
-| CR-05 | V0.1 working connected editor milestone | Proposed at Phase 05 | M2 demonstrates insertion, movement, resizing, connections and routing with supported default styles. Phase 06 retains full label and style controls. V0.1 is an internal development milestone. All V0.2 mandatory requirements and release gates remain in force. |
+| CR-05 | V0.1 working connected editor milestone | Approved by owner, 27 November 2026 | M2 demonstrates insertion, movement, resizing, connections and routing with supported default styles. Phase 06 retains full label and style controls. V0.1 is an internal development milestone. All V0.2 mandatory requirements and release gates remain in force. |
 | ND-02 | Retain full source filenames and initial hashes | Pack assembly decision | docs/BASELINE_MANIFEST.json |
 | ND-03 | No app scaffold or dependencies in starter ZIP | Pack assembly decision | Phase 00 selects versions and initializes |
 

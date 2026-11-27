@@ -5,7 +5,7 @@
 - Tasks completed: 29/56. Phases passed: 6/13.
 - Mandatory scenarios passed: 41/205. Conditional: 0/13 (applicability pending).
 - Spikes passed: 8/8; release gates passed: 0/10.
-- Phase 05 is ready for owner review. Phase 06 awaits separate authorization.
+- V0.1 internal connected-editor milestone achieved under owner-approved CR-05. Phase 06 authorized.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
@@ -14,7 +14,7 @@
 | 02 | Core domain and command foundation | 5 | Closed in `e9f321c` | Owner accepted |
 | 03 | Workspace and canvas | 5 | Closed in `43e22d3` | Owner accepted |
 | 04 | Component library | 4 | Closed in `7622353` | Owner accepted |
-| 05 | Connections and routing | 3 | Implemented | Passed locally |
+| 05 | Connections and routing | 3 | Closed in `c694948` | Owner accepted |
 | 06 | Properties and styling | 3 | Not started | Not run |
 | 07 | Grouping and boundaries | 4 | Not started | Not run |
 | 08 | Commands and editing history integration | 3 | Not started | Not run |
@@ -85,7 +85,7 @@
 | T-12-03 | Release handover | Not started | Not run | — |
 
 ## Active blockers and review
-Phase 04 closed in `7622353`. Phase 05 passed locally and awaits owner review. CR-05 proposes V0.1 as the internal connected editor milestone. Full label fitting, property controls, grouping, durable persistence, import, export and release qualification remain scheduled for later phases. Hosted GitHub Actions remains unrun.
+Phase 04 closed in `7622353`. The owner accepted Phase 05 and approved CR-05 for V0.1, the internal connected-editor milestone. Full label fitting, property controls, grouping, durable persistence, import, export and release qualification remain scheduled for later phases. Hosted GitHub Actions remains unrun.
 
 ## Updating this tracker
 Use `not_started`, `in_progress`, `blocked`, `implemented` (or register's approved status vocabulary) and actual verification states separately; never mark completed solely because code exists. For a phase that has only partial verification, record specific tests pending later. Update machine registers first and reconcile this rollup at the phase gate. Keep evidence under `docs/04-development/evidence/` or an approved CI artifact reference, with timestamp, commit/build, command, environment, result and limitations. Do not mark mandatory skipped/unrun as passed. Record an explicit non-applicability decision for deferred optional tests only.

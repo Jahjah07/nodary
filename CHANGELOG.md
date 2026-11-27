@@ -2,6 +2,8 @@
 
 ## Phase 05 — 27 November 2026
 
+- The owner approved CR-05 and recognized V0.1 as the internal connected-editor milestone. V0.2 mandatory requirements remain in force.
+
 - Closed Phase 04 locally and restored the original screenshot bytes in Git.
 - Added validated pointer and keyboard connection creation, endpoint reconnection, route selection and edge-only deletion.
 - Added shared deterministic routing, arrowheads, stroke and label geometry, with live updates after moving or resizing components. [Phase 05 evidence](docs/04-development/evidence/PHASE-05.md)

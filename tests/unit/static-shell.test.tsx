@@ -9,7 +9,7 @@ afterEach(cleanup);
 
 test("SP-01: the library links to the static editor with the fixture UUID", () => {
   render(<Library documents={[]} loading={false} error="" corrupt={0} refresh={() => {}}
-    create={async () => null} action={async () => null} />);
+    create={async () => null} importDiagram={async () => null} action={async () => null} />);
 
   const href = screen.getByRole("link", { name: "Open sample diagram" }).getAttribute("href");
   const url = new URL(href ?? "/", "http://localhost");

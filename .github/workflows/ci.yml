@@ -25,5 +25,5 @@ jobs:
       - run: npm run typecheck
       - run: npm run test:coverage
       - run: npm run build
-      - run: npx playwright install --with-deps chromium chrome msedge
+      - run: npx playwright install --with-deps chromium chrome msedge firefox
       - run: npm run test:e2e

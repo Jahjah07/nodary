@@ -2,10 +2,10 @@
 
 **Baseline:** 27 November 2026. This is a human-readable rollup. Machine authority: [DGS-09_Implementation_Task_Register_v0.1.json](docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json) and [DGS-10_Acceptance_Test_Register_v0.1.json](docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json). Update status from actual evidence, not manual progress alone.
 
-- Tasks completed: 44/56. Phases passed: 10/13.
-- Mandatory scenarios passed: 129/205. Conditional: 0/13 (applicability pending).
+- Tasks completed: 49/56. Phases passed: 11/13.
+- Mandatory scenarios passed: 175/205. Conditional: 0/13 (applicability pending).
 - Spikes passed: 8/8; release gates passed: 0/10.
-- V0.1 internal connected-editor milestone achieved under owner-approved CR-05. Phase 09 is ready for owner review.
+- V0.1 internal connected-editor milestone achieved under owner-approved CR-05. V0.2 feature-complete MVP candidate awaits Phase 10 owner review and release qualification.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
@@ -18,8 +18,8 @@
 | 06 | Properties and styling | 3 | Closed in `4f2d856` | Owner accepted |
 | 07 | Grouping and boundaries | 4 | Closed in `a9de1eb` | Owner accepted |
 | 08 | Commands and editing history integration | 3 | Closed in `44bfdb6` | Owner accepted |
-| 09 | Persistence and recovery | 5 | Implemented | Passed locally |
-| 10 | Import, export and templates | 5 | Not started | Not run |
+| 09 | Persistence and recovery | 5 | Closed in `e0d9d7e` | Owner accepted the local pass |
+| 10 | Import, export and templates | 5 | Implemented, ready for owner review | Passed locally |
 | 11 | Testing and stabilization | 4 | Not started | Not run |
 | 12 | Deployment and release | 3 | Not started | Not run |
 
@@ -71,11 +71,11 @@
 | T-09-03 | Cross-tab conflict and recovery | Implemented | Pass, one writer wins, no stale deletion or resurrection, guarded navigation | [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md) |
 | T-09-04 | Viewport, upgrades and failure handling | Implemented | Pass, independent view writes and safe version and corruption handling | [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md) |
 | T-09-05 | Editable backup recovery integration | Implemented | Pass, real browser JSON download from the latest graph after save failure | [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md#editable-backup-evidence) |
-| T-10-01 | Bounded JSON import and portable export | Not started | Not run | — |
-| T-10-02 | Starter templates and independence | Not started | Not run | — |
-| T-10-03 | Standalone SVG serializer | Not started | Not run | — |
-| T-10-04 | PNG renderer and preflight | Not started | Not run | — |
-| T-10-05 | File dialogs, handoff and regression | Not started | Not run | — |
+| T-10-01 | Bounded JSON import and portable export | Implemented | Pass, strict input checks, independent IDs, atomic import and native JSON round trips | [Phase 10 evidence](docs/04-development/evidence/PHASE-10.md) |
+| T-10-02 | Starter templates and independence | Implemented | Pass, both exact fixtures validated, edited, independently instantiated and reopened | [Phase 10 evidence](docs/04-development/evidence/PHASE-10.md) |
+| T-10-03 | Standalone SVG serializer | Implemented | Pass, full world scene, safe vector XML and independent Firefox rendering | [Phase 10 evidence](docs/04-development/evidence/PHASE-10.md) |
+| T-10-04 | PNG renderer and preflight | Implemented | Pass, real 2× and 1× output, resource ceilings, cancellation and cleanup | [Phase 10 evidence](docs/04-development/evidence/PHASE-10.md) |
+| T-10-05 | File dialogs, handoff and regression | Implemented | Pass, fresh capture, real browser downloads and 123-case full regression | [Phase 10 evidence](docs/04-development/evidence/PHASE-10.md) |
 | T-11-01 | Consolidated mandatory traceability suite | Not started | Not run | — |
 | T-11-02 | Security, accessibility and compatibility audit | Not started | Not run | — |
 | T-11-03 | Performance and visual fidelity | Not started | Not run | — |
@@ -85,7 +85,7 @@
 | T-12-03 | Release handover | Not started | Not run | — |
 
 ## Active blockers and review
-The owner accepted Phase 08. Phase 09 passed locally, including real IndexedDB recovery and the 102-case serial browser suite. Import, starter templates, standalone export, cross-platform font fidelity and release qualification remain open. The earlier intermittent Edge click stall remains an investigation item. Phase 10 awaits separate authorization. Hosted GitHub Actions remains unrun.
+The owner accepted Phase 09. Phase 10 passed locally, including portable round trips, standalone exports, 123 browser regression cases and a 21-case focused rerun. The reported hosted Ubuntu run failed the same Windows-only keyboard assertion in three browsers. A hosted run with the corrected test is pending. The earlier intermittent Edge click stall remains an investigation item. Cross-platform font fidelity and the consolidated performance, usability, security and accessibility gates remain open for release qualification. Phase 11 requires separate authorization. [Phase 10 evidence](docs/04-development/evidence/PHASE-10.md#acceptance-and-gate) · [CI follow-up](docs/04-development/evidence/PHASE-10.md#hosted-ci-follow-up)
 
 ## Updating this tracker
 Use `not_started`, `in_progress`, `blocked`, `implemented` (or register's approved status vocabulary) and actual verification states separately; never mark completed solely because code exists. For a phase that has only partial verification, record specific tests pending later. Update machine registers first and reconcile this rollup at the phase gate. Keep evidence under `docs/04-development/evidence/` or an approved CI artifact reference, with timestamp, commit/build, command, environment, result and limitations. Do not mark mandatory skipped/unrun as passed. Record an explicit non-applicability decision for deferred optional tests only.

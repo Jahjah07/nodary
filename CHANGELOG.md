@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 10 — 28 November 2026
+
+- Added validated native JSON import with independent identities and add-only storage, and creation from the two original starter templates.
+- Added full-scene standalone SVG and PNG export and editable JSON download. PNG defaults to 2× and offers explicit 1× where feasible. Exports use the current valid diagram without a storage read. [Phase 10 evidence](docs/04-development/evidence/PHASE-10.md)
+
 ## Phase 09 — 28 November 2026
 
 - Added durable local documents, library actions, revision-checked autosave, and independent viewport and panel preferences.

@@ -5,8 +5,8 @@ import { fail, type Result } from "../core/validation";
 import type { DocumentRepository } from "./document-repository";
 
 // DGS-08 §4. Whole-document copies retain geometry and remap every canonical ID.
-export function copyDiagram(
-  source: Immutable<DiagramDocument>, viewport: Viewport | null, now: string, uuid: () => string,
+export function remapDiagram(
+  source: Immutable<DiagramDocument>, viewport: Viewport | null, now: string, uuid: () => string, title = source.title,
 ): Result<PortableDiagram> {
   const document = structuredClone(source) as DiagramDocument;
   const keys = [source.id, ...source.nodes.map(({ id }) => id), ...source.groups.map(({ id }) => id),
@@ -17,7 +17,7 @@ export function copyDiagram(
     return fail({ code: "RECORD_EXISTS", message: "Could not allocate independent diagram identifiers.", path: [] });
   }
   document.id = ids.get(source.id)!;
-  document.title = `${[...source.title].slice(0, 113).join("")} (copy)`;
+  document.title = title;
   document.createdAt = document.updatedAt = now;
   for (const item of [...document.nodes, ...document.groups]) {
     item.id = ids.get(item.id)!;
@@ -29,6 +29,10 @@ export function copyDiagram(
     edge.target.nodeId = ids.get(edge.target.nodeId)!;
   }
   return parsePortable({ document, viewport });
+}
+
+export function copyDiagram(source: Immutable<DiagramDocument>, viewport: Viewport | null, now: string, uuid: () => string) {
+  return remapDiagram(source, viewport, now, uuid, `${[...source.title].slice(0, 113).join("")} (copy)`);
 }
 
 export async function createWithFreshIds(make: () => Result<PortableDiagram>, repository: {

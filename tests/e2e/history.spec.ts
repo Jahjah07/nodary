@@ -11,7 +11,9 @@ const drawn = (page: Page) => page.locator(".diagram-node");
 const notice = (page: Page) => page.locator(".canvas-notice");
 
 async function create(page: Page, name: string) {
-  await page.getByRole("button", { name: "New diagram" }).press("Enter");
+  const newDiagram = page.getByRole("button", { name: "New diagram" });
+  await expect(newDiagram).toBeEnabled();
+  await newDiagram.press("Enter");
   await page.getByRole("textbox", { name: "Diagram name" }).fill(name);
   await page.getByLabel("Category").selectOption("flowchart");
   await page.getByRole("button", { name: "Create diagram" }).press("Enter");
@@ -64,7 +66,15 @@ test("CI-11 / UX-11 coalesces repeated nudges, preserves redo on view changes, a
   await canvas(page).press("Control+a");
   await expect(redo(page)).toBeEnabled();
   if (info.project.name === "chrome") await page.screenshot({ path: info.outputPath("history-controls.png") });
+  const windows = await page.evaluate(() => navigator.platform.startsWith("Win"));
   await canvas(page).press("Control+y");
+  if (windows) {
+    await expect(field(page, "X")).toHaveValue("176");
+    await canvas(page).press("Control+z");
+  }
+  await expect(field(page, "X")).toHaveValue("173");
+  await expect(redo(page)).toBeEnabled();
+  await canvas(page).press("Control+Shift+z");
   await expect(field(page, "X")).toHaveValue("176");
   await expect(zoom).toHaveText(nextZoom);
   await expect(page.getByRole("button", { name: "Grid", exact: true })).toHaveAttribute("aria-pressed", "false");

@@ -172,8 +172,8 @@
         "T-10-04",
         "T-10-05"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "09"
     },
     {
@@ -1072,7 +1072,8 @@
       ],
       "priority": "must",
       "evidence": [
-        "docs/04-development/evidence/PHASE-08.md#task-results"
+        "docs/04-development/evidence/PHASE-08.md#task-results",
+        "docs/04-development/evidence/PHASE-10.md#hosted-ci-follow-up"
       ],
       "commit": "44bfdb617fad41b71a486f58dbbb014b17d82717",
       "blocker": null
@@ -1122,7 +1123,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
       ],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "blocker": null
     },
     {
@@ -1144,7 +1145,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
       ],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "blocker": null
     },
     {
@@ -1167,7 +1168,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
       ],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "blocker": null
     },
     {
@@ -1189,7 +1190,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
       ],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "blocker": null
     },
     {
@@ -1211,7 +1212,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
       ],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "blocker": null
     },
     {
@@ -1224,13 +1225,16 @@
       ],
       "verification": "PE-23–28,DM-16–17,DM-20",
       "deliverable": "Implement strict UTF-8/duplicate-key/depth/size checks, v1 validation, ID remap, atomic add-only import and immutable export snapshot; reject unsupported versions and unsafe keys.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-09-05"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#implementation-and-architecture",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1244,13 +1248,16 @@
       ],
       "verification": "CL-22–24,DM-23,UX-02,UX-16",
       "deliverable": "Bundle exact DGS-06 flowchart and architecture fixtures, remap all IDs, validate, persist and open; independently editable, immutable sources; template instances JSON round-trip.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-10-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#implementation-and-architecture",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1264,13 +1271,16 @@
       ],
       "verification": "PE-29–33,CL-18–21,DM-22",
       "deliverable": "Generate native safe XML vector output from scene with full bounds, 32-unit white padding, icons, text and statuses; no UI, remote assets or raster wrapper; handle XML errors explicitly.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-10-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#implementation-and-architecture",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1284,13 +1294,16 @@
       ],
       "verification": "PE-34–36",
       "deliverable": "Rasterize same scene at 2x (explicit 1x), 8192 edge and 16 Mi pixel budgets; decode/encode/null/timeout cleanup and correct dimensions; no hidden scale reduction.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-10-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#implementation-and-architecture",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1305,13 +1318,17 @@
       ],
       "verification": "PE-37–38,UX-13–14,CI-34,CL-03",
       "deliverable": "Wire import/export dialog, filename sanitization, stable captured snapshot after draft resolution, browser download handoff; independently inspect PNG/SVG and reimport JSON in target browsers.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-10-04"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#implementation-and-architecture",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate",
+        "docs/04-development/evidence/PHASE-10.md#hosted-ci-follow-up"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1617,7 +1634,7 @@
       "id": "AC-FR-05-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-05-04",
@@ -1665,7 +1682,7 @@
       "id": "AC-FR-07-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-08-01",
@@ -1767,43 +1784,43 @@
       "id": "AC-FR-12-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-12-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-12-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-13-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-13-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-13-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-13-04",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-14-01",
@@ -1827,19 +1844,19 @@
       "id": "AC-FR-15-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-15-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-15-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-16-01",
@@ -1917,7 +1934,7 @@
       "id": "UX-02",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-03",
@@ -1983,13 +2000,13 @@
       "id": "UX-13",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-14",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-15",
@@ -2001,7 +2018,7 @@
       "id": "UX-16",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-17",
@@ -2109,13 +2126,13 @@
       "id": "DM-16",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-17",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-18",
@@ -2127,13 +2144,13 @@
       "id": "DM-19",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-20",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-21",
@@ -2145,13 +2162,13 @@
       "id": "DM-22",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-23",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-24",
@@ -2175,7 +2192,7 @@
       "id": "CL-03",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-04",
@@ -2265,19 +2282,19 @@
       "id": "CL-18",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-19",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-20",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-21",
@@ -2289,19 +2306,19 @@
       "id": "CL-22",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-23",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-24",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-25",
@@ -2517,7 +2534,7 @@
       "id": "CI-34",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-35",
@@ -2565,7 +2582,7 @@
       "id": "PE-06",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-07",
@@ -2667,25 +2684,25 @@
       "id": "PE-23",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-24",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-25",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-26",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-27",
@@ -2697,67 +2714,67 @@
       "id": "PE-28",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-29",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-30",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-31",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-32",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-33",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-34",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-35",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-36",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-37",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-38",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-39",

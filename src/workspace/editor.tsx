@@ -10,6 +10,7 @@ import type { ComponentType } from "../core/component-edits";
 import { EndpointDialog, type ConnectionStart, type EditEdge } from "./connections";
 import { DraftRegistration, LabelDialog, PropertyControls, type EditProperty } from "./properties";
 import { DocumentActions, type RunDocumentAction } from "./document-actions";
+import { ExportDialog, type ExportSnapshot } from "./export-dialog";
 import { HierarchyControls, type EditHierarchy } from "./hierarchy-controls";
 import { Canvas, type CanvasControls, type EditComponent, type HistoryAction, type PaletteDrag, type Tool } from "./canvas";
 import { ComponentPreview, measureLabel } from "./component-graphic";
@@ -33,7 +34,7 @@ const saveLabels = { temporary: "Temporary session", unsaved: "Unsaved changes",
 export type EditorControls = { prepare(): boolean };
 
 export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, onHierarchy, onHistory,
-  controls, onDirty, onLibrary, onDocumentAction, onBackup, recovery, panelPreference, onPanels, busy = false }: {
+  controls, onDirty, onLibrary, onDocumentAction, onBackup, onExport, recovery, panelPreference, onPanels, busy = false }: {
   session: DocumentSession;
   onView(viewport: Viewport | null, selection: readonly string[]): void;
   onToggle(key: "gridVisible" | "snapToGrid"): void;
@@ -47,6 +48,7 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
   onLibrary?(): void;
   onDocumentAction?: RunDocumentAction;
   onBackup?(): void;
+  onExport?(): ExportSnapshot | undefined;
   recovery?: ReactNode;
   panelPreference?: Panels;
   onPanels?(panels: Panels): void;
@@ -135,6 +137,7 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
         onClick={() => onToggle("snapToGrid")}><Magnet size={16} /> Snap</button>
       {!isSample && onDocumentAction && <DocumentActions title={document.title} run={onDocumentAction} disabled={busy} />}
       {!isSample && onBackup && <button className="button tool-button" title="Download editable backup" onClick={onBackup}><Download size={16} /> Backup</button>}
+      {!isSample && onExport && <ExportDialog capture={onExport} />}
       <button ref={right} className="icon-button right-toggle" title="Properties" aria-label="Properties" aria-expanded={open.properties}
         aria-controls={open.properties ? "properties-panel" : undefined} onClick={() => togglePanel("properties")}><PanelRight size={18} /></button>
     </div>

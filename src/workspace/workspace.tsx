@@ -5,7 +5,9 @@ import { useCallback, useEffect, useEffectEvent, useRef, useState } from "react"
 import { useStore } from "zustand";
 import { createStore } from "zustand/vanilla";
 import { createAutosave, hasPendingContent } from "../application/autosave";
-import { copyDiagram, createWithFreshIds } from "../application/document-lifecycle";
+import { copyDiagram, createWithFreshIds, remapDiagram } from "../application/document-lifecycle";
+import { validatePortableFile } from "../application/portable-file";
+import { starterTemplates, type StartPoint } from "../application/starter-templates";
 import { summaryOf, type DocumentRepository, type DocumentSummary, type OpenDocument, type Panels } from "../application/document-repository";
 import { editSession, openSession, viewSession, type DocumentSession } from "../application/document-session";
 import type { CommandState, Outcome } from "../core/commands";
@@ -15,8 +17,8 @@ import { duplicatePlan, type HierarchyEdit } from "../core/hierarchy-edits";
 import { indexHierarchy } from "../core/hierarchy";
 import type { EditHierarchy } from "./hierarchy-controls";
 import { componentDispatcher, type ComponentEdit } from "../core/component-edits";
-import { idSchema, type DiagramDocument, type Viewport } from "../core/contracts";
-import { ok, type Issue } from "../core/validation";
+import { idSchema, type DiagramDocument, type PortableDiagram, type Viewport } from "../core/contracts";
+import { ok, type Issue, type Result } from "../core/validation";
 import { createIndexedDocumentRepository } from "../infrastructure/indexed-document-repository";
 import { Editor, type EditorControls } from "./editor";
 import { backupData, downloadBackup } from "./backup";
@@ -287,16 +289,28 @@ export function Workspace({ initial, repository: provided }: { initial: "/" | "/
   };
   const now = () => new Date().toISOString();
   const uuid = () => crypto.randomUUID();
-  async function create(title: string, category: DiagramDocument["category"]) {
+  async function addDiagram(make: () => Result<PortableDiagram>) {
     if (operation.current) return "Wait for the current document action to finish.";
     setOperating(true);
     try {
-      const result = await createWithFreshIds(() => ok(blankDiagram(uuid(), title, category, now())), repository);
+      const result = await createWithFreshIds(make, repository);
       if (!result.ok) return result.issues[0].message;
       await refresh();
       accept(editorHref(result.value.id));
       return null;
     } finally { setOperating(false); }
+  }
+  function importDiagram(source: PortableDiagram, title = source.document.title) {
+    return addDiagram(() => {
+      const copy = remapDiagram(source.document, source.viewport, now(), uuid, title);
+      return copy.ok ? validatePortableFile(copy.value, measureLabel) : copy;
+    });
+  }
+  async function create(title: string, category: DiagramDocument["category"], startingPoint: StartPoint) {
+    if (startingPoint === "blank") return addDiagram(() => ok(blankDiagram(uuid(), title, category, now())));
+    const checked = validatePortableFile(starterTemplates[startingPoint].source, measureLabel);
+    if (!checked.ok) return checked.issues.map(({ code, path, message }) => `${path.join(".")} · ${code} · ${message}`).join(" ");
+    return importDiagram(checked.value, title);
   }
   async function libraryAction(row: DocumentSummary, action: DocumentAction, title?: string) {
     if (operation.current) return "Wait for the current document action to finish.";
@@ -386,10 +400,14 @@ export function Workspace({ initial, repository: provided }: { initial: "/" | "/
     if (blockedRoute) { await leave(blockedRoute, true); return; }
     await save.current?.flush(true);
   }
-  function backup() {
-    if (!prepare()) return;
+  function capture() {
+    if (!prepare()) return undefined;
     const current = active();
-    if (current) setNotice(downloadBackup(backupData(current.editor.document, current.editor.view.viewport)) ?? "");
+    return current ? { document: current.editor.document, viewport: current.editor.view.viewport } : undefined;
+  }
+  function backup() {
+    const current = capture();
+    if (current) setNotice(downloadBackup(backupData(current.document, current.viewport)) ?? "");
   }
   function changePanels(value: Panels) {
     panelEdited.current = true;
@@ -399,9 +417,9 @@ export function Workspace({ initial, repository: provided }: { initial: "/" | "/
 
   const opened = entry?.route === route ? entry : undefined;
   if (!editorRoute) return <Library documents={documents} loading={!ready && !error} error={error} corrupt={corrupt}
-    refresh={() => void refresh()} create={create} action={libraryAction} />;
+    refresh={() => void refresh()} create={create} importDiagram={importDiagram} action={libraryAction} />;
   if (session) return <Editor key={session.token} session={session} onView={updateView} onEdit={edit} onEdge={editEdge} onHierarchy={editHierarchy}
-    controls={controls} onDirty={setDirtyDraft} onLibrary={() => void leave("/")} onDocumentAction={editorAction} onBackup={backup}
+    controls={controls} onDirty={setDirtyDraft} onLibrary={() => void leave("/")} onDocumentAction={editorAction} onBackup={backup} onExport={capture}
     panelPreference={panels} onPanels={changePanels} busy={busy}
     recovery={<>
       {(notice || warning || panelWarning) && <p className="storage-notice" role="status">{[notice, warning, panelWarning].filter(Boolean).join(" ")}</p>}

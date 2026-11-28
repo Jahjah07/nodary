@@ -35,6 +35,8 @@ Retain each applicable copyright and permission notice with distributed copies. 
 
 The 14 registry keys below were copied from the corresponding `dist/esm/icons/<key>.mjs` entries in the lockfile-pinned `lucide-react` 1.82.0 package. The local array stores geometry and removes React reconciliation keys. The original ISC and Feather MIT notices are byte-identical to the package license and shipped in the static build as `LUCIDE-LICENSE.txt`. [Bundled license](public/LUCIDE-LICENSE.txt)
 
+Phase 10 embeds the same full notice as escaped text in the `desc` element of each standalone SVG that contains a Lucide vector. The serializer’s bundled copy is checked against `public/LUCIDE-LICENSE.txt`. The installed system font stack remains Arial, Liberation Sans, then sans-serif.
+
 | Applicable terms in the installed release | Icon keys |
 |---|---|
 | Lucide ISC and listed Feather MIT attribution | `database`, `monitor`, `server` |

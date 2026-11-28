@@ -6,10 +6,11 @@ import { inspectJson, limits } from "../core/validation";
 const encoder = new TextEncoder();
 
 // DGS-08 §10. The filename derives from the title without modifying the document.
-export function backupFilename(title: string) {
+export function exportFilename(title: string, format: "json" | "svg" | "png") {
   let stem = title.normalize("NFC").replace(/[<>:"/\\|?*\p{Cc}]/gu, " ").trim().replace(/[. ]+$/u, "");
-  stem = stem.replace(/\.json$/iu, "").replace(/[. ]+$/u, "");
-  if (/^(?:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\.|$)/iu.test(stem)) stem = `_${stem}`;
+  const extension = `.${format}`;
+  while (stem.toLowerCase().endsWith(extension)) stem = stem.slice(0, -extension.length).replace(/[. ]+$/u, "");
+  if (/^(?:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])$/iu.test(stem.split(".", 1)[0].trimEnd())) stem = `_${stem}`;
   let safe = "", bytes = 0, count = 0;
   for (const point of stem) {
     const size = encoder.encode(point).length;
@@ -18,8 +19,10 @@ export function backupFilename(title: string) {
     bytes += size;
   }
   safe = safe.replace(/[. ]+$/u, "");
-  return `${safe || "Untitled diagram"}.json`;
+  while (safe.toLowerCase().endsWith(extension)) safe = safe.slice(0, -extension.length).replace(/[. ]+$/u, "");
+  return `${safe || "Untitled diagram"}${extension}`;
 }
+export const backupFilename = (title: string) => exportFilename(title, "json");
 
 export function backupData(document: Immutable<DiagramDocument>, viewport: unknown) {
   const view = viewportSchema.nullable().safeParse(viewport);
@@ -33,17 +36,22 @@ export function backupData(document: Immutable<DiagramDocument>, viewport: unkno
 
 export function downloadBackup(capture: ReturnType<typeof backupData>) {
   if ("error" in capture) return capture.error;
+  return downloadFile(new Blob([capture.bytes], { type: "application/json;charset=utf-8" }), capture.filename,
+    capture.omit ? "The invalid viewport was omitted." : undefined);
+}
+
+export function downloadFile(blob: Blob, filename: string, warning?: string) {
   const anchor = document.createElement("a");
   let url: string | undefined;
   try {
-    url = URL.createObjectURL(new Blob([capture.bytes], { type: "application/json;charset=utf-8" }));
+    url = URL.createObjectURL(blob);
     anchor.href = url;
-    anchor.download = capture.filename;
+    anchor.download = filename;
     document.body.append(anchor);
     anchor.click();
-    return capture.omit ? "Download started. The invalid viewport was omitted." : "Download started.";
+    return warning ? `Download started. ${warning}` : "Download started.";
   } catch {
-    return "The browser could not start the backup download.";
+    return "The browser could not start the download.";
   } finally {
     anchor.remove();
     if (url) {

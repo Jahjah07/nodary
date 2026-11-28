@@ -22,11 +22,11 @@ npm run build
 npx playwright install chromium
 npm run test:e2e
 ```
-Install Google Chrome and Microsoft Edge to run all browser projects. On a clean Linux CI runner, use `npx playwright install --with-deps chromium chrome msedge`. Run `npm start` after building to serve `out/` on `http://127.0.0.1:4173`. Playwright starts that same server itself, so leave port 4173 free before running E2E. Open `/editor/?id=fixture` to exercise SP-01 directly.
+Install Google Chrome and Microsoft Edge to run all browser projects, and install Firefox with `npx playwright install firefox` for the standalone export check. On a clean Linux CI runner, use `npx playwright install --with-deps chromium chrome msedge firefox`. Run `npm start` after building to serve `out/` on `http://127.0.0.1:4173`. Playwright starts that same server itself, so leave port 4173 free before running E2E. Open `/editor/?id=fixture` to exercise SP-01 directly.
 
-The Phase 01 experiments run from a separate static build on port 4174. Install Firefox with `npx playwright install firefox` for the independent SVG rendering check. Run `npm run build:prototypes` and `npm run test:prototypes`. Pass a spike ID such as `npm run test:prototypes -- sp-02` for a targeted run. [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md)
+The Phase 01 experiments run from a separate static build on port 4174. Run `npm run build:prototypes` and `npm run test:prototypes`. Pass a spike ID such as `npm run test:prototypes -- sp-02` for a targeted run. [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md)
 
-Production target is static HTTPS hosting. Vendor choice and terms review are deferred to the deployment phase. Use the editor’s Backup action to download an editable JSON copy. Private browsing, browser eviction, or clearing site data can remove local records.
+Production target is static HTTPS hosting. Vendor choice and terms review are deferred to the deployment phase. The library can import portable JSON or start a diagram from either built-in template. The editor exports full-scene PNG and SVG and editable JSON. The Backup action downloads editable JSON during save recovery. Private browsing, browser eviction, or clearing site data can remove local records.
 
 ## Project structure
 ```text

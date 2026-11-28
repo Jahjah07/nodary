@@ -228,7 +228,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -259,7 +259,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -291,7 +291,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -322,7 +322,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -353,7 +353,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -750,17 +750,21 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
         "tests/integration/property-edits.test.ts",
-        "tests/e2e/properties.spec.ts"
+        "tests/e2e/properties.spec.ts",
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-06.md#acceptance"
+        "docs/04-development/evidence/PHASE-06.md#acceptance",
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64; Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; Node 22.14.0, Vitest 5.1.2; static build oY-8_c6Kjm_sMwAt3UHEj",
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1012,17 +1016,21 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
         "tests/unit/routes.test.ts",
-        "tests/integration/connections-view.test.tsx"
+        "tests/integration/connections-view.test.tsx",
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-05.md#acceptance"
+        "docs/04-development/evidence/PHASE-05.md#acceptance",
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2",
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1413,7 +1421,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -1446,7 +1454,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -1477,7 +1485,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -1509,7 +1517,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -1541,7 +1549,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -1563,12 +1571,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/portable-file.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1589,12 +1603,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/portable-file.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1615,12 +1635,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/portable-file.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1642,12 +1668,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1669,12 +1701,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1696,12 +1734,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1723,12 +1766,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1840,12 +1889,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1863,12 +1917,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -1886,12 +1945,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -2142,16 +2206,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "component_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
-        "tests/e2e/workspace.spec.ts"
+        "tests/e2e/workspace.spec.ts",
+        "tests/e2e/files.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
+        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture",
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -2392,7 +2459,8 @@
         "tests/integration/connections-view.test.tsx"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence",
+        "docs/04-development/evidence/PHASE-10.md#hosted-ci-follow-up"
       ],
       "defectIds": [],
       "commit": "44bfdb617fad41b71a486f58dbbb014b17d82717",
@@ -2421,7 +2489,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -2439,17 +2507,20 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "component_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
         "tests/e2e/persistence.spec.ts",
-        "tests/integration/indexed-repository.test.ts"
+        "tests/integration/indexed-repository.test.ts",
+        "tests/e2e/files.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-09.md#partial-evidence-and-release-limits"
+        "docs/04-development/evidence/PHASE-09.md#partial-evidence-and-release-limits",
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -2465,12 +2536,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "visual_security_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -2511,12 +2588,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "component_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -2985,12 +3067,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/portable-file.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3006,12 +3094,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/portable-file.test.ts",
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3057,19 +3151,22 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
         "tests/integration/document-session.test.ts",
         "tests/e2e/persistence.spec.ts",
-        "tests/integration/indexed-repository.test.ts"
+        "tests/integration/indexed-repository.test.ts",
+        "tests/e2e/files.spec.ts"
       ],
       "evidence": [
         "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations",
-        "docs/04-development/evidence/PHASE-09.md#partial-evidence-and-release-limits"
+        "docs/04-development/evidence/PHASE-09.md#partial-evidence-and-release-limits",
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3086,17 +3183,21 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
         "tests/integration/document-session.test.ts",
-        "tests/unit/portable-parity.test.ts"
+        "tests/unit/portable-parity.test.ts",
+        "tests/e2e/files.spec.ts",
+        "tests/unit/portable-file.test.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations",
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3138,12 +3239,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3159,12 +3266,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3261,12 +3373,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3662,18 +3779,22 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
         "tests/unit/routes.test.ts",
         "tests/integration/connections-view.test.tsx",
-        "tests/e2e/connections.spec.ts"
+        "tests/e2e/connections.spec.ts",
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-05.md#acceptance"
+        "docs/04-development/evidence/PHASE-05.md#acceptance",
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6; Node 22.14.0, Vitest 5.1.2; static build gI-m-jx3xslSsTOW-0264",
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3690,12 +3811,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "visual_security_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3711,12 +3838,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "visual_security_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3735,7 +3868,9 @@
       "plannedTestLevel": "visual_security_e2e",
       "status": "not_run",
       "testIds": [],
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
       "environment": null,
@@ -3754,12 +3889,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3775,12 +3915,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -3796,12 +3941,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_visual_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -4140,7 +4290,8 @@
       ],
       "evidence": [
         "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture",
-        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence",
+        "docs/04-development/evidence/PHASE-10.md#hosted-ci-follow-up"
       ],
       "defectIds": [],
       "commit": "f4aa40c95997c824f20503715cfb7e12ec929a15",
@@ -4677,7 +4828,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -4752,12 +4903,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/integration/png-export.test.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -4819,7 +4977,8 @@
         "tests/e2e/history.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-09.md#partial-evidence-and-release-limits"
+        "docs/04-development/evidence/PHASE-09.md#partial-evidence-and-release-limits",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
@@ -4848,7 +5007,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -4873,7 +5032,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -4900,7 +5059,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -4926,7 +5085,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -4943,17 +5102,20 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
         "tests/e2e/persistence.spec.ts",
-        "tests/integration/indexed-repository.test.ts"
+        "tests/integration/indexed-repository.test.ts",
+        "tests/e2e/files.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-09.md#partial-evidence-and-release-limits"
+        "docs/04-development/evidence/PHASE-09.md#partial-evidence-and-release-limits",
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -4978,7 +5140,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5003,7 +5165,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5029,7 +5191,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5054,7 +5216,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5080,7 +5242,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5106,7 +5268,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5131,7 +5293,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5157,7 +5319,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5183,7 +5345,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5208,7 +5370,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5234,7 +5396,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5260,7 +5422,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5285,7 +5447,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5312,7 +5474,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5339,7 +5501,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5365,7 +5527,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5382,12 +5544,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/portable-file.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5404,12 +5572,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/portable-file.test.ts",
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5425,12 +5599,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/portable-file.test.ts",
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5446,12 +5626,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/portable-file.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5471,13 +5657,15 @@
       "status": "pass",
       "testIds": [
         "tests/e2e/persistence.spec.ts",
-        "tests/integration/indexed-repository.test.ts"
+        "tests/integration/indexed-repository.test.ts",
+        "tests/e2e/files.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-09.md#editable-backup-evidence"
+        "docs/04-development/evidence/PHASE-09.md#editable-backup-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },
@@ -5494,12 +5682,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/integration/png-export.test.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5515,12 +5710,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "visual_security_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5537,12 +5738,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "visual_security_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5558,12 +5765,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "visual_security_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5579,12 +5792,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "visual_security_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5600,12 +5819,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5621,12 +5846,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/integration/png-export.test.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5642,12 +5874,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/integration/png-export.test.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5663,12 +5902,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts",
+        "tests/integration/png-export.test.ts",
+        "tests/unit/visual-export.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5684,12 +5930,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/unit/visual-export.test.ts",
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5705,12 +5957,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/files.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-10.md#browser-and-export-evidence",
+        "docs/04-development/evidence/PHASE-10.md#acceptance-and-gate"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node.js 22.14.0, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45, Firefox 159.0 standalone local files, static build 7jXMnJvb-RO6fraXTKRua",
       "applicabilityDecision": null
     },
     {
@@ -5735,7 +5992,7 @@
         "docs/04-development/evidence/PHASE-09.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "e0d9d7e0931372c8519b62e08a3922fe08a87bb1",
       "environment": "Windows 11 x64, Node 22.14.0, Dexie 4.4.7, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build JEUGs1G9CuerPxsp69k_A",
       "applicabilityDecision": null
     },

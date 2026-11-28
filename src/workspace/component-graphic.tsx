@@ -40,7 +40,7 @@ export function ComponentGraphic({ item, selected, tile, label, hideTitle }: {
   const { width, height } = item.size;
   const { style } = item;
   const { outline, decoration, icon, status, dash, bounds } = shape;
-  const layout = label ?? labelLayout(item, measureLabel);
+  const layout = label ?? labelLayout(item, tile ? approximate : measureLabel);
   const frame = "title" in item;
   const tileBox = icon ? `${icon.box.x - 3} ${icon.box.y - 3} 30 30` :
     `${bounds.x - 2} ${bounds.y - 2} ${bounds.width + 4} ${bounds.height + 4}`;

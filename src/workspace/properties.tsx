@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState, type FocusEvent, type KeyboardEvent } from "react";
+import { createContext, useContext, useEffect, useRef, useState, type FocusEvent, type KeyboardEvent } from "react";
 import { propertyFields, propertyValue, type PropertyEdit, type PropertyField, type PropertyItem } from "../core/properties";
 import { componentRegistry } from "../core/registry";
 
 export type EditProperty = (edit: PropertyEdit, generation: number) => string | null;
+export const DraftRegistration = createContext<((form: HTMLFormElement, resolve?: () => boolean) => void) | null>(null);
 type Commit = (field: PropertyField, value: string | number, generation: number) => string | null;
 
 const names: Record<PropertyField, string> = {
@@ -30,6 +31,9 @@ function Field({ field, name, current, generation, busy, commit, dismiss, autoFo
   const input = useRef<HTMLInputElement & HTMLTextAreaElement>(null);
   const form = useRef<HTMLFormElement>(null);
   const composing = useRef(false);
+  const registerDraft = useContext(DraftRegistration);
+  const resolveDraft = useRef<() => boolean>(() => true);
+  const dirty = !!draft;
   const initial = current === undefined ? "" : String(current);
   const value = draft?.value ?? initial;
   const color = colorFields.has(field), numeric = numericFields.has(field), multiline = field === "label";
@@ -42,6 +46,7 @@ function Field({ field, name, current, generation, busy, commit, dismiss, autoFo
     setError("");
   }
   function cancel() {
+    if (form.current) registerDraft?.(form.current);
     setDraft(undefined);
     setError("");
     dismiss?.();
@@ -59,6 +64,7 @@ function Field({ field, name, current, generation, busy, commit, dismiss, autoFo
     }
     const result = commit(field, numeric ? Number(raw) : color ? raw.toUpperCase() : raw, version);
     if (result) { setError(result); return false; }
+    if (form.current) registerDraft?.(form.current);
     setDraft(undefined);
     setError("");
     dismiss?.();
@@ -77,6 +83,20 @@ function Field({ field, name, current, generation, busy, commit, dismiss, autoFo
       event.preventDefault(); submit(value, draft?.generation ?? generation);
     }
   }
+  useEffect(() => {
+    resolveDraft.current = () => {
+      if (!draft) return true;
+      if (submit(draft.value, draft.generation)) return true;
+      input.current?.focus({ preventScroll: true });
+      return false;
+    };
+  });
+  useEffect(() => {
+    const element = form.current;
+    if (!element || !registerDraft || !dirty) return;
+    registerDraft(element, () => resolveDraft.current());
+    return () => registerDraft(element);
+  }, [dirty, registerDraft]);
   const textProps = {
     value, placeholder: current === undefined ? "Mixed" : undefined, "aria-invalid": !!error,
     onChange: (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => change(event.target.value),

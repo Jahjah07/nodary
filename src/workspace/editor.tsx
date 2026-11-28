@@ -1,13 +1,15 @@
 "use client";
 
-import { CircleHelp, Clock3, Grid2X2, Hand, Magnet, MousePointer2, PanelLeft, PanelRight, Redo2, Undo2, X } from "lucide-react";
-import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode, type SyntheticEvent } from "react";
-import type { DocumentSession } from "../application/document-session";
+import { CircleHelp, Download, Grid2X2, Hand, Magnet, MousePointer2, PanelLeft, PanelRight, Redo2, Undo2, X } from "lucide-react";
+import { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState, useSyncExternalStore, type ReactNode, type Ref, type SyntheticEvent } from "react";
+import { saveStatus, type DocumentSession } from "../application/document-session";
+import type { Panels } from "../application/document-repository";
 import type { Viewport } from "../core/contracts";
 import { componentFor, componentRegistry } from "../core/registry";
 import type { ComponentType } from "../core/component-edits";
 import { EndpointDialog, type ConnectionStart, type EditEdge } from "./connections";
-import { LabelDialog, PropertyControls, type EditProperty } from "./properties";
+import { DraftRegistration, LabelDialog, PropertyControls, type EditProperty } from "./properties";
+import { DocumentActions, type RunDocumentAction } from "./document-actions";
 import { HierarchyControls, type EditHierarchy } from "./hierarchy-controls";
 import { Canvas, type CanvasControls, type EditComponent, type HistoryAction, type PaletteDrag, type Tool } from "./canvas";
 import { ComponentPreview, measureLabel } from "./component-graphic";
@@ -26,8 +28,12 @@ function subscribeNarrow(change: () => void) {
 }
 
 const categories = [["Flowchart", "flow."], ["Architecture", "arch."], ["General", "general."]] as const;
+const saveLabels = { temporary: "Temporary session", unsaved: "Unsaved changes", saving: "Saving", saved: "Saved locally",
+  failed: "Save failed", conflict: "Changes conflict" };
+export type EditorControls = { prepare(): boolean };
 
-export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, onHierarchy, onHistory }: {
+export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, onHierarchy, onHistory,
+  controls, onDirty, onLibrary, onDocumentAction, onBackup, recovery, panelPreference, onPanels, busy = false }: {
   session: DocumentSession;
   onView(viewport: Viewport | null, selection: readonly string[]): void;
   onToggle(key: "gridVisible" | "snapToGrid"): void;
@@ -36,6 +42,15 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
   onProperty: EditProperty;
   onHierarchy: EditHierarchy;
   onHistory(action: HistoryAction): string | null;
+  controls?: Ref<EditorControls>;
+  onDirty?(dirty: boolean): void;
+  onLibrary?(): void;
+  onDocumentAction?: RunDocumentAction;
+  onBackup?(): void;
+  recovery?: ReactNode;
+  panelPreference?: Panels;
+  onPanels?(panels: Panels): void;
+  busy?: boolean;
 }) {
   const { document, view } = session.editor;
   const scene = useMemo(() => buildScene(document, measureLabel), [document]);
@@ -54,14 +69,31 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
   const heading = useRef<HTMLHeadingElement>(null);
   const left = useRef<HTMLButtonElement>(null);
   const right = useRef<HTMLButtonElement>(null);
-  const open = { components: narrow ? drawer === "components" : panels.components, properties: narrow ? drawer === "properties" : panels.properties };
+  const preferred = panelPreference ?? panels;
+  const open = { components: narrow ? drawer === "components" : preferred.components, properties: narrow ? drawer === "properties" : preferred.properties };
+  const drafts = useRef(new Map<HTMLFormElement, () => boolean>());
+  const registerDraft = useCallback((form: HTMLFormElement, resolve?: () => boolean) => {
+    if (resolve) drafts.current.set(form, resolve);
+    else drafts.current.delete(form);
+    onDirty?.(drafts.current.size > 0);
+  }, [onDirty]);
+  useImperativeHandle(controls, () => ({
+    prepare() {
+      canvas.current?.cancel();
+      return [...drafts.current.values()].every((resolve) => resolve());
+    },
+  }));
   useEffect(() => { heading.current?.focus({ preventScroll: true }); }, []);
 
   function togglePanel(panel: Panel) {
     if (narrow) {
       setDrawer(open[panel] ? undefined : panel);
       if (!open[panel]) requestAnimationFrame(() => window.document.getElementById(`${panel}-heading`)?.focus());
-    } else setPanels((previous) => ({ ...previous, [panel]: !previous[panel] }));
+    } else {
+      const next = { ...preferred, [panel]: !preferred[panel] };
+      if (onPanels) onPanels(next);
+      else setPanels(next);
+    }
   }
   function closePanel(panel: Panel) {
     togglePanel(panel);
@@ -76,11 +108,13 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
       invalid.querySelector<HTMLElement>("input, textarea, select")?.focus();
     }
   }
-  return <div className="editor-shell" onPointerDownCapture={guardDraft} onClickCapture={guardDraft}>
+  return <DraftRegistration.Provider value={registerDraft}><div className="editor-shell" onPointerDownCapture={guardDraft} onClickCapture={guardDraft}>
     <header className="app-header editor-header">
-      <span className="wordmark">Nodary</span><span className="header-divider" /><BackToLibrary /><span className="header-divider" />
+      <span className="wordmark">Nodary</span><span className="header-divider" /><BackToLibrary onNavigate={onLibrary} /><span className="header-divider" />
       <h1 ref={heading} tabIndex={-1} title={document.title}>{document.title}</h1>
-      <span className="temporary" title="Cleared when this tab is reloaded or closed"><Clock3 size={15} /> <span>Temporary session</span></span>
+      <span className="save-state" data-save-state={isSample ? "sample" : saveStatus(session)} aria-live="polite">
+        {isSample ? "Read-only sample" : saveLabels[saveStatus(session)]}
+      </span>
       <button className="icon-button" aria-label="Keyboard shortcuts" title="Keyboard shortcuts" onClick={() => help.current?.showModal()}><CircleHelp size={19} /></button>
     </header>
     <div className="editor-toolbar" role="group" aria-label="Editor toolbar">
@@ -91,17 +125,20 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
       <button className="button tool-button" title="Pan" aria-pressed={tool === "pan"} onClick={() => setTool("pan")}><Hand size={17} /> Pan</button>
       <span className="header-divider" />
       <button className="icon-button" type="button" aria-label="Undo" aria-keyshortcuts="Control+Z Meta+Z" title="Undo (Ctrl / ⌘ + Z)"
-        data-history-action disabled={isSample || !!session.pending || !session.editor.history.past.length} onClick={() => canvas.current?.history("undo")}><Undo2 size={18} /></button>
+        data-history-action disabled={isSample || busy || !session.editor.history.past.length} onClick={() => canvas.current?.history("undo")}><Undo2 size={18} /></button>
       <button className="icon-button" type="button" aria-label="Redo" aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z Control+Y" title="Redo (Ctrl / ⌘ + Shift + Z, or Ctrl + Y)"
-        data-history-action disabled={isSample || !!session.pending || !session.editor.history.future.length} onClick={() => canvas.current?.history("redo")}><Redo2 size={18} /></button>
+        data-history-action disabled={isSample || busy || !session.editor.history.future.length} onClick={() => canvas.current?.history("redo")}><Redo2 size={18} /></button>
       <span className="header-divider" />
-      <button className="button tool-button" title="Show grid" aria-pressed={document.settings.gridVisible} disabled={!!session.pending}
+      <button className="button tool-button" title="Show grid" aria-pressed={document.settings.gridVisible} disabled={busy}
         onClick={() => onToggle("gridVisible")}><Grid2X2 size={16} /> Grid</button>
-      <button className="button tool-button" title="Snap to grid" aria-pressed={document.settings.snapToGrid} disabled={!!session.pending}
+      <button className="button tool-button" title="Snap to grid" aria-pressed={document.settings.snapToGrid} disabled={busy}
         onClick={() => onToggle("snapToGrid")}><Magnet size={16} /> Snap</button>
+      {!isSample && onDocumentAction && <DocumentActions title={document.title} run={onDocumentAction} disabled={busy} />}
+      {!isSample && onBackup && <button className="button tool-button" title="Download editable backup" onClick={onBackup}><Download size={16} /> Backup</button>}
       <button ref={right} className="icon-button right-toggle" title="Properties" aria-label="Properties" aria-expanded={open.properties}
         aria-controls={open.properties ? "properties-panel" : undefined} onClick={() => togglePanel("properties")}><PanelRight size={18} /></button>
     </div>
+    {recovery}
     <main className="editor-main">
       {open.components && <Sidebar panel="components" close={() => closePanel("components")}>
         <div className="component-library">
@@ -109,8 +146,8 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
             <h3 id={`palette-${name}`}>{name}</h3>
             <ul>{componentRegistry.components.filter(({ type }) => type.startsWith(prefix)).map(({ type, displayName }) => <li key={type}>
               <button type="button" title={isSample ? "Create a diagram to insert components" : displayName}
-                aria-label={`Insert ${displayName}`} data-type={type} draggable={!isSample && !session.pending}
-                disabled={isSample || !!session.pending}
+                aria-label={`Insert ${displayName}`} data-type={type} draggable={!isSample && !busy}
+                disabled={isSample || busy}
                 onClick={() => { if (canvas.current?.insert(type as ComponentType) && narrow) setDrawer(undefined); }}
                 onDragStart={(event) => {
                   const box = event.currentTarget.getBoundingClientRect();
@@ -127,15 +164,14 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
         </div>
       </Sidebar>}
       <Canvas scene={scene} viewport={view.viewport} selection={view.selection} tool={tool} isSample={isSample}
-        editor={session.editor} pending={!!session.pending} controls={canvas} drag={drag} onEdit={onEdit} onEdge={onEdge} onView={onView}
+        editor={session.editor} pending={busy} controls={canvas} drag={drag} onEdit={onEdit} onEdge={onEdge} onView={onView}
         onLabel={setLabelId} onHierarchy={onHierarchy} onHistory={onHistory} />
       {open.properties && <Sidebar panel="properties" close={() => closePanel("properties")}>
-        <Inspector scene={scene} session={session} readOnly={isSample} onEdge={onEdge} onProperty={onProperty} onHierarchy={onHierarchy}
+        <Inspector scene={scene} session={session} readOnly={isSample} busy={busy} onEdge={onEdge} onProperty={onProperty} onHierarchy={onHierarchy}
           select={(ids) => { canvas.current?.finishNudge(); onView(view.viewport ?? originView, ids); }}
           openConnection={(start, trigger) => { endpointTrigger.current = trigger; setConnection(start); }} />
       </Sidebar>}
     </main>
-    {session.failure && <p role="alert" className="editor-error">The temporary repository could not apply the latest edit.</p>}
     <footer className="editor-status">
       <span>{document.nodes.length} nodes · {document.edges.length} edges · {document.groups.length} boundaries</span>
       <span aria-live="polite">{view.selection.length ? `${view.selection.length} selected` : <>
@@ -170,8 +206,9 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
         <div><dt>Pan temporarily</dt><dd><kbd>Space</kbd> + drag</dd></div>
         <div><dt>Zoom under the pointer</dt><dd><kbd>Ctrl / ⌘</kbd> + scroll</dd></div></dl>
       <p>Use the Hierarchy controls in Properties to group or ungroup objects and assign a parent boundary.</p>
+      <p>Local storage is specific to this browser profile and site. Private browsing, eviction, or clearing site data can remove diagrams. Download an editable backup for work you need to keep.</p>
     </dialog>
-  </div>;
+  </div></DraftRegistration.Provider>;
 }
 
 function Sidebar({ panel, close, children }: { panel: Panel; close(): void; children: ReactNode }) {
@@ -183,8 +220,8 @@ function Sidebar({ panel, close, children }: { panel: Panel; close(): void; chil
   </aside>;
 }
 
-function Inspector({ scene, session, select, readOnly, openConnection, onEdge, onProperty, onHierarchy }: {
-  scene: Scene; session: DocumentSession; select(ids: readonly string[]): void; readOnly: boolean;
+function Inspector({ scene, session, select, readOnly, busy, openConnection, onEdge, onProperty, onHierarchy }: {
+  scene: Scene; session: DocumentSession; select(ids: readonly string[]): void; readOnly: boolean; busy: boolean;
   openConnection(start: ConnectionStart, trigger: HTMLElement): void; onEdge: EditEdge;
   onProperty: EditProperty;
   onHierarchy: EditHierarchy;
@@ -223,20 +260,20 @@ function Inspector({ scene, session, select, readOnly, openConnection, onEdge, o
         <button className="button selection-button" data-selection-action disabled={view.selection.length === all.length} onClick={() => select(objectsIn(scene))}>Select all</button>
         {view.selection.length > 0 && <button className="button selection-button" data-selection-action onClick={() => select([])}>Clear selection</button>}
       </div>}
-      {!readOnly && canConnect && <button className="button selection-button" disabled={!!session.pending}
+      {!readOnly && canConnect && <button className="button selection-button" disabled={busy}
         onClick={(event) => openConnection({ kind: "connect", id: crypto.randomUUID(),
           source: { nodeId: picked.item.id, handleId: "right" } }, event.currentTarget)}>Connect to…</button>}
       {!readOnly && edge && <div className="connection-actions">
-        {(["source", "target"] as const).map((side) => <button className="button selection-button" key={side} disabled={!!session.pending}
+        {(["source", "target"] as const).map((side) => <button className="button selection-button" key={side} disabled={busy}
           onClick={(event) => openConnection({ kind: "reconnect", id: edge.id, side }, event.currentTarget)}>Reconnect {side}</button>)}
-        <button className="button selection-button" disabled={!!session.pending}
+        <button className="button selection-button" disabled={busy}
           onClick={() => editEdge({ kind: "delete", id: edge.id })}>Delete connection</button>
       </div>}
       {edgeError && <p role="alert">{edgeError}</p>}
       {!readOnly && selectedItems.length > 0 && <HierarchyControls key={JSON.stringify(view.selection)}
-        document={document} ids={view.selection} generation={session.editor.generation} pending={!!session.pending} edit={onHierarchy} />}
+        document={document} ids={view.selection} generation={session.editor.generation} pending={busy} edit={onHierarchy} />}
       {!readOnly && selectedItems.length > 0 && <PropertyControls items={selectedItems} generation={session.editor.generation}
-        busy={!!session.pending} onEdit={onProperty} />}
+        busy={busy} onEdit={onProperty} />}
     </section>
   </div>;
 }

@@ -59,7 +59,7 @@ afterEach(() => {
 });
 
 test("UX-11 workspace routes undo and redo through the repository session and starts fresh on reopen", async () => {
-  render(<Workspace initial="/" />);
+  render(<Workspace initial="/" repository={createMemoryDocumentRepository()} />);
   await screen.findByText("No diagrams yet");
   fireEvent.click(screen.getByRole("button", { name: "New diagram" }));
   fireEvent.change(screen.getByRole("textbox", { name: "Diagram name" }), { target: { value: "History workflow" } });

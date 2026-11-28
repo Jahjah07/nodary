@@ -224,6 +224,38 @@ test("UX-07/09 nests editable groups, connects at all three containment levels, 
     return box.left >= x && box.top >= y && box.right <= x + width && box.bottom <= y + height;
   }), fit)).toBe(true);
   await capture(page, info, "restored-architecture");
+  await expect(page.getByText("Saved locally", { exact: true })).toBeVisible();
+  await page.reload();
+  await expect(canvas(page)).toBeVisible();
+  await expect(page.getByText("Saved locally", { exact: true })).toBeVisible();
+  await expect(undo).toBeDisabled();
+  await expect(redo).toBeDisabled();
+  await expect(item(page, decision)).toHaveAttribute("data-parent-id", inside);
+  await expect(item(page, storage)).toHaveAttribute("data-parent-id", peer);
+  await expect(item(page, peer)).toHaveAttribute("data-parent-id", outer);
+  await expect.poll(records).toEqual(beforeDeletion);
+  await expect(item(page, web).getByText("Completed")).toBeVisible();
+  await expect(item(page, web).locator('[fill="#DBEAFE"]')).toHaveCount(1);
+  await capture(page, info, "reloaded-architecture");
+  await page.getByRole("button", { name: "Duplicate diagram Grouped service topology", exact: true }).click();
+  const copyDialog = page.getByRole("dialog", { name: "Duplicate diagram" });
+  await copyDialog.getByRole("button", { name: "Duplicate diagram", exact: true }).click();
+  await expect(copyDialog).toHaveCount(0);
+  await page.getByRole("link", { name: "Back to diagram library" }).click();
+  await expect(page.getByRole("link", { name: "Grouped service topology", exact: true })).toBeVisible();
+  await page.getByRole("link", { name: "Grouped service topology (copy)", exact: true }).click();
+  await expect(frames(page)).toHaveCount(3);
+  await expect(lines(page)).toHaveCount(4);
+  const clonedWeb = page.locator('.projection [data-component="arch.website"]');
+  const clonedId = (await idOf(clonedWeb))!;
+  expect(clonedId).not.toBe(web);
+  await expect(clonedWeb).not.toHaveAttribute("data-parent-id", inside);
+  await picker(page).selectOption(clonedId);
+  await setField(page, "Fill colour", "#FEE2E2");
+  await page.getByRole("link", { name: "Back to diagram library" }).click();
+  await page.getByRole("link", { name: "Grouped service topology", exact: true }).click();
+  await expect.poll(records).toEqual(beforeDeletion);
+  await expect(item(page, web).locator('[fill="#DBEAFE"]')).toHaveCount(1);
 });
 
 test("CI-24/25/26 expands ancestors on left and top, rejects shrink, and requires explicit membership", async ({ page }, info) => {

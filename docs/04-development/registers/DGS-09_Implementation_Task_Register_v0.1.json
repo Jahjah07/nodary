@@ -156,8 +156,8 @@
         "T-09-04",
         "T-09-05"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "08"
     },
     {
@@ -1051,7 +1051,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-08.md#task-results"
       ],
-      "commit": null,
+      "commit": "44bfdb617fad41b71a486f58dbbb014b17d82717",
       "blocker": null
     },
     {
@@ -1074,7 +1074,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-08.md#task-results"
       ],
-      "commit": null,
+      "commit": "44bfdb617fad41b71a486f58dbbb014b17d82717",
       "blocker": null
     },
     {
@@ -1100,7 +1100,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-08.md#task-results"
       ],
-      "commit": null,
+      "commit": "44bfdb617fad41b71a486f58dbbb014b17d82717",
       "blocker": null
     },
     {
@@ -1113,13 +1113,15 @@
       ],
       "verification": "PE-01–06,PE-20–22",
       "deliverable": "Implement documents/viewports/preferences stores, create/open/rename/duplicate/delete and atomic row/view operations; strict loaded content validation, no reset on error; template path completed Phase 10.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-08-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1133,13 +1135,15 @@
       ],
       "verification": "PE-07–12,PE-19,CI-31",
       "deliverable": "750 ms debounce, 1s max-wait when available, one in-flight immutable snapshot, generation-aware acknowledgement, retry latest, undo saved as new revision.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-09-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1154,13 +1158,15 @@
       ],
       "verification": "PE-13–18,DM-19,UX-12",
       "deliverable": "CAS transaction, stale deletion protection, copy/reload/backup, session isolation and pending navigation; test two actual tabs even with notifications disabled.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-09-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1174,13 +1180,15 @@
       ],
       "verification": "PE-20–22,PE-39",
       "deliverable": "Independent 500ms viewport debounce without graph revision, safe corrupt-view fallback, blocked upgrade/versionchange, no destructive rollback; test transaction abort and unavailable storage.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-09-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1194,13 +1202,15 @@
       ],
       "verification": "PE-11,PE-27,UX-13",
       "deliverable": "Expose safe JSON export of current valid in-memory snapshot even when DB unavailable, reusing Phase 02 validation; no stale substitution; final import/export UI Phase 10.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-09-04"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-09.md#implementation-and-architecture"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1505,31 +1515,31 @@
       "id": "AC-FR-01-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-01-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-01-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-01-04",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-01-05",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-02-01",
@@ -1727,31 +1737,31 @@
       "id": "AC-FR-10-04",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-11-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-11-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-11-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-11-04",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-12-01",
@@ -1967,7 +1977,7 @@
       "id": "UX-12",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-13",
@@ -2489,7 +2499,7 @@
       "id": "CI-31",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-32",
@@ -2531,25 +2541,25 @@
       "id": "PE-02",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-03",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-04",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-05",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-06",
@@ -2561,97 +2571,97 @@
       "id": "PE-07",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-08",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-09",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-10",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-11",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-12",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-13",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-14",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-15",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-16",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-17",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-18",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-19",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-20",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-21",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-22",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-23",
@@ -2681,7 +2691,7 @@
       "id": "PE-27",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-28",
@@ -2753,7 +2763,7 @@
       "id": "PE-39",
       "source": "DGS-08",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "PE-40",

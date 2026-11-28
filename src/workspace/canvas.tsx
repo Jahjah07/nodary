@@ -20,7 +20,9 @@ import { buildScene, clampTranslation, connectionAnchor, connectionAnchors, fitS
 export type Tool = "select" | "pan";
 export type EditComponent = (edit: ComponentEdit, selection: readonly string[] | undefined, generation: number) => CommandState | string;
 export type HistoryAction = "undo" | "redo";
-export type CanvasControls = { insert(type: ComponentType): boolean; clearDrop(): void; finishNudge(): void; history(action: HistoryAction): void };
+export type CanvasControls = {
+  insert(type: ComponentType): boolean; clearDrop(): void; finishNudge(): void; history(action: HistoryAction): void; cancel(): void;
+};
 export type PaletteDrag = { type: ComponentType; hotspot: Position };
 const dispatcher = componentDispatcher(measureLabel);
 const dropType = "application/x-nodary-component";
@@ -176,6 +178,7 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     clearDrop: () => setGhost(undefined),
     finishNudge: () => { finishNudge(true); },
     history,
+    cancel: () => { stop(true); finishNudge(false); drag.current = null; setGhost(undefined); setMenu(undefined); },
   }));
 
   function placed(event: DragEvent<HTMLDivElement>) {

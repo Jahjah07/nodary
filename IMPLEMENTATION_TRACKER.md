@@ -2,10 +2,10 @@
 
 **Baseline:** 27 November 2026. This is a human-readable rollup. Machine authority: [DGS-09_Implementation_Task_Register_v0.1.json](docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json) and [DGS-10_Acceptance_Test_Register_v0.1.json](docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json). Update status from actual evidence, not manual progress alone.
 
-- Tasks completed: 39/56. Phases passed: 9/13.
-- Mandatory scenarios passed: 95/205. Conditional: 0/13 (applicability pending).
+- Tasks completed: 44/56. Phases passed: 10/13.
+- Mandatory scenarios passed: 129/205. Conditional: 0/13 (applicability pending).
 - Spikes passed: 8/8; release gates passed: 0/10.
-- V0.1 internal connected-editor milestone achieved under owner-approved CR-05. Phase 08 is ready for owner review.
+- V0.1 internal connected-editor milestone achieved under owner-approved CR-05. Phase 09 is ready for owner review.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
@@ -17,8 +17,8 @@
 | 05 | Connections and routing | 3 | Closed in `c694948` | Owner accepted |
 | 06 | Properties and styling | 3 | Closed in `4f2d856` | Owner accepted |
 | 07 | Grouping and boundaries | 4 | Closed in `a9de1eb` | Owner accepted |
-| 08 | Commands and editing history integration | 3 | Implemented | Passed locally |
-| 09 | Persistence and recovery | 5 | Not started | Not run |
+| 08 | Commands and editing history integration | 3 | Closed in `44bfdb6` | Owner accepted |
+| 09 | Persistence and recovery | 5 | Implemented | Passed locally |
 | 10 | Import, export and templates | 5 | Not started | Not run |
 | 11 | Testing and stabilization | 4 | Not started | Not run |
 | 12 | Deployment and release | 3 | Not started | Not run |
@@ -66,11 +66,11 @@
 | T-08-01 | Full transaction integration | Implemented | Pass, validated graph-only history and unchanged metadata, view and base revision | [Phase 08 evidence](docs/04-development/evidence/PHASE-08.md#task-results) |
 | T-08-02 | Keyboard actions and history capacity | Implemented | Pass, keyboard and toolbar actions, 50 undos and 50 redos | [Phase 08 evidence](docs/04-development/evidence/PHASE-08.md#task-results) |
 | T-08-03 | End-to-end editor regression | Implemented | Pass, flowchart and nested architecture regression in Chrome, Edge and Chromium | [Phase 08 evidence](docs/04-development/evidence/PHASE-08.md#task-results) |
-| T-09-01 | Dexie repository and lifecycle | Not started | Not run | — |
-| T-09-02 | Autosave coordinator | Not started | Not run | — |
-| T-09-03 | Cross-tab conflict and recovery | Not started | Not run | — |
-| T-09-04 | Viewport, upgrades and failure handling | Not started | Not run | — |
-| T-09-05 | Editable backup recovery integration | Not started | Not run | — |
+| T-09-01 | Dexie repository and lifecycle | Implemented | Pass, durable library actions, independent copies, reload and atomic rollback | [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md) |
+| T-09-02 | Autosave coordinator | Implemented | Pass, deadline scheduling, immutable saves, latest-generation retry and durable undo/redo | [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md) |
+| T-09-03 | Cross-tab conflict and recovery | Implemented | Pass, one writer wins, no stale deletion or resurrection, guarded navigation | [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md) |
+| T-09-04 | Viewport, upgrades and failure handling | Implemented | Pass, independent view writes and safe version and corruption handling | [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md) |
+| T-09-05 | Editable backup recovery integration | Implemented | Pass, real browser JSON download from the latest graph after save failure | [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md#editable-backup-evidence) |
 | T-10-01 | Bounded JSON import and portable export | Not started | Not run | — |
 | T-10-02 | Starter templates and independence | Not started | Not run | — |
 | T-10-03 | Standalone SVG serializer | Not started | Not run | — |
@@ -85,7 +85,7 @@
 | T-12-03 | Release handover | Not started | Not run | — |
 
 ## Active blockers and review
-The owner accepted Phase 07. Phase 08 passed locally, including 50 mixed history transactions and the 78-case serial browser suite. Durable persistence, import, standalone export, cross-platform font fidelity and release qualification remain open. Phase 09 awaits separate authorization. Hosted GitHub Actions remains unrun.
+The owner accepted Phase 08. Phase 09 passed locally, including real IndexedDB recovery and the 102-case serial browser suite. Import, starter templates, standalone export, cross-platform font fidelity and release qualification remain open. The earlier intermittent Edge click stall remains an investigation item. Phase 10 awaits separate authorization. Hosted GitHub Actions remains unrun.
 
 ## Updating this tracker
 Use `not_started`, `in_progress`, `blocked`, `implemented` (or register's approved status vocabulary) and actual verification states separately; never mark completed solely because code exists. For a phase that has only partial verification, record specific tests pending later. Update machine registers first and reconcile this rollup at the phase gate. Keep evidence under `docs/04-development/evidence/` or an approved CI artifact reference, with timestamp, commit/build, command, environment, result and limitations. Do not mark mandatory skipped/unrun as passed. Record an explicit non-applicability decision for deferred optional tests only.

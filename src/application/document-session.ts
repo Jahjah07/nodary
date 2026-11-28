@@ -1,7 +1,7 @@
 import { openCommandState, setSelection, setViewport, type CommandState, type Outcome } from "../core/commands";
 import type { DiagramDocument, Viewport } from "../core/contracts";
 import { freeze, type Immutable } from "../core/immutable";
-import { fail, ok, type Result } from "../core/validation";
+import { fail, ok, type Issue, type Result } from "../core/validation";
 import { summaryOf, type DocumentRepository, type OpenDocument, type StoredDocument } from "./document-repository";
 
 export type SaveStatus = "temporary" | "unsaved" | "saving" | "saved" | "failed" | "conflict";
@@ -14,6 +14,7 @@ export type DocumentSession = Readonly<{
   acknowledgedGeneration: number;
   pending: Capture | null;
   failure: "failed" | "conflict" | null;
+  issue?: Issue;
 }>;
 
 export function openSession(token: string, repository: Pick<DocumentRepository, "durability">, opened: OpenDocument): Result<DocumentSession> {
@@ -48,11 +49,11 @@ export function saveStatus(session: DocumentSession): SaveStatus {
   return session.durability === "durable" ? "saved" : "temporary";
 }
 
-// DGS-08 write coordination values. Scheduling and real IndexedDB are later phases.
+// DGS-08 §5, immutable capture and acknowledgement.
 export function beginSave(session: DocumentSession): DocumentSession {
   if (session.pending || session.failure === "conflict" || session.editor.generation === session.acknowledgedGeneration) return session;
   return freeze({
-    ...session, failure: null, pending: {
+    ...session, failure: null, issue: undefined, pending: {
       token: session.token, id: session.editor.document.id, revision: session.revision,
       generation: session.editor.generation, document: session.editor.document,
     },
@@ -62,7 +63,8 @@ export function beginSave(session: DocumentSession): DocumentSession {
 export function settleSave(session: DocumentSession, captured: Capture, result: Result<StoredDocument>): DocumentSession {
   if (session.pending !== captured || session.token !== captured.token || session.editor.document.id !== captured.id) return session;
   if (!result.ok) return freeze({
-    ...session, pending: null, failure: result.issues.some((issue) => issue.code === "REVISION_CONFLICT") ? "conflict" : "failed",
+    ...session, pending: null, issue: result.issues[0],
+    failure: result.issues.some((issue) => issue.code === "REVISION_CONFLICT") ? "conflict" : "failed",
   });
   if (result.value.id !== captured.id || result.value.revision !== captured.revision + 1 ||
     JSON.stringify(result.value.content) !== JSON.stringify(captured.document)) {

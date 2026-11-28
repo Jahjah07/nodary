@@ -2,15 +2,14 @@
 
 import { cleanup, render, screen } from "@testing-library/react";
 import { afterEach, expect, test } from "vitest";
-import { summaryOf } from "../../src/application/document-repository";
 import { isSampleFixture } from "../../src/prototypes/sp-01/fixture";
 import { Library } from "../../src/workspace/library";
-import { sampleDiagram } from "../../src/workspace/sample";
 
 afterEach(cleanup);
 
 test("SP-01: the library links to the static editor with the fixture UUID", () => {
-  render(<Library documents={[summaryOf(sampleDiagram().document, 1)]} loading={false} error="" create={async () => null} />);
+  render(<Library documents={[]} loading={false} error="" corrupt={0} refresh={() => {}}
+    create={async () => null} action={async () => null} />);
 
   const href = screen.getByRole("link", { name: "Open sample diagram" }).getAttribute("href");
   const url = new URL(href ?? "/", "http://localhost");

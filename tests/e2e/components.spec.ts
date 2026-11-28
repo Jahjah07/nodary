@@ -9,8 +9,8 @@ const properties = (page: Page) => page.getByRole("complementary", { name: "Prop
 const controls = (page: Page) => page.getByRole("group", { name: "Viewport controls" });
 const position = (page: Page) => properties(page).getByText("World position", { exact: true }).locator("..").locator("dd");
 const size = (page: Page) => properties(page).getByText("Size", { exact: true }).locator("..").locator("dd");
-async function open(page: Page, name = "Component verification") {
-  await page.goto("/");
+async function open(page: Page, name = "Component verification", alreadyAtLibrary = false) {
+  if (!alreadyAtLibrary) await page.goto("/");
   await page.getByRole("button", { name: "New diagram" }).click();
   const dialog = page.getByRole("dialog", { name: "New diagram" });
   await dialog.getByRole("textbox", { name: "Diagram name" }).fill(name);
@@ -53,12 +53,19 @@ test("CL-01/02/04/26 full registry renders and keyboard inserts offline", async 
   test.setTimeout(90_000);
   const outside: string[] = [];
   const errors: string[] = [];
+  const loaded = new Set<string>();
+  page.on("requestfinished", (request) => loaded.add(request.url()));
   page.on("request", (request) => { if (new URL(request.url()).origin !== baseURL) outside.push(request.url()); });
   page.on("pageerror", (error) => errors.push(error.message));
   await open(page, "Component library");
   const palette = page.getByRole("complementary", { name: "Component library" });
   for (const [category, count] of [["Flowchart", 8], ["Architecture", 14], ["General", 7]] as const) {
     await expect(palette.getByRole("region", { name: category }).getByRole("button")).toHaveCount(count);
+  }
+  // Installed browser channels request the tab icon. The bundled headless shell skips it.
+  if (info.project.name !== "chromium") {
+    const favicon = await page.locator('link[rel="icon"]').evaluate((link) => (link as HTMLLinkElement).href);
+    await expect.poll(() => loaded.has(favicon)).toBe(true);
   }
   const requests: string[] = [];
   page.on("request", (request) => requests.push(request.url()));
@@ -203,8 +210,12 @@ test("T-04-02 representative categorized scenes show actual shared SVG geometry"
     ["general", ["general.rectangle", "general.rounded_rectangle", "general.ellipse", "general.diamond", "general.text", "general.note", "general.boundary"]],
   ] as const;
   for (const [name, types] of examples) {
-    if (name !== "flowchart") page.once("dialog", (dialog) => void dialog.accept());
-    await open(page, `${name[0].toUpperCase()}${name.slice(1)} components`);
+    const returning = name !== "flowchart";
+    if (returning) {
+      await page.getByRole("link", { name: "Back to diagram library" }).click();
+      await expect(page.getByRole("button", { name: "New diagram" })).toBeEnabled();
+    }
+    await open(page, `${name[0].toUpperCase()}${name.slice(1)} components`, returning);
     const box = (await surface(page).boundingBox())!;
     for (const [i, type] of types.entries()) {
       const x = box.x + box.width * (.2 + (i % 3) * .3);

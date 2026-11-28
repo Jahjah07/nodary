@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 09 — 28 November 2026
+
+- Added durable local documents, library actions, revision-checked autosave, and independent viewport and panel preferences.
+- Added conflict and storage failure recovery, guarded navigation, and editable JSON backups from the current editor graph. [Phase 09 evidence](docs/04-development/evidence/PHASE-09.md)
+
 ## Phase 08 — 28 November 2026
 
 - Added undo and redo controls and canvas shortcuts for validated graph-only history. Viewport, settings and repository revisions stay current when a graph is restored.

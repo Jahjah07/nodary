@@ -17,10 +17,11 @@ export function useWorkspaceLocation(initial: "/" | "/editor/") {
   return useSyncExternalStore(subscribe, locationSnapshot, () => initial);
 }
 
-export function navigate(href: string) {
+export function navigate(href: string, replace = false) {
   if (href === locationSnapshot()) return;
-  // Both destinations have static entry pages. Keep the active workspace and its in-memory repository mounted.
-  window.history.pushState(null, "", href);
+  // Both destinations have static entry pages. Keep the active workspace mounted across internal navigation.
+  if (replace) window.history.replaceState(window.history.state, "", href);
+  else window.history.pushState(null, "", href);
   window.dispatchEvent(new Event(navigationEvent));
 }
 

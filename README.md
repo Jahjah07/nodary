@@ -1,6 +1,6 @@
 # Nodary
 
-A local-first visual workspace for flowcharts, IT/software architecture and structured diagrams. The Phase 03 workspace opens a representative architecture diagram and creates blank diagrams for the current tab. Reloading or closing the tab clears temporary documents and edits.
+A local-first visual workspace for flowcharts, IT/software architecture and structured diagrams. Nodary stores committed diagrams in IndexedDB for the current site and browser profile. Reopening restores the latest saved graph and starts fresh editing history.
 
 ## Start here
 1. Open the `nodary` repository in your IDE/Codex workspace.
@@ -26,13 +26,13 @@ Install Google Chrome and Microsoft Edge to run all browser projects. On a clean
 
 The Phase 01 experiments run from a separate static build on port 4174. Install Firefox with `npx playwright install firefox` for the independent SVG rendering check. Run `npm run build:prototypes` and `npm run test:prototypes`. Pass a spike ID such as `npm run test:prototypes -- sp-02` for a targeted run. [Phase 01 evidence](docs/04-development/evidence/PHASE-01.md)
 
-Production target is static HTTPS hosting. Vendor choice and terms review are deferred to the deployment phase. Browser data is origin-specific and should be backed up independently once persistence is implemented.
+Production target is static HTTPS hosting. Vendor choice and terms review are deferred to the deployment phase. Use the editor’s Backup action to download an editable JSON copy. Private browsing, browser eviction, or clearing site data can remove local records.
 
 ## Project structure
 ```text
 nodary/
 ├── src/app/               # Static library and editor routes
-├── src/workspace/         # Temporary workspace, canvas and controlled projection
+├── src/workspace/         # Workspace, canvas and controlled projection
 ├── src/prototypes/sp-01/  # Read-only synthetic sample and renderer mount
 ├── docs/                  # 11 DGS specs, schema, registry, registers, review
 ├── tests/fixtures/        # 4 portable JSON example/template/benchmark files
@@ -55,7 +55,7 @@ The two working registers change as evidence is recorded. The manifest continues
 
 ## Progress and execution
 - 11/11 specs drafted, 56 tasks planned across 13 phases, 218 scenarios (205 mandatory), 8 spikes, 28 deferred future features.
-- See the [tracker](IMPLEMENTATION_TRACKER.md) for Phase 00 verification and remaining work.
+- See the [tracker](IMPLEMENTATION_TRACKER.md) for phase verification and remaining work.
 - Current target V0.2, 29 components, 2 starter templates, local documents, JSON/PNG/SVG exports. No AI/cloud/collaboration in MVP.
 - The 19–30 focused-day estimate is provisional; not a delivery promise.
 

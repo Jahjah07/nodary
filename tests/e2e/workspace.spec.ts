@@ -21,7 +21,7 @@ async function clickNode(page: Page, label: string, button: "left" | "right" = "
   await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2, { button });
 }
 
-test("T-03-01 creates a temporary blank diagram and preserves work across static library navigation", async ({ page, baseURL }, info) => {
+test("T-03-01 creates a blank diagram and preserves work across static library navigation and reload", async ({ page, baseURL }, info) => {
   const failures: string[] = [];
   page.on("pageerror", (error) => failures.push(error.message));
   page.on("request", (request) => { if (new URL(request.url()).origin !== baseURL) failures.push(request.url()); });
@@ -47,7 +47,7 @@ test("T-03-01 creates a temporary blank diagram and preserves work across static
   await expect(page.getByRole("heading", { name: "Event processing" })).toBeFocused();
   const opened = page.url();
   expect(opened).toMatch(/\/editor\/\?id=[0-9a-f-]{36}$/);
-  await expect(page.getByText("Temporary session")).toBeVisible();
+  await expect(page.getByText("Saved locally")).toBeVisible();
   await expect(page.getByText("Blank canvas")).toBeVisible();
   await page.getByRole("button", { name: "Snap", exact: true }).click();
   await expect(page.getByRole("button", { name: "Snap", exact: true })).toHaveAttribute("aria-pressed", "true");
@@ -63,8 +63,10 @@ test("T-03-01 creates a temporary blank diagram and preserves work across static
   let warned = false;
   page.once("dialog", async (warning) => { warned = warning.type() === "beforeunload"; await warning.accept(); });
   await page.reload();
-  await expect(page.getByRole("status")).toHaveText("Diagram not found.");
-  expect(warned).toBe(true);
+  await expect(page.getByRole("heading", { name: "Event processing" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Snap", exact: true })).toHaveAttribute("aria-pressed", "true");
+  await expect(page.getByRole("button", { name: "Undo", exact: true })).toBeDisabled();
+  expect(warned).toBe(false);
   expect(failures).toEqual([]);
 });
 

@@ -51,8 +51,9 @@ export function resizeRect(rect: Rect, handle: ResizeHandle, delta: Position, sq
 export function componentDispatcher(measure?: Measure) {
   const metrics = containmentMetrics(measure);
   const reject = (message: string) => fail({ code: "INVALID_GEOMETRY", path: ["document"], message });
-  return createDispatcher<{ toggle: SettingsKey; component: ComponentEdit; edge: EdgeEdit; property: PropertyEdit; hierarchy: HierarchyEdit }>({
+  return createDispatcher<{ toggle: SettingsKey; rename: string; component: ComponentEdit; edge: EdgeEdit; property: PropertyEdit; hierarchy: HierarchyEdit }>({
     toggle(draft, key) { draft.settings[key] = !draft.settings[key]; return ok(undefined); },
+    rename(draft, title) { draft.title = title; return ok(undefined); },
     edge: applyEdgeEdit,
     property: (draft, edit) => applyPropertyEdit(draft, edit, measure),
     hierarchy: (draft, edit) => applyHierarchyEdit(draft, edit, metrics),

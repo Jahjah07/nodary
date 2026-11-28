@@ -75,7 +75,9 @@ test("CL-01/02/04/26 full registry renders and keyboard inserts offline", async 
     await expect(output).toHaveAttribute("data-label-fits", "true");
     await expect(surface(page)).toBeFocused();
     await expect(size(page)).toHaveText(`${definition.defaultSize.width} × ${definition.defaultSize.height}`);
-    await expect(output.locator(".diagram-label, .frame-title")).toHaveText(definition.entity === "node" ? definition.defaultLabel : definition.defaultTitle);
+    const label = definition.entity === "node" ? output.locator(".diagram-label") :
+      page.locator(`[data-frame-id="${await output.locator("..").getAttribute("data-id")}"] .frame-title`);
+    await expect(label).toHaveText(definition.entity === "node" ? definition.defaultLabel : definition.defaultTitle);
     if (definition.iconKey) {
       const vector = output.locator(`[data-icon="${definition.iconKey}"]`);
       await expect(vector).toHaveCount(1);

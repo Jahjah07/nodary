@@ -126,8 +126,8 @@
         "T-07-03",
         "T-07-04"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "06"
     },
     {
@@ -888,7 +888,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-06.md#task-results"
       ],
-      "commit": null,
+      "commit": "4f2d856208216c309bf7e4d93d4fcdc74f34aee1",
       "blocker": null
     },
     {
@@ -912,7 +912,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-06.md#task-results"
       ],
-      "commit": null,
+      "commit": "4f2d856208216c309bf7e4d93d4fcdc74f34aee1",
       "blocker": null
     },
     {
@@ -935,7 +935,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-06.md#task-results"
       ],
-      "commit": null,
+      "commit": "4f2d856208216c309bf7e4d93d4fcdc74f34aee1",
       "blocker": null
     },
     {
@@ -947,13 +947,15 @@
       ],
       "verification": "CL-16,CI-23–25",
       "deliverable": "Render frames behind descendants, title/border hit regions, dynamic padding; nested children parent-relative, cross-boundary edges intact.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-06-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-07.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -966,13 +968,15 @@
       ],
       "verification": "DM-06–08,CI-23,CI-26",
       "deliverable": "Create same-parent selection group, add/remove membership with world-coordinate preservation and cycle/depth checks; visual overlap never changes membership.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-07-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-07.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -987,13 +991,15 @@
       ],
       "verification": "CI-24–25,CL-12,DM-08",
       "deliverable": "Expand ancestor frames in all directions, rebase child locals to preserve unrelated world positions; boundary resize does not scale children, invalid shrink rejects.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-07-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-07.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1009,13 +1015,15 @@
       ],
       "verification": "DM-12–13,CI-27–28,CL-17,UX-09",
       "deliverable": "Normalize selected roots, remove incident edges only for deleted nodes, preserve unselected descendants, remap copied internal edges and IDs; undo fully restores transaction.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-07-03"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-07.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1551,13 +1559,13 @@
       "id": "AC-FR-03-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-03-04",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-04-01",
@@ -1647,31 +1655,31 @@
       "id": "AC-FR-08-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-08-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-08-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-08-04",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-08-05",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-09-01",
@@ -1923,7 +1931,7 @@
       "id": "UX-07",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-08",
@@ -1935,7 +1943,7 @@
       "id": "UX-09",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-10",
@@ -2061,13 +2069,13 @@
       "id": "DM-12",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-13",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-14",
@@ -2181,7 +2189,7 @@
       "id": "CL-08",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-09",
@@ -2229,13 +2237,13 @@
       "id": "CL-16",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-17",
       "source": "DGS-06",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-18",
@@ -2427,37 +2435,37 @@
       "id": "CI-23",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-24",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-25",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-26",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-27",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-28",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-29",

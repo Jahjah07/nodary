@@ -13,6 +13,7 @@ import { componentFor } from "../core/registry";
 import { ComponentGraphic, measureLabel } from "./component-graphic";
 import { targetEdit, type ConnectionStart, type EditEdge } from "./connections";
 import { Projection } from "./flow";
+import type { EditHierarchy, HierarchyIntent } from "./hierarchy-controls";
 import { buildScene, clampTranslation, connectionAnchor, connectionAnchors, fitScene, hitTest, objectsIn,
   originView, projectConnection, rectBetween, zoomAt, type Scene, type SceneAnchor } from "./scene";
 
@@ -31,10 +32,11 @@ type Gesture = {
   connection?: ConnectionStart;
 };
 
-export function Canvas({ scene, viewport, selection, tool, isSample, editor, pending, controls, drag, onEdit, onEdge, onView, onLabel }: {
+export function Canvas({ scene, viewport, selection, tool, isSample, editor, pending, controls, drag, onEdit, onEdge, onView, onLabel, onHierarchy }: {
   scene: Scene; viewport: Viewport | null; selection: readonly string[]; tool: Tool; isSample: boolean;
   editor: CommandState; pending: boolean; controls: Ref<CanvasControls>; drag: RefObject<PaletteDrag | null>; onEdit: EditComponent;
   onEdge: EditEdge;
+  onHierarchy: EditHierarchy;
   onLabel(id: string): void;
   onView(view: Viewport, selection: readonly string[]): void;
 }) {
@@ -64,6 +66,12 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
   const anchors = enabled ? sceneAnchors : [];
   const resizer = !isSample && tool === "select" && !space && picked.length === 1 ?
     [...shown.nodes, ...shown.groups].find(({ item }) => item.id === picked[0] && componentFor(item.type).resizable) : undefined;
+  const hierarchyActions = [
+    ...(objects.filter(({ item }) => selection.includes(item.id)).length > 1 ? [{ kind: "group", label: "Group selection" } as const] : []),
+    ...(scene.groups.some(({ item }) => selection.includes(item.id)) ? [{ kind: "ungroup", label: "Ungroup" } as const] : []),
+    ...(objects.some(({ item }) => selection.includes(item.id)) ? [{ kind: "duplicate", label: "Duplicate" } as const] : []),
+    { kind: "delete", label: "Delete selection" } as const,
+  ];
 
   function origin() {
     const rect = surface.current!.getBoundingClientRect();
@@ -361,10 +369,14 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     } else if (!gesture.current && !isSample && !pending && event.key === "Enter" && selection.length === 1) {
       event.preventDefault();
       onLabel(selection[0]);
-    } else if (!gesture.current && !isSample && !pending && selectedEdge &&
+    } else if (!gesture.current && !nudge.current && !isSample && !pending && selection.length > 0 &&
         (event.key === "Delete" || event.key === "Backspace") && !event.ctrlKey && !event.metaKey && !event.altKey) {
       event.preventDefault();
-      setNotice(onEdge({ kind: "delete", id: selectedEdge.item.id }, editor.generation) ?? "");
+      if (!event.repeat) setNotice(onHierarchy({ kind: "delete", ids: selection }, editor.generation) ?? "");
+    } else if (!gesture.current && !nudge.current && !isSample && !pending && selection.length > 0 &&
+      (event.ctrlKey || event.metaKey) && !event.altKey && !event.shiftKey && event.key.toLowerCase() === "d") {
+      event.preventDefault();
+      if (!event.repeat) setNotice(onHierarchy({ kind: "duplicate", ids: selection }, editor.generation) ?? "");
     } else if (!gesture.current && !isSample && !pending && !event.altKey && !event.ctrlKey && !event.metaKey &&
       Object.hasOwn(arrows, event.key)) {
       const ids = objects.filter(({ item }) => selection.includes(item.id)).map(({ item }) => item.id);
@@ -398,7 +410,14 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     const hit = hitTest(scene, clientToWorld(point, active, originView), active.zoom);
     if (hit && !selection.includes(hit)) onView(active, [hit]);
     const size = surface.current!.getBoundingClientRect();
-    setMenu({ x: Math.max(4, Math.min(point.x, size.width - 165)), y: Math.max(4, Math.min(point.y, size.height - 88)) });
+    setMenu({ x: Math.max(4, Math.min(point.x, size.width - 165)),
+      y: Math.max(4, Math.min(point.y, size.height - (isSample || (!hit && !selection.length) ? 88 : 240))) });
+  }
+
+  function applyFromMenu(kind: Exclude<HierarchyIntent["kind"], "reparent">) {
+    setMenu(undefined);
+    setNotice(onHierarchy({ kind, ids: selection }, editor.generation) ?? "");
+    surface.current?.focus();
   }
 
   return <section className="canvas-area" aria-label={isSample ? "Read-only sample diagram" : "Diagram workspace"}>
@@ -485,6 +504,8 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
         setMenu(undefined); onView(active, []); surface.current?.focus();
       }}>Clear selection</button>
       <button className="button" onClick={() => { setMenu(undefined); fit(); surface.current?.focus(); }}>Fit diagram</button>
+      {!isSample && selection.length > 0 && hierarchyActions.map(({ kind, label }) =>
+        <button key={kind} className="button" disabled={pending} onClick={() => applyFromMenu(kind)}>{label}</button>)}
     </div>}
   </section>;
 }

@@ -4,9 +4,21 @@ import { fail, limits, ok, type Issue, type Result } from "./validation";
 
 export type Placed = Node | Boundary;
 export type Placement<T extends Immutable<Placed>> = { item: T; path: Issue["path"]; world: Position; depth: number };
+export type Hierarchy = ReadonlyMap<string, Placement<Immutable<Placed>>>;
 export const origin = (): Position => ({ x: 0, y: 0 });
 export const add = (a: Position, b: Position): Position => ({ x: a.x + b.x, y: a.y + b.y });
 export const subtract = (a: Position, b: Position): Position => ({ x: a.x - b.x, y: a.y - b.y });
+
+export function ancestors(index: Hierarchy, id: string) {
+  const result: string[] = [];
+  for (let parent = index.get(id)?.item.parentId; parent; parent = index.get(parent)?.item.parentId) result.push(parent);
+  return result;
+}
+
+export function transformRoots(index: Hierarchy, ids: readonly string[]) {
+  const selected = new Set(ids);
+  return [...selected].filter((id) => index.has(id) && !ancestors(index, id).some((parent) => selected.has(parent)));
+}
 
 // DGS-05 parent chains are bounded independently of array order.
 export function indexHierarchy<N extends Immutable<Node>, B extends Immutable<Boundary>>(

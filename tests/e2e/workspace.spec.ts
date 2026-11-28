@@ -171,11 +171,12 @@ test("T-03-04 selects, Shift-toggles, respects boundary interiors and preserves 
   await clickNode(page, "Database");
   await page.keyboard.up("Shift");
   await expect(status(page)).toContainText("1 selected");
-  const outer = page.locator(".diagram-frame").filter({ hasText: "Production environment" });
+  const outerId = "00000000-0000-4000-8000-000000000002";
+  const outer = page.locator(`.react-flow__node[data-id="${outerId}"] .diagram-frame`);
   const frame = (await outer.boundingBox())!;
   await page.mouse.click(frame.x + 24, frame.y + frame.height - 43);
   await expect(page.locator(".diagram-node[data-selected='true']")).toHaveCount(0);
-  const title = (await outer.locator(".frame-title").boundingBox())!;
+  const title = (await page.locator(`[data-frame-id="${outerId}"] .frame-title`).boundingBox())!;
   await page.mouse.click(title.x + title.width / 2, title.y + title.height / 2);
   await expect(outer).toHaveAttribute("data-selected", "true");
   await expect(page.getByRole("heading", { name: "Production environment" })).toBeVisible();

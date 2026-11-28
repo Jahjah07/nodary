@@ -2,10 +2,10 @@
 
 **Baseline:** 27 November 2026. This is a human-readable rollup. Machine authority: [DGS-09_Implementation_Task_Register_v0.1.json](docs/04-development/registers/DGS-09_Implementation_Task_Register_v0.1.json) and [DGS-10_Acceptance_Test_Register_v0.1.json](docs/04-development/registers/DGS-10_Acceptance_Test_Register_v0.1.json). Update status from actual evidence, not manual progress alone.
 
-- Tasks completed: 32/56. Phases passed: 7/13.
-- Mandatory scenarios passed: 59/205. Conditional: 0/13 (applicability pending).
+- Tasks completed: 36/56. Phases passed: 8/13.
+- Mandatory scenarios passed: 79/205. Conditional: 0/13 (applicability pending).
 - Spikes passed: 8/8; release gates passed: 0/10.
-- V0.1 internal connected-editor milestone achieved under owner-approved CR-05. Phase 06 is ready for review.
+- V0.1 internal connected-editor milestone achieved under owner-approved CR-05. Phase 07 is ready for owner review.
 
 | Phase | Title | Tasks | Implementation | Gate |
 |---|---|---:|---|---|
@@ -15,8 +15,8 @@
 | 03 | Workspace and canvas | 5 | Closed in `43e22d3` | Owner accepted |
 | 04 | Component library | 4 | Closed in `7622353` | Owner accepted |
 | 05 | Connections and routing | 3 | Closed in `c694948` | Owner accepted |
-| 06 | Properties and styling | 3 | Implemented | Passed locally |
-| 07 | Grouping and boundaries | 4 | Not started | Not run |
+| 06 | Properties and styling | 3 | Closed in `4f2d856` | Owner accepted |
+| 07 | Grouping and boundaries | 4 | Implemented | Passed locally |
 | 08 | Commands and editing history integration | 3 | Not started | Not run |
 | 09 | Persistence and recovery | 5 | Not started | Not run |
 | 10 | Import, export and templates | 5 | Not started | Not run |
@@ -59,10 +59,10 @@
 | T-06-01 | Contextual properties and styles | Implemented | Pass, validated fields and mixed-value bulk transactions | [Phase 06 evidence](docs/04-development/evidence/PHASE-06.md) |
 | T-06-02 | Text layout and content fit | Implemented | Pass, measured Unicode layout, atomic growth and invalid-resize rejection | [Phase 06 evidence](docs/04-development/evidence/PHASE-06.md) |
 | T-06-03 | Architecture status and boundary title controls | Implemented | Pass, four statuses, title fitting and opacity | [Phase 06 evidence](docs/04-development/evidence/PHASE-06.md) |
-| T-07-01 | Boundary scene and nesting | Not started | Not run | — |
-| T-07-02 | Group and explicit reparent operations | Not started | Not run | — |
-| T-07-03 | Recursive expansion and resizing | Not started | Not run | — |
-| T-07-04 | Delete, ungroup and duplicate graph operations | Not started | Not run | — |
+| T-07-01 | Boundary scene and nesting | Implemented | Pass, nested rendering and live cross-boundary routing in Chrome and Edge | [Phase 07 evidence](docs/04-development/evidence/PHASE-07.md#task-results) |
+| T-07-02 | Group and explicit reparent operations | Implemented | Pass, sibling grouping and explicit world-preserving membership | [Phase 07 evidence](docs/04-development/evidence/PHASE-07.md#task-results) |
+| T-07-03 | Recursive expansion and resizing | Implemented | Pass, four-direction growth, title containment and invalid-shrink rejection | [Phase 07 evidence](docs/04-development/evidence/PHASE-07.md#task-results) |
+| T-07-04 | Delete, ungroup and duplicate graph operations | Implemented | Pass, safe promotion, internal edge remapping and atomic undo/redo | [Phase 07 evidence](docs/04-development/evidence/PHASE-07.md#task-results) |
 | T-08-01 | Full transaction integration | Not started | Not run | — |
 | T-08-02 | Keyboard actions and history capacity | Not started | Not run | — |
 | T-08-03 | End-to-end editor regression | Not started | Not run | — |
@@ -85,7 +85,7 @@
 | T-12-03 | Release handover | Not started | Not run | — |
 
 ## Active blockers and review
-The owner accepted Phase 05 and approved CR-05 for V0.1, the internal connected-editor milestone. Phase 06 passed locally. Editable grouping and its cross-boundary connection workflow, durable persistence, import, export and release qualification remain scheduled for later phases. Phase 07 requires separate authorization. Hosted GitHub Actions remains unrun.
+The owner accepted Phase 06. Phase 07 passed locally, including editable UX-07 in Chrome and Edge. Workspace history integration, durable persistence, import, export and release qualification remain scheduled for later phases. Phase 08 awaits separate authorization. Hosted GitHub Actions remains unrun.
 
 ## Updating this tracker
 Use `not_started`, `in_progress`, `blocked`, `implemented` (or register's approved status vocabulary) and actual verification states separately; never mark completed solely because code exists. For a phase that has only partial verification, record specific tests pending later. Update machine registers first and reconcile this rollup at the phase gate. Keep evidence under `docs/04-development/evidence/` or an approved CI artifact reference, with timestamp, commit/build, command, environment, result and limitations. Do not mark mandatory skipped/unrun as passed. Record an explicit non-applicability decision for deferred optional tests only.

@@ -1,6 +1,6 @@
 import type { Boundary, DiagramDocument, Position, Size, Viewport } from "./contracts";
 import { contains, geometryEpsilon, padding, validateGraph, validWorldRect, type Rect } from "./graph";
-import { add, indexHierarchy, origin, subtract, type Placed } from "./hierarchy";
+import { add, indexHierarchy, origin, subtract, transformRoots, type Placed } from "./hierarchy";
 import type { Immutable } from "./immutable";
 import { fail, limits, type Issue, type Result } from "./validation";
 
@@ -28,19 +28,19 @@ function invalid(message: string): Issue {
   return { code: "INVALID_GEOMETRY", path: ["document", "groups"], message };
 }
 
-function extent(item: Immutable<Placed>, metrics?: ContainmentMetrics): Rect {
+export function extent(item: Immutable<Placed>, metrics?: ContainmentMetrics, position = item.position): Rect {
   const measured = metrics?.visualBounds(item);
-  if (!measured) return { ...item.position, ...item.size };
+  if (!measured) return { ...position, ...item.size };
   const x = Math.min(0, measured.x);
   const y = Math.min(0, measured.y);
   return {
-    x: item.position.x + x, y: item.position.y + y,
+    x: position.x + x, y: position.y + y,
     width: Math.max(item.size.width, measured.x + measured.width) - x,
     height: Math.max(item.size.height, measured.y + measured.height) - y,
   };
 }
 
-function insets(frame: Immutable<Boundary>, metrics?: ContainmentMetrics) {
+export function insets(frame: Immutable<Boundary>, metrics?: ContainmentMetrics) {
   const height = metrics?.titleHeight(frame) ?? 0;
   return { ...padding, top: Math.max(padding.top, 16 + height + frame.style.strokeWidth) };
 }
@@ -130,14 +130,10 @@ export function moveTransformRoots(document: Snapshot, ids: readonly string[], d
   const draft = structuredClone(document) as DiagramDocument;
   const index = indexHierarchy(draft);
   if (!index.ok) return index;
-  const selection = new Set(ids);
   const parents: string[] = [];
-  for (const id of selection) {
-    const entry = index.value.get(id);
-    if (!entry) return fail(invalid("Transform target does not exist."));
-    let ancestor = entry.item.parentId;
-    while (ancestor !== null && !selection.has(ancestor)) ancestor = index.value.get(ancestor)!.item.parentId;
-    if (ancestor !== null) continue;
+  if (ids.some((id) => !index.value.has(id))) return fail(invalid("Transform target does not exist."));
+  for (const id of transformRoots(index.value, ids)) {
+    const entry = index.value.get(id)!;
     entry.item.position = add(entry.item.position, delta);
     if (entry.item.parentId !== null) parents.push(entry.item.parentId);
   }

@@ -221,7 +221,7 @@ test("CL-14/15 styles architecture statuses and a boundary without replacing cus
   await enter(field(page, "Fill colour"), "#DDE7FF");
   await enter(field(page, "Fill opacity"), "0.54");
   await expect(frame.locator("rect")).toHaveAttribute("fill-opacity", "0.54");
-  await expect(renderedLabel(frame).locator("tspan")).toHaveCount(2);
+  await expect(page.locator(`[data-frame-id="${await nodeId(frame)}"] .frame-title tspan`)).toHaveCount(2);
   await expect(field(page, "Status")).toHaveCount(0);
   if (info.project.name === "chrome") await page.screenshot({ path: info.outputPath("boundary-properties.png") });
 

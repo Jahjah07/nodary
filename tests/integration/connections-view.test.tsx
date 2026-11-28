@@ -110,7 +110,7 @@ test("editor restricts connection tools by selection and sends the scoped route 
   const onEdge = vi.fn(() => null);
   const onView = vi.fn();
   const onProperty = vi.fn(() => null);
-  const props = { onEdge, onView, onToggle: vi.fn(), onEdit: vi.fn(), onProperty };
+  const props = { onEdge, onView, onToggle: vi.fn(), onEdit: vi.fn(), onProperty, onHierarchy: vi.fn() };
   const note = session.editor.document.nodes.at(-1)!;
   const pickedNote = viewSession(session, null, [note.id]);
   if (!pickedNote.ok) throw Error("expected selected annotation");
@@ -127,4 +127,29 @@ test("editor restricts connection tools by selection and sends the scoped route 
   fireEvent.click(screen.getByRole("button", { name: "Cancel" }));
   fireEvent.click(screen.getByRole("button", { name: "Delete connection" }));
   expect(onEdge).toHaveBeenLastCalledWith({ kind: "delete", id: edge.id }, 0);
+});
+
+test("hierarchy controls exclude cyclic parents and route explicit actions with the current generation", async () => {
+  const session = await opened();
+  const { groups, nodes } = session.editor.document;
+  const outer = groups.find(({ parentId }) => parentId === null)!;
+  const nested = groups.find(({ parentId }) => parentId === outer.id)!;
+  const child = nodes.find(({ parentId }) => parentId === nested.id)!;
+  const props = { onView: vi.fn(), onToggle: vi.fn(), onEdit: vi.fn(), onEdge: vi.fn(), onProperty: vi.fn(),
+    onHierarchy: vi.fn(() => "The selected boundary is closed for this test.") };
+  const pickedFrame = viewSession(session, null, [outer.id]);
+  if (!pickedFrame.ok) throw Error("expected boundary selection");
+  const { rerender } = render(<Editor session={pickedFrame.value} {...props} />);
+  const parent = screen.getByRole("combobox", { name: "Parent boundary" }) as HTMLSelectElement;
+  expect([...parent.options].find(({ value }) => value === nested.id)?.disabled).toBe(true);
+  expect([...parent.options].find(({ value }) => value === outer.id)?.disabled).toBe(true);
+  fireEvent.click(screen.getByRole("button", { name: "Ungroup" }));
+  expect(props.onHierarchy).toHaveBeenCalledWith({ kind: "ungroup", ids: [outer.id] }, 0);
+  expect(screen.getByRole("alert").textContent).toContain("selected boundary");
+  const pickedChild = viewSession(session, null, [child.id]);
+  if (!pickedChild.ok) throw Error("expected node selection");
+  rerender(<Editor session={pickedChild.value} {...props} />);
+  expect(screen.getByText("Parent-local position")).toBeDefined();
+  fireEvent.click(screen.getByRole("button", { name: "Remove from boundary" }));
+  expect(props.onHierarchy).toHaveBeenLastCalledWith({ kind: "reparent", ids: [child.id], parentId: outer.id }, 0);
 });

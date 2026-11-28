@@ -141,7 +141,7 @@ kbd { font: 12px/1.4 system-ui, sans-serif; padding: 2px 4px; border-radius: 4px
 .canvas-surface[data-dragging="true"] { cursor: grabbing; }
 .canvas-grid { pointer-events: none; background-image: radial-gradient(circle, #cbd5e1 1px, transparent 1.1px); }
 .projection, .projection * { pointer-events: none !important; }
-.projection .react-flow__edgelabel-renderer { z-index: 600; }
+.projection .react-flow__edgelabel-renderer { z-index: 3000; }
 .projection-port { opacity: 0; }
 .diagram-node, .diagram-frame { display: block; width: 100%; height: 100%; overflow: visible; user-select: none; }
 .diagram-node[data-selected="true"], .diagram-frame[data-selected="true"] { outline: 2px solid var(--accent); outline-offset: 2px; }
@@ -151,6 +151,7 @@ kbd { font: 12px/1.4 system-ui, sans-serif; padding: 2px 4px; border-radius: 4px
   border-radius: 2px; background: var(--panel); }
 .drop-preview { position: absolute; pointer-events: none; opacity: .55; }
 .diagram-edge-label { position: absolute; overflow: visible; }
+.boundary-title-layer { position: absolute; overflow: visible; }
 .diagram-edge-label[data-selected="true"] { outline: 2px solid var(--accent); }
 .connection-port { position: absolute; z-index: 3; display: grid; place-items: center; width: 18px; height: 18px;
   transform: translate(-50%, -50%); cursor: crosshair; }
@@ -165,6 +166,10 @@ kbd { font: 12px/1.4 system-ui, sans-serif; padding: 2px 4px; border-radius: 4px
 .connection-preview polyline[data-valid="true"] { stroke: #15803d; }
 .connection-actions { display: grid; gap: 8px; margin-top: 12px; }
 .property-controls { display: grid; gap: 10px; margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--line); }
+.hierarchy-controls { min-width: 0; display: grid; gap: 8px; margin: 14px 0 0; padding: 8px; border: 1px solid var(--line); border-radius: 6px; }
+.hierarchy-controls legend { padding: 0 4px; color: var(--secondary); font-size: 12px; }
+.hierarchy-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.hierarchy-controls [role="alert"] { color: #991B1B; font-size: 12px; margin: 0; }
 .property-controls fieldset { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; border: 1px solid var(--line); border-radius: 6px; }
 .property-controls legend { padding: 0 4px; color: var(--secondary); font-size: 12px; }
 .property-field label { display: grid; gap: 4px; min-width: 0; font-size: 13px; }

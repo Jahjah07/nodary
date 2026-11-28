@@ -5,17 +5,22 @@ import type { Boundary, Node, Position, Viewport } from "../core/contracts";
 import type { Immutable } from "../core/immutable";
 import { diagramFont, visualOf } from "../core/visual";
 import { dashPattern } from "../core/routes";
-import { ComponentGraphic } from "./component-graphic";
+import { ComponentGraphic, DiagramLabel } from "./component-graphic";
 import type { Scene } from "./scene";
 import "@xyflow/react/dist/style.css";
 
-type SceneNode = FlowNode<{ item: Immutable<Node | Boundary>; selected: boolean; label: Scene["nodes"][number]["label"] }>;
+type SceneNode = FlowNode<{ item: Immutable<Node | Boundary>; selected: boolean; label: Scene["nodes"][number]["label"]; rect: Scene["nodes"][number]["rect"]; layer: number }>;
 type SceneConnector = FlowEdge<{ edge: Scene["edges"][number]; selected: boolean }>;
 const ports = { top: Port.Top, right: Port.Right, bottom: Port.Bottom, left: Port.Left };
 function DiagramObject({ data }: NodeProps<SceneNode>) {
   const { item, selected } = data;
+  const frame = "title" in item;
   return <>
-    <ComponentGraphic item={item} selected={selected} label={data.label} />
+    <ComponentGraphic item={item} selected={selected} label={data.label} hideTitle={frame} />
+    {frame && item.title && <EdgeLabelRenderer><svg className="boundary-title-layer" data-frame-id={item.id}
+      width={data.rect.width} height={data.rect.height} style={{ left: data.rect.x, top: data.rect.y, zIndex: 1 + data.layer }}>
+      <DiagramLabel style={item.style.text} layout={data.label} boundary />
+    </svg></EdgeLabelRenderer>}
     {visualOf(item).anchors.map(({ id, position }) => <Handle className="projection-port" key={id} id={id}
       type="source" position={ports[id]} isConnectable={false}
       style={{ left: position.x, top: position.y, right: "auto", bottom: "auto", transform: "translate(-50%, -50%)" }} />)}
@@ -56,7 +61,7 @@ export function Projection({ scene, viewport, selection }: { scene: Scene; viewp
   const nodes: SceneNode[] = [...scene.groups, ...scene.nodes].map((entry, index) => ({
     id: entry.item.id, parentId: entry.item.parentId ?? undefined, position: entry.item.position,
     type: "diagram", ...entry.item.size, measured: entry.item.size,
-    data: { item: entry.item, selected: active.has(entry.item.id), label: entry.label },
+    data: { item: entry.item, selected: active.has(entry.item.id), label: entry.label, rect: entry.rect, layer: index },
     zIndex: "title" in entry ? index : 250 + index,
   }));
   const edges: SceneConnector[] = scene.edges.map((edge) => ({
@@ -66,7 +71,7 @@ export function Projection({ scene, viewport, selection }: { scene: Scene; viewp
   }));
   return <div className="projection" aria-hidden="true">
     <ReactFlow<SceneNode, SceneConnector> nodes={nodes} edges={edges} viewport={viewport}
-      nodeTypes={nodeTypes} edgeTypes={edgeTypes} connectionMode={ConnectionMode.Loose}
+      nodeTypes={nodeTypes} edgeTypes={edgeTypes} connectionMode={ConnectionMode.Loose} zIndexMode="manual"
       nodesDraggable={false} nodesConnectable={false} edgesReconnectable={false} elementsSelectable={false}
       nodesFocusable={false} edgesFocusable={false} disableKeyboardA11y autoPanOnNodeFocus={false}
       panOnDrag={false} panOnScroll={false} zoomOnScroll={false} zoomOnPinch={false} zoomOnDoubleClick={false}

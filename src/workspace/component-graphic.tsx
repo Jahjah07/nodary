@@ -22,8 +22,19 @@ export const measureLabel: Measure = Object.assign(
   } },
 );
 
-export function ComponentGraphic({ item, selected, tile, label }: {
-  item: Parameters<typeof visualOf>[0]; selected?: boolean; tile?: boolean; label?: ReturnType<typeof labelLayout>;
+type GraphicItem = Parameters<typeof visualOf>[0];
+type Layout = ReturnType<typeof labelLayout>;
+
+export function DiagramLabel({ style, layout, boundary }: { style: GraphicItem["style"]["text"]; layout: Layout; boundary?: boolean }) {
+  if (!layout.lines.length) return null;
+  return <text className={boundary ? "frame-title" : "diagram-label"} fill={style.color}
+    fontFamily={diagramFont} fontSize={style.fontSize} xmlSpace="preserve">
+    {layout.placements.map((line, i) => <tspan key={i} x={line.x} y={line.y}>{line.text}</tspan>)}
+  </text>;
+}
+
+export function ComponentGraphic({ item, selected, tile, label, hideTitle }: {
+  item: GraphicItem; selected?: boolean; tile?: boolean; label?: Layout; hideTitle?: boolean;
 }) {
   const shape = visualOf(item);
   const { width, height } = item.size;
@@ -39,7 +50,7 @@ export function ComponentGraphic({ item, selected, tile, label }: {
     strokeLinejoin: "round" as const, strokeLinecap: "round" as const };
   return <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
     className={tile ? "component-preview" : frame ? "diagram-frame" : "diagram-node"}
-    data-component={item.type} data-selected={selected} data-label-fits={layout.fits}
+    data-component={item.type} data-parent-id={tile ? undefined : item.parentId ?? ""} data-selected={selected} data-label-fits={layout.fits}
     viewBox={tile ? tileBox : `0 0 ${width} ${height}`}>
     {(!tile || !icon) && <>
       {outline.kind === "rect" && <rect {...paint} width={width} height={height} rx={outline.radius} />}
@@ -53,10 +64,7 @@ export function ComponentGraphic({ item, selected, tile, label }: {
     </g>}
     {tile && outline.kind === "none" && <text x={width / 2} y={height / 2} dominantBaseline="central"
       fontFamily={diagramFont} fontSize={height * .65} textAnchor="middle" fill={style.text.color}>T</text>}
-    {!tile && layout.lines.length > 0 && <text className={frame ? "frame-title" : "diagram-label"} fill={style.text.color}
-      fontFamily={diagramFont} fontSize={style.text.fontSize} xmlSpace="preserve">
-      {layout.placements.map((line, i) => <tspan key={i} x={line.x} y={line.y}>{line.text}</tspan>)}
-    </text>}
+    {!tile && !hideTitle && <DiagramLabel style={style.text} layout={layout} boundary={frame} />}
     {!tile && status && <g data-status={"status" in item ? item.status : undefined} transform={`translate(${status.box.x} ${status.box.y})`}>
       <rect width={status.box.width} height={status.box.height} rx={4} fill="#FFFFFF" />
       <circle cx={11.5} cy={status.box.height / 2} r={3.5} fill={status.marker} />

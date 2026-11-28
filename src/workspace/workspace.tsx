@@ -9,6 +9,9 @@ import { beginSave, editSession, openSession, settleSave, viewSession, type Docu
 import type { CommandState, Outcome } from "../core/commands";
 import type { EdgeEdit } from "../core/edge-edits";
 import type { PropertyEdit } from "../core/properties";
+import { duplicatePlan, type HierarchyEdit } from "../core/hierarchy-edits";
+import { indexHierarchy } from "../core/hierarchy";
+import type { EditHierarchy } from "./hierarchy-controls";
 import { componentDispatcher, type ComponentEdit } from "../core/component-edits";
 import { idSchema, type DiagramDocument, type Viewport } from "../core/contracts";
 import { createMemoryDocumentRepository } from "../infrastructure/memory-document-repository";
@@ -136,8 +139,29 @@ export function Workspace({ initial }: { initial: "/" | "/editor/" }) {
     if (session?.editor.document.id === sampleId) return "Create a diagram to edit connections.";
     return apply((state) => dispatcher.dispatch(state, { type: "edge", payload, expectedGeneration }), payload.kind === "delete" ? [] : [payload.id]);
   }
+  const editHierarchy: EditHierarchy = (intent, expectedGeneration) => {
+    if (!session || session.editor.document.id === sampleId) return "Create a diagram to edit its hierarchy.";
+    let payload: HierarchyEdit;
+    let selection: string[] | undefined;
+    if (intent.kind === "group") {
+      const id = crypto.randomUUID();
+      payload = { kind: "group", ids: intent.ids, id };
+      selection = [id];
+    } else if (intent.kind === "duplicate") {
+      const document = session.editor.document;
+      const index = indexHierarchy(document);
+      if (!index.ok) return index.issues[0].message;
+      const plan = duplicatePlan(document, index.value, intent.ids);
+      const ids = [...plan.included, ...plan.edges.map(({ id }) => id)];
+      const copies = Object.fromEntries(ids.map((id) => [id, crypto.randomUUID()]));
+      payload = { kind: "duplicate", ids: intent.ids, copies };
+      if (ids.length) selection = [...plan.roots, ...plan.edges.map(({ id }) => id)].map((id) => copies[id]);
+    } else if (intent.kind === "reparent") payload = intent;
+    else payload = { kind: intent.kind, ids: intent.ids };
+    return apply((state) => dispatcher.dispatch(state, { type: "hierarchy", payload, expectedGeneration }), selection);
+  };
   if (!editorRoute) return <Library documents={documents} loading={!ready && !error} error={error} create={create} />;
-  if (session) return <Editor key={session.token} session={session} onView={updateView} onEdit={edit} onEdge={editEdge}
+  if (session) return <Editor key={session.token} session={session} onView={updateView} onEdit={edit} onEdge={editEdge} onHierarchy={editHierarchy}
     onProperty={(payload: PropertyEdit, expectedGeneration) => {
       if (session.editor.document.id === sampleId) return "Create a diagram to edit properties.";
       return apply((state) => dispatcher.dispatch(state, { type: "property", payload, expectedGeneration }));

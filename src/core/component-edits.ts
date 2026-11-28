@@ -1,5 +1,6 @@
 import { createDispatcher } from "./commands";
 import { applyEdgeEdit, type EdgeEdit } from "./edge-edits";
+import { applyHierarchyEdit, type HierarchyEdit } from "./hierarchy-edits";
 import { applyPropertyEdit, containmentMetrics, type PropertyEdit } from "./properties";
 import type { Boundary, Node, Position } from "./contracts";
 import { indexHierarchy, moveTransformRoots, resizeObject, snapWorld, validateContainment } from "./geometry";
@@ -50,10 +51,11 @@ export function resizeRect(rect: Rect, handle: ResizeHandle, delta: Position, sq
 export function componentDispatcher(measure?: Measure) {
   const metrics = containmentMetrics(measure);
   const reject = (message: string) => fail({ code: "INVALID_GEOMETRY", path: ["document"], message });
-  return createDispatcher<{ toggle: SettingsKey; component: ComponentEdit; edge: EdgeEdit; property: PropertyEdit }>({
+  return createDispatcher<{ toggle: SettingsKey; component: ComponentEdit; edge: EdgeEdit; property: PropertyEdit; hierarchy: HierarchyEdit }>({
     toggle(draft, key) { draft.settings[key] = !draft.settings[key]; return ok(undefined); },
     edge: applyEdgeEdit,
     property: (draft, edit) => applyPropertyEdit(draft, edit, measure),
+    hierarchy: (draft, edit) => applyHierarchyEdit(draft, edit, metrics),
     component(draft, edit) {
       if (edit.kind === "insert") {
         const item = makeComponent(edit.type, edit.id, edit.position);

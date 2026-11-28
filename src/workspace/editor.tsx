@@ -8,6 +8,7 @@ import { componentFor, componentRegistry } from "../core/registry";
 import type { ComponentType } from "../core/component-edits";
 import { EndpointDialog, type ConnectionStart, type EditEdge } from "./connections";
 import { LabelDialog, PropertyControls, type EditProperty } from "./properties";
+import { HierarchyControls, type EditHierarchy } from "./hierarchy-controls";
 import { Canvas, type CanvasControls, type EditComponent, type PaletteDrag, type Tool } from "./canvas";
 import { ComponentPreview, measureLabel } from "./component-graphic";
 import { BackToLibrary, categoryName } from "./library";
@@ -26,13 +27,14 @@ function subscribeNarrow(change: () => void) {
 
 const categories = [["Flowchart", "flow."], ["Architecture", "arch."], ["General", "general."]] as const;
 
-export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty }: {
+export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, onHierarchy }: {
   session: DocumentSession;
   onView(viewport: Viewport | null, selection: readonly string[]): void;
   onToggle(key: "gridVisible" | "snapToGrid"): void;
   onEdit: EditComponent;
   onEdge: EditEdge;
   onProperty: EditProperty;
+  onHierarchy: EditHierarchy;
 }) {
   const { document, view } = session.editor;
   const scene = useMemo(() => buildScene(document, measureLabel), [document]);
@@ -120,9 +122,9 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty }
       </Sidebar>}
       <Canvas scene={scene} viewport={view.viewport} selection={view.selection} tool={tool} isSample={isSample}
         editor={session.editor} pending={!!session.pending} controls={canvas} drag={drag} onEdit={onEdit} onEdge={onEdge} onView={onView}
-        onLabel={setLabelId} />
+        onLabel={setLabelId} onHierarchy={onHierarchy} />
       {open.properties && <Sidebar panel="properties" close={() => closePanel("properties")}>
-        <Inspector scene={scene} session={session} readOnly={isSample} onEdge={onEdge} onProperty={onProperty}
+        <Inspector scene={scene} session={session} readOnly={isSample} onEdge={onEdge} onProperty={onProperty} onHierarchy={onHierarchy}
           select={(ids) => onView(view.viewport ?? originView, ids)}
           openConnection={(start, trigger) => { endpointTrigger.current = trigger; setConnection(start); }} />
       </Sidebar>}
@@ -168,10 +170,11 @@ function Sidebar({ panel, close, children }: { panel: Panel; close(): void; chil
   </aside>;
 }
 
-function Inspector({ scene, session, select, readOnly, openConnection, onEdge, onProperty }: {
+function Inspector({ scene, session, select, readOnly, openConnection, onEdge, onProperty, onHierarchy }: {
   scene: Scene; session: DocumentSession; select(ids: readonly string[]): void; readOnly: boolean;
   openConnection(start: ConnectionStart, trigger: HTMLElement): void; onEdge: EditEdge;
   onProperty: EditProperty;
+  onHierarchy: EditHierarchy;
 }) {
   const { document, view } = session.editor;
   const [edgeError, setEdgeError] = useState("");
@@ -217,6 +220,8 @@ function Inspector({ scene, session, select, readOnly, openConnection, onEdge, o
           onClick={() => editEdge({ kind: "delete", id: edge.id })}>Delete connection</button>
       </div>}
       {edgeError && <p role="alert">{edgeError}</p>}
+      {!readOnly && selectedItems.length > 0 && <HierarchyControls key={JSON.stringify(view.selection)}
+        document={document} ids={view.selection} generation={session.editor.generation} pending={!!session.pending} edit={onHierarchy} />}
       {!readOnly && selectedItems.length > 0 && <PropertyControls items={selectedItems} generation={session.editor.generation}
         busy={!!session.pending} onEdit={onProperty} />}
     </section>

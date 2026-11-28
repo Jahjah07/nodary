@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 07 — 28 November 2026
+
+- Added explicit nested grouping and parent selection, measured recursive expansion, and world-preserving reparent and ungroup actions.
+- Added hierarchy-aware deletion and duplication. Internal links remap to copied components, and links to outside components stay with the original graph. [Phase 07 evidence](docs/04-development/evidence/PHASE-07.md)
+
 ## Phase 06 — 27 November 2026
 
 - Added contextual property editing and direct label drafts for nodes, edges, and boundaries, with shared-style edits for compatible selections.

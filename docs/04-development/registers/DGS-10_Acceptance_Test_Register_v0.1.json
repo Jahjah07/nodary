@@ -409,12 +409,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/history.spec.ts",
+        "tests/e2e/properties.spec.ts",
+        "tests/e2e/hierarchy.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -473,12 +479,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/properties.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -514,7 +524,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -551,7 +561,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -1026,7 +1036,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -1062,7 +1072,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -1098,7 +1108,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -1134,7 +1144,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -1170,7 +1180,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -1280,12 +1290,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/history.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -1307,12 +1321,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/hierarchy.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -1334,12 +1352,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/history.spec.ts",
+        "tests/integration/editor-history.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -1681,12 +1704,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/history.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -1707,12 +1734,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/history.spec.ts",
+        "tests/e2e/workspace.spec.ts",
+        "tests/e2e/components.spec.ts",
+        "tests/e2e/hierarchy.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -1733,12 +1767,17 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "integration_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/history.spec.ts",
+        "tests/e2e/properties.spec.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -2201,7 +2240,7 @@
         "docs/04-development/evidence/PHASE-07.md#ux-07-browser-verification"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -2258,7 +2297,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -2301,12 +2340,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "component_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/e2e/history.spec.ts",
+        "tests/e2e/properties.spec.ts",
+        "tests/integration/connections-view.test.tsx"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -2787,7 +2832,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -2813,7 +2858,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -2857,16 +2902,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_integration",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
-        "tests/unit/commands.test.ts"
+        "tests/unit/commands.test.ts",
+        "tests/integration/editor-history.test.ts",
+        "tests/e2e/history.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations",
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -3075,12 +3123,16 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "performance_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/editor-history.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#fifty-transaction-production-history"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -3287,10 +3339,11 @@
       ],
       "evidence": [
         "docs/04-development/evidence/PHASE-05.md#acceptance",
-        "docs/04-development/evidence/PHASE-07.md#acceptance"
+        "docs/04-development/evidence/PHASE-07.md#acceptance",
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -3507,7 +3560,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -3533,7 +3586,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -3812,17 +3865,21 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
         "tests/e2e/workspace.spec.ts",
-        "tests/unit/workspace-scene.test.ts"
+        "tests/unit/workspace-scene.test.ts",
+        "tests/e2e/history.spec.ts",
+        "tests/e2e/properties.spec.ts",
+        "tests/e2e/hierarchy.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
+        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture",
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -3944,10 +4001,12 @@
       "status": "pass",
       "testIds": [
         "tests/e2e/workspace.spec.ts",
-        "tests/unit/workspace-scene.test.ts"
+        "tests/unit/workspace-scene.test.ts",
+        "tests/e2e/hierarchy.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
+        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture",
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
       ],
       "defectIds": [],
       "commit": "43e22d3a45520f4fed65ceb4c024a96c80e18768",
@@ -4018,10 +4077,12 @@
       "status": "pass",
       "testIds": [
         "tests/integration/component-edits.test.ts",
-        "tests/e2e/components.spec.ts"
+        "tests/e2e/components.spec.ts",
+        "tests/e2e/history.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture"
+        "docs/04-development/evidence/PHASE-04.md#acceptance-and-architecture",
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
       ],
       "defectIds": [],
       "commit": "f4aa40c95997c824f20503715cfb7e12ec929a15",
@@ -4344,7 +4405,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -4371,7 +4432,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -4398,7 +4459,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -4424,7 +4485,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -4450,7 +4511,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -4476,7 +4537,7 @@
         "docs/04-development/evidence/PHASE-07.md#acceptance"
       ],
       "defectIds": [],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build 6NhpwqUi9vBu4LTeL_gwc",
       "applicabilityDecision": null
     },
@@ -4494,16 +4555,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
-        "tests/e2e/workspace.spec.ts"
+        "tests/e2e/workspace.spec.ts",
+        "tests/e2e/history.spec.ts",
+        "tests/e2e/connections.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
+        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture",
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -4520,12 +4584,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
-      "testIds": [],
-      "evidence": [],
+      "status": "pass",
+      "testIds": [
+        "tests/integration/editor-history.test.ts",
+        "tests/e2e/history.spec.ts",
+        "tests/unit/commands.test.ts"
+      ],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
+      ],
       "defectIds": [],
       "commit": null,
-      "environment": null,
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -4564,16 +4634,18 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "accessibility_manual_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
-        "tests/e2e/workspace.spec.ts"
+        "tests/e2e/workspace.spec.ts",
+        "tests/e2e/history.spec.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture"
+        "docs/04-development/evidence/PHASE-03.md#acceptance-and-architecture",
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Chromium 159.0.8154.6, Chrome 158.0.8127.38, Edge 158.0.4370.45",
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {
@@ -4590,16 +4662,19 @@
       ],
       "finalVerificationTask": "T-11-01",
       "plannedTestLevel": "unit_e2e",
-      "status": "not_run",
+      "status": "pass",
       "testIds": [
-        "tests/unit/commands.test.ts"
+        "tests/unit/commands.test.ts",
+        "tests/e2e/history.spec.ts",
+        "tests/integration/editor-history.test.ts"
       ],
       "evidence": [
-        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations"
+        "docs/04-development/evidence/PHASE-02.md#acceptance-evidence-and-limitations",
+        "docs/04-development/evidence/PHASE-08.md#acceptance-evidence"
       ],
       "defectIds": [],
       "commit": null,
-      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Phase 02 worktree",
+      "environment": "Windows 11 x64, Node 22.14.0, Vitest 5.1.2, Playwright 1.65.1, Chrome 158.0.8127.38, Edge 158.0.4370.45, Chromium 159.0.8154.6, static build BU98cWLutl9Sdv0YqZvO6",
       "applicabilityDecision": null
     },
     {

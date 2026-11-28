@@ -140,8 +140,8 @@
         "T-08-02",
         "T-08-03"
       ],
-      "status": "not_started",
-      "gate_status": "not_run",
+      "status": "implemented",
+      "gate_status": "pass",
       "depends_on_phase": "07"
     },
     {
@@ -956,7 +956,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-07.md#task-results"
       ],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "blocker": null
     },
     {
@@ -977,7 +977,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-07.md#task-results"
       ],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "blocker": null
     },
     {
@@ -1000,7 +1000,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-07.md#task-results"
       ],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "blocker": null
     },
     {
@@ -1024,7 +1024,7 @@
       "evidence": [
         "docs/04-development/evidence/PHASE-07.md#task-results"
       ],
-      "commit": null,
+      "commit": "a9de1eb3b52eff8033491e5258915302a80de097",
       "blocker": null
     },
     {
@@ -1042,13 +1042,15 @@
       ],
       "verification": "DM-15,CI-29–30,UX-11",
       "deliverable": "Integrate all graph mutations with existing dispatcher/history; metadata/view excluded, one gesture/label/style commit, cancelled/noop no entry; undo/redo preserve current metadata/revision.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-07-04"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1063,13 +1065,15 @@
       ],
       "verification": "CI-11,CI-30,CI-32,DM-24",
       "deliverable": "Finish nudge coalescing, undo/redo availability, duplicate/delete/group shortcuts and keyboard alternatives; test at least 50 graph transactions and redo branching.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-08-01"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1087,13 +1091,15 @@
       ],
       "verification": "CI-03,CI-08,CI-33,CL-08",
       "deliverable": "Verify full scene fit, complex multi-selection, stale preview and resource limits; use both reference diagram categories; fix any bypasses of dispatcher.",
-      "status": "not_started",
-      "verification_status": "not_run",
+      "status": "implemented",
+      "verification_status": "pass",
       "dependencies": [
         "T-08-02"
       ],
       "priority": "must",
-      "evidence": [],
+      "evidence": [
+        "docs/04-development/evidence/PHASE-08.md#task-results"
+      ],
       "commit": null,
       "blocker": null
     },
@@ -1541,7 +1547,7 @@
       "id": "AC-FR-02-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-03-01",
@@ -1553,7 +1559,7 @@
       "id": "AC-FR-03-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-03-03",
@@ -1703,19 +1709,19 @@
       "id": "AC-FR-10-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-10-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-10-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-10-04",
@@ -1793,19 +1799,19 @@
       "id": "AC-FR-14-01",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-14-02",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-14-03",
       "source": "DGS-02",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "AC-FR-15-01",
@@ -1955,7 +1961,7 @@
       "id": "UX-11",
       "source": "DGS-04",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "UX-12",
@@ -2087,7 +2093,7 @@
       "id": "DM-15",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "DM-16",
@@ -2141,7 +2147,7 @@
       "id": "DM-24",
       "source": "DGS-05",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CL-01",
@@ -2315,7 +2321,7 @@
       "id": "CI-03",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-04",
@@ -2471,13 +2477,13 @@
       "id": "CI-29",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-30",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-31",
@@ -2489,13 +2495,13 @@
       "id": "CI-32",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-33",
       "source": "DGS-07",
       "applicability": "mandatory",
-      "status": "not_run"
+      "status": "pass"
     },
     {
       "id": "CI-34",

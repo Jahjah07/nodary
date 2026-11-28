@@ -131,9 +131,10 @@ export function Workspace({ initial }: { initial: "/" | "/editor/" }) {
     return null;
   }
 
-  function edit(payload: ComponentEdit, selection: readonly string[], expectedGeneration: number) {
+  function edit(payload: ComponentEdit, selection: readonly string[] | undefined, expectedGeneration: number) {
     if (session?.editor.document.id === sampleId) return "Create a diagram to edit components.";
-    return apply((state) => dispatcher.dispatch(state, { type: "component", payload, expectedGeneration }), selection);
+    const issue = apply((state) => dispatcher.dispatch(state, { type: "component", payload, expectedGeneration }), selection);
+    return issue ?? sessionStore.getState().entry!.session!.editor;
   }
   function editEdge(payload: EdgeEdit, expectedGeneration: number) {
     if (session?.editor.document.id === sampleId) return "Create a diagram to edit connections.";
@@ -162,6 +163,7 @@ export function Workspace({ initial }: { initial: "/" | "/editor/" }) {
   };
   if (!editorRoute) return <Library documents={documents} loading={!ready && !error} error={error} create={create} />;
   if (session) return <Editor key={session.token} session={session} onView={updateView} onEdit={edit} onEdge={editEdge} onHierarchy={editHierarchy}
+    onHistory={(action) => session.editor.document.id === sampleId ? null : apply(dispatcher[action])}
     onProperty={(payload: PropertyEdit, expectedGeneration) => {
       if (session.editor.document.id === sampleId) return "Create a diagram to edit properties.";
       return apply((state) => dispatcher.dispatch(state, { type: "property", payload, expectedGeneration }));

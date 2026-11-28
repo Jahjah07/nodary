@@ -18,8 +18,9 @@ import { buildScene, clampTranslation, connectionAnchor, connectionAnchors, fitS
   originView, projectConnection, rectBetween, zoomAt, type Scene, type SceneAnchor } from "./scene";
 
 export type Tool = "select" | "pan";
-export type EditComponent = (edit: ComponentEdit, selection: readonly string[], generation: number) => string | null;
-export type CanvasControls = { insert(type: ComponentType): boolean; clearDrop(): void };
+export type EditComponent = (edit: ComponentEdit, selection: readonly string[] | undefined, generation: number) => CommandState | string;
+export type HistoryAction = "undo" | "redo";
+export type CanvasControls = { insert(type: ComponentType): boolean; clearDrop(): void; finishNudge(): void; history(action: HistoryAction): void };
 export type PaletteDrag = { type: ComponentType; hotspot: Position };
 const dispatcher = componentDispatcher(measureLabel);
 const dropType = "application/x-nodary-component";
@@ -32,12 +33,13 @@ type Gesture = {
   connection?: ConnectionStart;
 };
 
-export function Canvas({ scene, viewport, selection, tool, isSample, editor, pending, controls, drag, onEdit, onEdge, onView, onLabel, onHierarchy }: {
+export function Canvas({ scene, viewport, selection, tool, isSample, editor, pending, controls, drag, onEdit, onEdge, onView, onLabel, onHierarchy, onHistory }: {
   scene: Scene; viewport: Viewport | null; selection: readonly string[]; tool: Tool; isSample: boolean;
   editor: CommandState; pending: boolean; controls: Ref<CanvasControls>; drag: RefObject<PaletteDrag | null>; onEdit: EditComponent;
   onEdge: EditEdge;
   onHierarchy: EditHierarchy;
   onLabel(id: string): void;
+  onHistory(action: HistoryAction): string | null;
   onView(view: Viewport, selection: readonly string[]): void;
 }) {
   const surface = useRef<HTMLDivElement>(null);
@@ -50,10 +52,12 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
   const [marquee, setMarquee] = useState<Rect>();
   const [menu, setMenu] = useState<Position>();
   const [notice, setNotice] = useState("");
-  const [preview, setPreview] = useState<{ document: Immutable<DiagramDocument>; selection: readonly string[] }>();
+  const [draft, setPreview] = useState<{ document: Immutable<DiagramDocument>; selection: readonly string[]; generation: number }>();
   const [ghost, setGhost] = useState<ReturnType<typeof makeComponent>>();
   const [hover, setHover] = useState<string | null>(null);
-  const [link, setLink] = useState<{ points: Position[]; target?: Endpoint; valid: boolean; message: string }>();
+  const [linkDraft, setLink] = useState<{ points: Position[]; target?: Endpoint; valid: boolean; message: string; generation: number }>();
+  const preview = draft?.generation === editor.generation ? draft : undefined;
+  const link = linkDraft?.generation === editor.generation ? linkDraft : undefined;
   const active = viewport ?? originView;
   const { gridVisible, snapToGrid, gridSpacing } = editor.document.settings;
   const spacing = gridSpacing * active.zoom * (active.zoom < .4 ? 2 : 1);
@@ -131,23 +135,25 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
       original?.[start.side === "source" ? "target" : "source"];
     const target = resolveTarget(end, current.view);
     const fallback = fixed ? [fixed.point, clientToWorld(end, current.view, originView)] : [];
-    if (!target) return { points: fallback, valid: false, message: "Drop on a component connection point." };
+    const rejected = { points: fallback, valid: false, target, generation: current.editor.generation };
+    if (!target) return { ...rejected, message: "Drop on a component connection point." };
     const edit = targetEdit(start, target);
     const candidate = candidateEdge(current.editor.document, edit);
-    if (!candidate.ok) return { points: fallback, valid: false, target, message: candidate.issues[0].message };
+    if (!candidate.ok) return { ...rejected, message: candidate.issues[0].message };
     const source = connectionAnchor(scene, candidate.value.source);
     const destination = connectionAnchor(scene, candidate.value.target);
     const projected = source && destination && projectConnection(candidate.value, source, destination);
-    if (!projected || typeof projected === "string") return { points: fallback, valid: false, target,
+    if (!projected || typeof projected === "string") return { ...rejected,
       message: projected || "The connection point is unavailable." };
-    return { points: projected.points, valid: true, target, message: "Release to connect." };
+    return { points: projected.points, valid: true, target, message: "Release to connect.", generation: current.editor.generation };
   }
   function insert(type: ComponentType, position: Position) {
     const id = crypto.randomUUID();
-    const error = onEdit({ kind: "insert", type, id, position }, [id], editor.generation);
-    setNotice(error ?? "");
-    if (!error) surface.current?.focus({ preventScroll: true });
-    return !error;
+    const result = onEdit({ kind: "insert", type, id, position }, [id], editor.generation);
+    setNotice(typeof result === "string" ? result : "");
+    if (typeof result === "string") return false;
+    surface.current?.focus({ preventScroll: true });
+    return true;
   }
   useImperativeHandle(controls, () => ({
     insert(type) {
@@ -168,6 +174,8 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
       return insert(type, position);
     },
     clearDrop: () => setGhost(undefined),
+    finishNudge: () => { finishNudge(true); },
+    history,
   }));
 
   function placed(event: DragEvent<HTMLDivElement>) {
@@ -183,9 +191,18 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     if (!current) return;
     nudge.current = null;
     setPreview(undefined);
-    const error = commit ? onEdit(current.edit, current.selection, current.base.generation) : null;
-    setNotice(error ?? "");
-    return commit && !error ? current : null;
+    const result = commit ? onEdit(current.edit, undefined, current.base.generation) : current.base;
+    setNotice(typeof result === "string" ? result : "");
+    return typeof result === "string" ? undefined : result;
+  }
+
+  function history(action: HistoryAction) {
+    if (document.activeElement?.matches("[data-history-action]")) surface.current?.focus({ preventScroll: true });
+    if (gesture.current) stop(true);
+    else if (nudge.current) finishNudge(false);
+    else if (!isSample && !pending && editor.history[action === "undo" ? "past" : "future"].length) {
+      setNotice(onHistory(action) ?? "");
+    }
   }
 
   const onResize = useEffectEvent((width: number, height: number) => {
@@ -238,7 +255,8 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
   function down(event: PointerEvent<HTMLDivElement>) {
     if (event.pointerType === "touch" || (event.button !== 0 && event.button !== 1) || gesture.current) return;
     event.preventDefault();
-    finishNudge(true);
+    const base = finishNudge(true) ?? editor;
+    const committedScene = base.document === editor.document ? scene : buildScene(base.document, measureLabel);
     event.currentTarget.focus({ preventScroll: true });
     if (event.currentTarget !== document.activeElement) return;
     if (menu) { setMenu(undefined); return; }
@@ -253,8 +271,8 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     const resize = mode === "select" && !pending ? handle : undefined;
     setNotice("");
     gesture.current = { pointer: event.pointerId, mode, start, view: active, selection, shift: event.shiftKey,
-      editor, resize, connection, hit: mode === "select" ? (resize && resizer ? resizer.item.id :
-        hitTest(scene, clientToWorld(start, active, originView), active.zoom)) : null };
+      editor: base, resize, connection, hit: mode === "select" ? (resize && resizer ? resizer.item.id :
+        hitTest(committedScene, clientToWorld(start, active, originView), active.zoom)) : null };
     if (connection) setLink(linkPreview(gesture.current, start));
     setDraggingPan(mode === "pan");
     event.currentTarget.setPointerCapture(event.pointerId);
@@ -295,6 +313,13 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
       return;
     }
     if (current.pointer !== event.pointerId) return;
+    if (current.mode === "select" && current.editor.generation !== editor.generation) {
+      setPreview(undefined);
+      setMarquee(undefined);
+      setLink(undefined);
+      setNotice("The document changed after this edit began.");
+      return;
+    }
     const end = local(event);
     if (current.connection) {
       setLink(linkPreview(current, end));
@@ -310,7 +335,7 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
         const result = dispatcher.preview(current.editor, { type: "component", payload: change.edit, expectedGeneration: editor.generation });
         const visible = !result.ok && change.floor ? dispatcher.preview(current.editor,
           { type: "component", payload: change.floor, expectedGeneration: editor.generation }) : result;
-        if (visible.ok) setPreview({ document: visible.value, selection: change.next });
+        setPreview(visible.ok ? { document: visible.value, selection: change.next, generation: current.editor.generation } : undefined);
         setNotice(result.ok ? "" : result.issues[0].message);
       } else if (!current.hit) setMarquee(rectBetween(current.start, end));
     } else {
@@ -326,6 +351,10 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     const dragged = Math.hypot(end.x - current.start.x, end.y - current.start.y) >= 4;
     stop(false);
     if (current.mode === "pan") return;
+    if (current.editor.generation !== editor.generation) {
+      setNotice("The document changed after this edit began.");
+      return;
+    }
     if (current.connection) {
       if (!dragged) return;
       const next = linkPreview(current, end);
@@ -335,7 +364,8 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
     }
     const change = dragged && transform(current, end.x - current.start.x, end.y - current.start.y);
     if (change) {
-      setNotice(onEdit(change.edit, change.next, current.editor.generation) ?? "");
+      const result = onEdit(change.edit, change.next, current.editor.generation);
+      setNotice(typeof result === "string" ? result : "");
       return;
     }
     if (current.resize) return;
@@ -354,7 +384,13 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
 
   function key(event: KeyboardEvent<HTMLDivElement>) {
     if (event.target !== event.currentTarget || event.nativeEvent.isComposing) return;
-    if (event.key === "Escape") {
+    const shortcut = event.key.toLowerCase();
+    const historyKey = !event.altKey && (((event.ctrlKey || event.metaKey) && shortcut === "z") ||
+      (event.ctrlKey && !event.metaKey && !event.shiftKey && shortcut === "y" && navigator.platform.startsWith("Win")));
+    if (historyKey && !isSample && !menu) {
+      event.preventDefault();
+      if (!event.repeat) history(event.shiftKey || shortcut === "y" ? "redo" : "undo");
+    } else if (event.key === "Escape") {
       event.preventDefault();
       if (gesture.current) stop(true);
       else if (nudge.current) finishNudge(false);
@@ -362,6 +398,7 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
       else onView(active, []);
     } else if (!gesture.current && (event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === "a") {
       event.preventDefault();
+      finishNudge(true);
       onView(active, objectsIn(scene));
     } else if (event.code === "Space" && !event.ctrlKey && !event.metaKey && !event.altKey) {
       event.preventDefault();
@@ -385,8 +422,7 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
       let previous = nudge.current;
       let base = previous?.base ?? editor;
       if (previous && (previous.key !== event.key || previous.selection.join() !== selection.join())) {
-        const committed = finishNudge(true);
-        if (committed) base = dispatcher.dispatch(committed.base, { type: "component", payload: committed.edit }).state;
+        base = finishNudge(true) ?? editor;
         previous = null;
       }
       const vector = arrows[event.key];
@@ -396,7 +432,7 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
         delta: { x: before.x + vector.x * step, y: before.y + vector.y * step } };
       const result = dispatcher.preview(base, { type: "component", payload: edit });
       nudge.current = { key: event.key, edit, selection, base };
-      if (result.ok) setPreview({ document: result.value, selection });
+      setPreview(result.ok ? { document: result.value, selection, generation: base.generation } : undefined);
       setNotice(result.ok ? "" : result.issues[0].message);
       clearTimeout(nudgeTimer.current);
       nudgeTimer.current = setTimeout(() => finishNudge(true), 300);
@@ -406,6 +442,7 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
   function context(event: MouseEvent<HTMLDivElement>) {
     event.preventDefault();
     if (gesture.current || tool === "pan" || space) return;
+    finishNudge(true);
     const point = local(event);
     const hit = hitTest(scene, clientToWorld(point, active, originView), active.zoom);
     if (hit && !selection.includes(hit)) onView(active, [hit]);
@@ -429,7 +466,9 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
         const id = hitTest(scene, clientToWorld(local(event), active, originView), active.zoom);
         if (id) onLabel(id);
       }}
-      onPointerCancel={() => stop(true)} onLostPointerCapture={() => stop(true)} onContextMenu={context} onKeyDown={key}
+      onPointerCancel={(event) => { if (gesture.current?.pointer === event.pointerId) stop(true); }}
+      onLostPointerCapture={(event) => { if (gesture.current?.pointer === event.pointerId) stop(true); }}
+      onContextMenu={context} onKeyDown={key}
       onDragOver={(event) => {
         const candidate = placed(event);
         if (!candidate) return;
@@ -446,7 +485,12 @@ export function Canvas({ scene, viewport, selection, tool, isSample, editor, pen
         setGhost(undefined);
         insert(candidate.type, candidate.position);
       }}
-      onBlur={() => { setSpace(false); stop(true); finishNudge(false); }} onAuxClick={(event) => { if (event.button === 1) event.preventDefault(); }}>
+      onBlur={(event) => {
+        setSpace(false);
+        if (event.relatedTarget?.matches("[data-history-action]")) return;
+        stop(true);
+        finishNudge(!!event.relatedTarget?.matches("[data-selection-action]"));
+      }} onAuxClick={(event) => { if (event.button === 1) event.preventDefault(); }}>
       {gridVisible && <div aria-hidden="true" className="canvas-grid" style={{ backgroundSize: `${spacing}px ${spacing}px`,
         backgroundPosition: `${active.x - spacing / 2}px ${active.y - spacing / 2}px` }} />}
       <Projection scene={shown} viewport={active} selection={picked} />

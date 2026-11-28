@@ -143,9 +143,13 @@ test("CI-18/19 creates branching flow, preserves attachment during transforms, a
   await page.keyboard.press("Escape");
   await page.mouse.up();
   await expect(paths(page)).toHaveCount(3);
+  await canvas(page).evaluate((element) => {
+    const surface = element as HTMLElement;
+    surface.addEventListener("pointerdown", (event) => { surface.dataset.testPointer = String(event.pointerId); }, { once: true });
+  });
   await startLink(page, yes, "bottom");
   await toPort(page, no, "right");
-  await canvas(page).dispatchEvent("pointercancel");
+  await canvas(page).dispatchEvent("pointercancel", { pointerId: Number(await canvas(page).getAttribute("data-test-pointer")) });
   await page.mouse.up();
   await expect(paths(page)).toHaveCount(3);
   await expect(page.locator(".connection-preview")).toHaveCount(0);

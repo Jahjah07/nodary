@@ -1,5 +1,10 @@
 # Changelog
 
+## Phase 08 — 28 November 2026
+
+- Added undo and redo controls and canvas shortcuts for validated graph-only history. Viewport, settings and repository revisions stay current when a graph is restored.
+- Coalesced keyboard nudge repeats and verified cancellation, session isolation and 50 mixed history transactions in the reference workload. [Phase 08 evidence](docs/04-development/evidence/PHASE-08.md)
+
 ## Phase 07 — 28 November 2026
 
 - Added explicit nested grouping and parent selection, measured recursive expansion, and world-preserving reparent and ungroup actions.

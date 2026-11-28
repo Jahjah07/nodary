@@ -11,11 +11,12 @@ const graphic = (page: Page, type: string) => page.locator(`.projection [data-co
 const picker = (page: Page) => field(page, "Find an object");
 const renderedLabel = (node: Locator) => node.locator(".diagram-label, .frame-title");
 const nodeId = (node: Locator) => node.locator("..").getAttribute("data-id");
-async function open(page: Page, name: string) {
+async function open(page: Page, name: string, category = "general") {
   await page.goto("/");
   await page.getByRole("button", { name: "New diagram" }).click();
   const dialog = page.getByRole("dialog", { name: "New diagram" });
   await dialog.getByRole("textbox", { name: "Diagram name" }).fill(name);
+  await dialog.getByLabel("Category").selectOption(category);
   await dialog.getByRole("button", { name: "Create diagram" }).click();
   await expect(canvas(page)).toBeVisible();
 }
@@ -158,7 +159,8 @@ test("CI-14/15/16 direct and inspector drafts preserve Unicode, IME, native undo
 });
 
 test("CL-10 and CI-17 styles a connected flowchart and edits mixed values and edge properties", async ({ page }, info) => {
-  await open(page, "Release approval flow");
+  test.setTimeout(60_000);
+  await open(page, "Release approval flow", "flowchart");
   const start = await insert(page, "Start / End", "flow.terminator", 95, 230);
   await label(page, "Submit release");
   const review = await insert(page, "Decision", "flow.decision", 390, 210);
@@ -208,12 +210,61 @@ test("CL-10 and CI-17 styles a connected flowchart and edits mixed values and ed
   await link(page, review, fix, "bottom", "top");
   await label(page, "Needs review");
   await enter(field(page, "Stroke colour"), "#9A3412");
+  const branch = page.locator(".connection-line[data-selected='true']");
+  await expect(branch).toHaveAttribute("stroke", "#9A3412");
+  const undo = page.getByRole("button", { name: "Undo", exact: true });
+  const redo = page.getByRole("button", { name: "Redo", exact: true });
+  await undo.click();
+  await expect(branch).not.toHaveAttribute("stroke", "#9A3412");
+  await expect(page.locator(".diagram-edge-label").filter({ hasText: "Needs review" })).toBeVisible();
+  await redo.click();
+  await expect(branch).toHaveAttribute("stroke", "#9A3412");
+  await select(page, start);
+  await enter(field(page, "X"), "-140");
+  const fit = page.getByRole("button", { name: "Fit diagram", exact: true });
+  await fit.click();
+  const bounds = (await canvas(page).boundingBox())!;
+  const ink = page.locator(".diagram-node,.diagram-edge-label,[data-edge-arrow]");
+  expect(await ink.count()).toBeGreaterThan(7);
+  await expect.poll(() => ink.evaluateAll((items, { x, y, width, height }) => items.every((item) => {
+    const box = item.getBoundingClientRect();
+    return box.left >= x && box.top >= y && box.right <= x + width && box.bottom <= y + height;
+  }), bounds)).toBe(true);
+  await enter(field(page, "X"), "-100000");
+  await fit.click();
+  await expect(page.getByLabel("Zoom level")).toHaveText("25%");
+  await expect(page.locator(".canvas-notice")).toContainText("cannot fit at the minimum zoom");
+  await undo.click();
+  await expect(field(page, "X")).toHaveValue("-140");
+  await fit.click();
+  await expect(page.locator(".canvas-notice")).toHaveCount(0);
+  await clickShape(page, start);
+  await page.keyboard.down("Shift");
+  await clickShape(page, review);
+  await page.keyboard.up("Shift");
+  await expect(page.locator(".editor-status")).toContainText("2 selected");
+  const edgeToReview = page.locator(`.connection-line[data-source="${await nodeId(start)}"][data-target="${await nodeId(review)}"]`);
+  const originalRoute = await edgeToReview.getAttribute("points");
+  const beforeStart = (await start.boundingBox())!, beforeReview = (await review.boundingBox())!;
+  const x = beforeStart.x + beforeStart.width / 2, y = beforeStart.y + beforeStart.height / 2;
+  await page.mouse.move(x, y);
+  await page.mouse.down();
+  await page.mouse.move(x + 30, y + 35, { steps: 5 });
+  await page.mouse.up();
+  const afterStart = (await start.boundingBox())!, afterReview = (await review.boundingBox())!;
+  expect(afterStart.x - beforeStart.x).toBeCloseTo(30, 2);
+  expect(afterStart.y - beforeStart.y).toBeCloseTo(35, 2);
+  expect(afterReview.x - beforeReview.x).toBeCloseTo(afterStart.x - beforeStart.x, 2);
+  expect(afterReview.y - beforeReview.y).toBeCloseTo(afterStart.y - beforeStart.y, 2);
+  await expect(edgeToReview).not.toHaveAttribute("points", originalRoute!);
+  await undo.click();
+  await expect(edgeToReview).toHaveAttribute("points", originalRoute!);
   await canvas(page).press("Escape");
   if (info.project.name === "chrome") await page.screenshot({ path: info.outputPath("styled-flowchart.png") });
 });
 
 test("CL-14/15 styles architecture statuses and a boundary without replacing custom paint", async ({ page }, info) => {
-  await open(page, "Service platform");
+  await open(page, "Service platform", "architecture");
   const frame = await insert(page, "Boundary", "general.boundary", 70, 135);
   await enter(field(page, "Width"), "820");
   await enter(field(page, "Height"), "490");

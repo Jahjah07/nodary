@@ -106,11 +106,18 @@ export function createDispatcher<Payloads extends object>(handlers: CommandHandl
     const result = prepare(state, command);
     if (!result.ok) return reject(state, result.issues);
     if (same(result.value, state.document)) return { status: "noop", state };
-    const graphChanged = !same(graphOf(result.value), graphOf(state.document));
+    const previous = graphOf(state.document);
+    const next = graphOf(result.value);
+    const graph = {
+      nodes: same(next.nodes, previous.nodes) ? previous.nodes : next.nodes,
+      groups: same(next.groups, previous.groups) ? previous.groups : next.groups,
+      edges: same(next.edges, previous.edges) ? previous.edges : next.edges,
+    };
+    const graphChanged = graph.nodes !== previous.nodes || graph.groups !== previous.groups || graph.edges !== previous.edges;
     const history = graphChanged ? {
-      past: [...state.history.past, graphOf(state.document)].slice(-historyLimit), future: [],
+      past: [...state.history.past, previous].slice(-historyLimit), future: [],
     } : state.history;
-    return publish(state, result.value, history);
+    return publish(state, { ...result.value, ...graph }, history);
   }
 
   function undo(state: CommandState): Outcome {
@@ -118,7 +125,7 @@ export function createDispatcher<Payloads extends object>(handlers: CommandHandl
     if (!graph) return { status: "noop", state };
     const result = parsePortable({ document: { ...state.document, ...graph }, viewport: state.view.viewport });
     if (!result.ok) return reject(state, result.issues);
-    return publish(state, result.value.document, {
+    return publish(state, { ...state.document, ...graph }, {
       past: state.history.past.slice(0, -1), future: [graphOf(state.document), ...state.history.future],
     });
   }
@@ -128,7 +135,7 @@ export function createDispatcher<Payloads extends object>(handlers: CommandHandl
     if (!graph) return { status: "noop", state };
     const result = parsePortable({ document: { ...state.document, ...graph }, viewport: state.view.viewport });
     if (!result.ok) return reject(state, result.issues);
-    return publish(state, result.value.document, {
+    return publish(state, { ...state.document, ...graph }, {
       past: [...state.history.past, graphOf(state.document)], future: state.history.future.slice(1),
     });
   }

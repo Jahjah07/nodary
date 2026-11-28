@@ -1,6 +1,6 @@
 "use client";
 
-import { CircleHelp, Clock3, Grid2X2, Hand, Magnet, MousePointer2, PanelLeft, PanelRight, X } from "lucide-react";
+import { CircleHelp, Clock3, Grid2X2, Hand, Magnet, MousePointer2, PanelLeft, PanelRight, Redo2, Undo2, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type ReactNode, type SyntheticEvent } from "react";
 import type { DocumentSession } from "../application/document-session";
 import type { Viewport } from "../core/contracts";
@@ -9,7 +9,7 @@ import type { ComponentType } from "../core/component-edits";
 import { EndpointDialog, type ConnectionStart, type EditEdge } from "./connections";
 import { LabelDialog, PropertyControls, type EditProperty } from "./properties";
 import { HierarchyControls, type EditHierarchy } from "./hierarchy-controls";
-import { Canvas, type CanvasControls, type EditComponent, type PaletteDrag, type Tool } from "./canvas";
+import { Canvas, type CanvasControls, type EditComponent, type HistoryAction, type PaletteDrag, type Tool } from "./canvas";
 import { ComponentPreview, measureLabel } from "./component-graphic";
 import { BackToLibrary, categoryName } from "./library";
 import { sampleId } from "./sample";
@@ -27,7 +27,7 @@ function subscribeNarrow(change: () => void) {
 
 const categories = [["Flowchart", "flow."], ["Architecture", "arch."], ["General", "general."]] as const;
 
-export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, onHierarchy }: {
+export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, onHierarchy, onHistory }: {
   session: DocumentSession;
   onView(viewport: Viewport | null, selection: readonly string[]): void;
   onToggle(key: "gridVisible" | "snapToGrid"): void;
@@ -35,6 +35,7 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
   onEdge: EditEdge;
   onProperty: EditProperty;
   onHierarchy: EditHierarchy;
+  onHistory(action: HistoryAction): string | null;
 }) {
   const { document, view } = session.editor;
   const scene = useMemo(() => buildScene(document, measureLabel), [document]);
@@ -89,6 +90,11 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
       <button className="button tool-button" title="Select" aria-pressed={tool === "select"} onClick={() => setTool("select")}><MousePointer2 size={16} /> Select</button>
       <button className="button tool-button" title="Pan" aria-pressed={tool === "pan"} onClick={() => setTool("pan")}><Hand size={17} /> Pan</button>
       <span className="header-divider" />
+      <button className="icon-button" type="button" aria-label="Undo" aria-keyshortcuts="Control+Z Meta+Z" title="Undo (Ctrl / ⌘ + Z)"
+        data-history-action disabled={isSample || !!session.pending || !session.editor.history.past.length} onClick={() => canvas.current?.history("undo")}><Undo2 size={18} /></button>
+      <button className="icon-button" type="button" aria-label="Redo" aria-keyshortcuts="Control+Shift+Z Meta+Shift+Z Control+Y" title="Redo (Ctrl / ⌘ + Shift + Z, or Ctrl + Y)"
+        data-history-action disabled={isSample || !!session.pending || !session.editor.history.future.length} onClick={() => canvas.current?.history("redo")}><Redo2 size={18} /></button>
+      <span className="header-divider" />
       <button className="button tool-button" title="Show grid" aria-pressed={document.settings.gridVisible} disabled={!!session.pending}
         onClick={() => onToggle("gridVisible")}><Grid2X2 size={16} /> Grid</button>
       <button className="button tool-button" title="Snap to grid" aria-pressed={document.settings.snapToGrid} disabled={!!session.pending}
@@ -122,10 +128,10 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
       </Sidebar>}
       <Canvas scene={scene} viewport={view.viewport} selection={view.selection} tool={tool} isSample={isSample}
         editor={session.editor} pending={!!session.pending} controls={canvas} drag={drag} onEdit={onEdit} onEdge={onEdge} onView={onView}
-        onLabel={setLabelId} onHierarchy={onHierarchy} />
+        onLabel={setLabelId} onHierarchy={onHierarchy} onHistory={onHistory} />
       {open.properties && <Sidebar panel="properties" close={() => closePanel("properties")}>
         <Inspector scene={scene} session={session} readOnly={isSample} onEdge={onEdge} onProperty={onProperty} onHierarchy={onHierarchy}
-          select={(ids) => onView(view.viewport ?? originView, ids)}
+          select={(ids) => { canvas.current?.finishNudge(); onView(view.viewport ?? originView, ids); }}
           openConnection={(start, trigger) => { endpointTrigger.current = trigger; setConnection(start); }} />
       </Sidebar>}
     </main>
@@ -154,9 +160,16 @@ export function Editor({ session, onView, onToggle, onEdit, onEdge, onProperty, 
         <button type="button" className="icon-button" aria-label="Close" onClick={() => help.current?.close()}><X size={18} /></button></div>
       <p>Focus the canvas to use diagram shortcuts. Tab moves between workspace controls.</p>
       <dl className="shortcut-list"><div><dt>Select all</dt><dd><kbd>Ctrl / ⌘</kbd> + <kbd>A</kbd></dd></div>
+        <div><dt>Undo</dt><dd><kbd>Ctrl / ⌘</kbd> + <kbd>Z</kbd></dd></div>
+        <div><dt>Redo</dt><dd><kbd>Ctrl / ⌘</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd> or <kbd>Ctrl</kbd> + <kbd>Y</kbd> on Windows</dd></div>
+        <div><dt>Duplicate selection</dt><dd><kbd>Ctrl / ⌘</kbd> + <kbd>D</kbd></dd></div>
+        <div><dt>Delete selection</dt><dd><kbd>Delete</kbd> or <kbd>Backspace</kbd></dd></div>
+        <div><dt>Nudge selection</dt><dd><kbd>Arrow keys</kbd> · 1 unit, or 20 with snap</dd></div>
+        <div><dt>Edit selected label or title</dt><dd><kbd>Enter</kbd></dd></div>
         <div><dt>Clear selection or cancel a gesture</dt><dd><kbd>Esc</kbd></dd></div>
         <div><dt>Pan temporarily</dt><dd><kbd>Space</kbd> + drag</dd></div>
         <div><dt>Zoom under the pointer</dt><dd><kbd>Ctrl / ⌘</kbd> + scroll</dd></div></dl>
+      <p>Use the Hierarchy controls in Properties to group or ungroup objects and assign a parent boundary.</p>
     </dialog>
   </div>;
 }
@@ -185,7 +198,7 @@ function Inspector({ scene, session, select, readOnly, openConnection, onEdge, o
   const canConnect = picked && "type" in picked.item && componentFor(picked.item.type).allowedHandles.length > 0;
   const editEdge = (edit: Parameters<EditEdge>[0]) => setEdgeError(onEdge(edit, session.editor.generation) ?? "");
   return <div className="inspector">
-    {all.length > 0 && <label>Find an object<select id="object-picker" value={picked?.item.id ?? ""} onChange={(event) => {
+    {all.length > 0 && <label>Find an object<select id="object-picker" data-selection-action value={picked?.item.id ?? ""} onChange={(event) => {
       select(event.target.value ? [event.target.value] : []); setEdgeError("");
     }}>
       <option value="">Choose an object</option>
@@ -207,8 +220,8 @@ function Inspector({ scene, session, select, readOnly, openConnection, onEdge, o
           : <dl className="properties-list"><div><dt>Category</dt><dd>{categoryName[document.category]}</dd></div>
             <div><dt>Grid spacing</dt><dd>{document.settings.gridSpacing} units</dd></div></dl>}
       {all.length > 0 && <div className="selection-actions">
-        <button className="button selection-button" disabled={view.selection.length === all.length} onClick={() => select(objectsIn(scene))}>Select all</button>
-        {view.selection.length > 0 && <button className="button selection-button" onClick={() => select([])}>Clear selection</button>}
+        <button className="button selection-button" data-selection-action disabled={view.selection.length === all.length} onClick={() => select(objectsIn(scene))}>Select all</button>
+        {view.selection.length > 0 && <button className="button selection-button" data-selection-action onClick={() => select([])}>Clear selection</button>}
       </div>}
       {!readOnly && canConnect && <button className="button selection-button" disabled={!!session.pending}
         onClick={(event) => openConnection({ kind: "connect", id: crypto.randomUUID(),

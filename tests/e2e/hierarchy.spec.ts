@@ -19,13 +19,14 @@ async function open(page: Page, name: string) {
   await page.goto("/");
   await page.getByRole("button", { name: "New diagram" }).click();
   await page.getByRole("textbox", { name: "Diagram name" }).fill(name);
+  await page.getByLabel("Category").selectOption("architecture");
   await page.getByRole("button", { name: "Create diagram" }).click();
   await expect(canvas(page)).toBeVisible();
 }
 async function setField(page: Page, name: string, value: string | number) {
   const locator = field(page, name);
   await locator.fill(String(value));
-  await locator.press(name === "Boundary title" ? "Control+Enter" : "Enter");
+  await locator.press(name === "Boundary title" || name === "Label" ? "Control+Enter" : "Enter");
   await expect(locator).toHaveValue(String(value));
   await expect(inspector(page).getByRole("alert")).toHaveCount(0);
 }
@@ -184,6 +185,45 @@ test("UX-07/09 nests editable groups, connects at all three containment levels, 
   await reconnect.getByRole("button", { name: "Reconnect", exact: true }).click();
   await expect(lines(page).and(page.locator(`[data-edge-id="${lineId}"]`))).toHaveAttribute("data-target", root);
   await expect(lines(page)).toHaveCount(4);
+
+  await picker(page).selectOption(web);
+  await inspector(page).getByRole("combobox", { name: "Status" }).selectOption("completed");
+  await setField(page, "Fill colour", "#DBEAFE");
+  await picker(page).selectOption(storage);
+  await parentPicker(page).selectOption(peer);
+  await expect(item(page, storage)).toHaveAttribute("data-parent-id", peer);
+  await picker(page).selectOption(lineId!);
+  await setField(page, "Label", "Private service request");
+  await picker(page).selectOption(decision);
+  const records = () => lines(page).evaluateAll((edges) => edges.map((edge) =>
+    ["data-edge-id", "data-source", "data-target", "data-source-handle", "data-target-handle", "points"]
+      .map((name) => edge.getAttribute(name))));
+  const beforeDeletion = await records();
+  const undo = page.getByRole("button", { name: "Undo", exact: true });
+  const redo = page.getByRole("button", { name: "Redo", exact: true });
+  await button(page, "Delete selection").click();
+  await expect(item(page, decision)).toHaveCount(0);
+  await expect(lines(page)).toHaveCount(1);
+  await expect(picker(page)).toHaveValue("");
+  await undo.click();
+  await expect(item(page, decision)).toHaveAttribute("data-parent-id", inside);
+  await expect.poll(records).toEqual(beforeDeletion);
+  await expect(picker(page)).toHaveValue("");
+  await redo.click();
+  await expect(item(page, decision)).toHaveCount(0);
+  await expect(lines(page)).toHaveCount(1);
+  await undo.click();
+  await expect.poll(records).toEqual(beforeDeletion);
+  await expect(item(page, web).getByText("Completed")).toBeVisible();
+  await expect(item(page, web).locator('[fill="#DBEAFE"]')).toHaveCount(1);
+  await page.getByRole("button", { name: "Fit diagram", exact: true }).click();
+  const fit = (await canvas(page).boundingBox())!;
+  const ink = page.locator(".diagram-frame,.diagram-node,.boundary-title-layer text,.diagram-edge-label,[data-edge-arrow]");
+  await expect.poll(() => ink.evaluateAll((items, { x, y, width, height }) => items.every((item) => {
+    const box = item.getBoundingClientRect();
+    return box.left >= x && box.top >= y && box.right <= x + width && box.bottom <= y + height;
+  }), fit)).toBe(true);
+  await capture(page, info, "restored-architecture");
 });
 
 test("CI-24/25/26 expands ancestors on left and top, rejects shrink, and requires explicit membership", async ({ page }, info) => {

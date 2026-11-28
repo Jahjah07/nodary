@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { cleanup, fireEvent, render, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import type { ReactNode } from "react";
 import { afterEach, beforeEach, expect, test, vi } from "vitest";
 import { openSession, viewSession } from "../../src/application/document-session";
@@ -12,6 +12,7 @@ import { Editor } from "../../src/workspace/editor";
 import { Connector } from "../../src/workspace/flow";
 import { sampleDiagram } from "../../src/workspace/sample";
 import { buildScene } from "../../src/workspace/scene";
+import { Workspace } from "../../src/workspace/workspace";
 
 vi.mock("@xyflow/react", async (importOriginal) => ({
   ...await importOriginal<typeof import("@xyflow/react")>(),
@@ -50,10 +51,45 @@ beforeEach(() => {
 
 afterEach(() => {
   cleanup();
+  window.history.replaceState(null, "", "/");
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
   Reflect.deleteProperty(HTMLDialogElement.prototype, "showModal");
   Reflect.deleteProperty(HTMLDialogElement.prototype, "close");
+});
+
+test("UX-11 workspace routes undo and redo through the repository session and starts fresh on reopen", async () => {
+  render(<Workspace initial="/" />);
+  await screen.findByText("No diagrams yet");
+  fireEvent.click(screen.getByRole("button", { name: "New diagram" }));
+  fireEvent.change(screen.getByRole("textbox", { name: "Diagram name" }), { target: { value: "History workflow" } });
+  fireEvent.click(screen.getByRole("button", { name: "Create diagram" }));
+  const canvas = await screen.findByRole("region", { name: "Diagram canvas" });
+  vi.spyOn(canvas, "getBoundingClientRect").mockReturnValue(new DOMRect(0, 0, 800, 600));
+  const undo = screen.getByRole("button", { name: "Undo" }) as HTMLButtonElement;
+  const redo = screen.getByRole("button", { name: "Redo" }) as HTMLButtonElement;
+  expect(undo.disabled).toBe(true);
+  expect(redo.disabled).toBe(true);
+  fireEvent.click(screen.getByRole("button", { name: "Insert Process" }));
+  await waitFor(() => expect(undo.disabled).toBe(false));
+  expect(screen.getByText("1 nodes · 0 edges · 0 boundaries")).toBeDefined();
+  fireEvent.keyDown(canvas, { key: "z", ctrlKey: true });
+  await waitFor(() => expect(redo.disabled).toBe(false));
+  expect(screen.queryByLabelText("Find an object")).toBeNull();
+  const grid = screen.getByRole("button", { name: "Grid" }) as HTMLButtonElement;
+  fireEvent.click(grid);
+  await waitFor(() => expect(grid.disabled).toBe(false));
+  expect(grid.getAttribute("aria-pressed")).toBe("false");
+  fireEvent.click(redo);
+  await waitFor(() => expect(undo.disabled).toBe(false));
+  expect(grid.getAttribute("aria-pressed")).toBe("false");
+  expect(screen.getByText("1 nodes · 0 edges · 0 boundaries")).toBeDefined();
+  fireEvent.click(screen.getByRole("link", { name: "Back to diagram library" }));
+  fireEvent.click(await screen.findByRole("link", { name: "History workflow" }));
+  await screen.findByRole("region", { name: "Diagram canvas" });
+  expect((screen.getByRole("button", { name: "Undo" }) as HTMLButtonElement).disabled).toBe(true);
+  expect((screen.getByRole("button", { name: "Redo" }) as HTMLButtonElement).disabled).toBe(true);
+  expect(screen.getByText("1 nodes · 0 edges · 0 boundaries")).toBeDefined();
 });
 
 test("connector paint uses canonical dashed stroke, labels and arrows beside a selection outline", () => {
@@ -110,7 +146,7 @@ test("editor restricts connection tools by selection and sends the scoped route 
   const onEdge = vi.fn(() => null);
   const onView = vi.fn();
   const onProperty = vi.fn(() => null);
-  const props = { onEdge, onView, onToggle: vi.fn(), onEdit: vi.fn(), onProperty, onHierarchy: vi.fn() };
+  const props = { onEdge, onView, onToggle: vi.fn(), onEdit: vi.fn(), onProperty, onHierarchy: vi.fn(), onHistory: vi.fn() };
   const note = session.editor.document.nodes.at(-1)!;
   const pickedNote = viewSession(session, null, [note.id]);
   if (!pickedNote.ok) throw Error("expected selected annotation");
@@ -136,7 +172,7 @@ test("hierarchy controls exclude cyclic parents and route explicit actions with 
   const nested = groups.find(({ parentId }) => parentId === outer.id)!;
   const child = nodes.find(({ parentId }) => parentId === nested.id)!;
   const props = { onView: vi.fn(), onToggle: vi.fn(), onEdit: vi.fn(), onEdge: vi.fn(), onProperty: vi.fn(),
-    onHierarchy: vi.fn(() => "The selected boundary is closed for this test.") };
+    onHierarchy: vi.fn(() => "The selected boundary is closed for this test."), onHistory: vi.fn() };
   const pickedFrame = viewSession(session, null, [outer.id]);
   if (!pickedFrame.ok) throw Error("expected boundary selection");
   const { rerender } = render(<Editor session={pickedFrame.value} {...props} />);
